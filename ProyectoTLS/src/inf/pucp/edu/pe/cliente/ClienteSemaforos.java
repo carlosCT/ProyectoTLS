@@ -5,7 +5,6 @@
 package inf.pucp.edu.pe.cliente;
 
 
-
 import inf.pucp.edu.pe.modelo.Cruce;
 import java.io.*;
 import java.net.*;
@@ -16,10 +15,10 @@ import java.util.ArrayList;
  *
  * @author fatima
  */
-public class Cliente {
+public class ClienteSemaforos {
 
-   
-    public Cliente(){
+   public static String ip= "192.168.1.38";
+    public ClienteSemaforos(){
         
     }
     
@@ -28,8 +27,8 @@ public class Cliente {
     
     public static ArrayList<Cruce> solicitarCruces(int xi, int yi, int xf, int yf) throws IOException{
     
-        String IP_SERVIDOR="192.168.1.34";
-        int PUERTO_SERVIDOR=8080;
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=5001;
         String lista[];
         ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
                       
@@ -57,14 +56,12 @@ public class Cliente {
         return listaCruces;
     }
     
-    public static ArrayList<Cruce> inicializarCruces() throws IOException{
+    public static void inicializarCruces() throws IOException{
     
-        String IP_SERVIDOR="192.168.1.34";
-        int PUERTO_SERVIDOR=8080;
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=5001;
         String lista[];
         String resultado = null;
-        ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
-                      
         
             try{
                 
@@ -82,11 +79,48 @@ public class Cliente {
             }
             
             System.out.print("Fin Cliente");
-        
-        return listaCruces;
+            
     }
     
+    public static void actualizarCruces() throws IOException{
     
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=5001;
+        String lista[];
+        String resultado = null;
+        
+            try{
+                
+                String valor="actualizar";                                                               
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+            
+    }
+    
+    public static void cambiarVelocidad(int velocidad) throws IOException{
+    
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=5001;
+        String lista[];
+        String resultado = null;
+                      
+            try{
+                
+                String valor="cambiarVelocidad " + velocidad;                                                               
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+        
+    }
     
      private static String realizar_operacion(String host, int puerto, String valor) {
         String respuesta=null;

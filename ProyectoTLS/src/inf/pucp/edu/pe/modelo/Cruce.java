@@ -1,7 +1,5 @@
 package inf.pucp.edu.pe.modelo;
 
-//import simulador2.*;
-import inf.pucp.edu.pe.vista.simulacion.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -160,25 +158,33 @@ public class Cruce implements Serializable{
     
     
     
-    public void actualizarCruce(){
+    public void actualizarCruce(int tiempoReducir){
         
-        this.tiempoActual--;
+        this.tiempoActual = this.tiempoActual - tiempoReducir;
         
-        if(this.tiempoActual < 0){
+        if(this.tiempoActual < 0 ){
             
-           this.tiempoActual = this.tiempoLuz;
+            
+           if(tiempoActual == -1){
+               this.tiempoActual = this.tiempoLuz;
+           }else{
+               this.tiempoActual = this.tiempoLuz + tiempoActual + 1;
+           }
+              
            this.estadoLuz = Math.abs(this.estadoLuz-1);
             
         }
-    }    
+    }
     
+}
+    /*
     public static void actualizarTodosCruces(ArrayList<Cruce> cruces){
              
         for(Cruce c : cruces){
             
             c.actualizarCruce();
                         
-        }
+        }*/
         
         /*
         for(int i=0; i<simulacion.numCrucesEnColumna; i++){
@@ -191,7 +197,7 @@ public class Cruce implements Serializable{
         }
         */
         
-    }
+    //}
     /*
     public void establecerVias(ArrayList<Via> Vias){
         
@@ -306,5 +312,4 @@ public class Cruce implements Serializable{
     
     */
     
-     
-}
+ 

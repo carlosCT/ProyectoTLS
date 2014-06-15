@@ -6,7 +6,7 @@
 
 package inf.pucp.edu.pe.vista.simulacion;
 
-import inf.pucp.edu.pe.cliente.Cliente;
+import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.modelo.*;
 
 import java.awt.Color;
@@ -59,7 +59,7 @@ public final class Panel extends JPanel{
         ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
         
         try{
-        listaCruces = Cliente.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*factor, MenuPrincipalSimulacion.posicionRelativaY*factor,MenuPrincipalSimulacion.posicionRelativaX*factor + MenuPrincipalSimulacion.ancho*factor, MenuPrincipalSimulacion.posicionRelativaY*factor + MenuPrincipalSimulacion.alto*factor);
+        listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*factor, MenuPrincipalSimulacion.posicionRelativaY*factor,MenuPrincipalSimulacion.posicionRelativaX*factor + MenuPrincipalSimulacion.ancho*factor, MenuPrincipalSimulacion.posicionRelativaY*factor + MenuPrincipalSimulacion.alto*factor);
         Thread.sleep(333);
         }catch(IOException e){} catch (InterruptedException ex) {
             Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);

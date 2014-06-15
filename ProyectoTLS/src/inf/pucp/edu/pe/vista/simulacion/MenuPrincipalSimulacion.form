@@ -74,7 +74,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnPause" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="btnReanudar" min="-2" pref="26" max="-2" attributes="0"/>
                   <EmptySpace pref="269" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -90,7 +90,7 @@
                   <EmptySpace min="12" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="jButton1" pref="0" max="32767" attributes="0"/>
+                  <Component id="btnReanudar" pref="0" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -136,12 +136,15 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStopActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="btnReanudar">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/inf/pucp/edu/pe/Iconos/reanudar.jpg"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReanudarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

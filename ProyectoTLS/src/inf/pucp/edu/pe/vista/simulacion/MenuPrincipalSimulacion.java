@@ -8,7 +8,7 @@ package inf.pucp.edu.pe.vista.simulacion;
 
 
 
-import inf.pucp.edu.pe.cliente.Cliente;
+import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.modelo.Mapa;
 import inf.pucp.edu.pe.modelo.Semaforo;
 import inf.pucp.edu.pe.modelo.Zona;
@@ -93,7 +93,7 @@ public class MenuPrincipalSimulacion extends JFrame{
         btnPause = new javax.swing.JButton();
         btnPlay = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnReanudar = new javax.swing.JButton();
 
         jMenu5.setText("File");
         jMenuBar2.add(jMenu5);
@@ -135,7 +135,12 @@ public class MenuPrincipalSimulacion extends JFrame{
             }
         });
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/reanudar.jpg"))); // NOI18N
+        btnReanudar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/reanudar.jpg"))); // NOI18N
+        btnReanudar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReanudarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout barraMenuLayout = new javax.swing.GroupLayout(barraMenu);
         barraMenu.setLayout(barraMenuLayout);
@@ -149,7 +154,7 @@ public class MenuPrincipalSimulacion extends JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(269, Short.MAX_VALUE))
         );
         barraMenuLayout.setVerticalGroup(
@@ -161,7 +166,7 @@ public class MenuPrincipalSimulacion extends JFrame{
                     .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraMenuLayout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -184,11 +189,11 @@ public class MenuPrincipalSimulacion extends JFrame{
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
                 Simulacion.run = true;
                 Simulacion.seguir=true;
-//                VentanaSimulacion vs= new VentanaSimulacion();
-//                this.add(vs);
-//                try{
-//                Cliente.inicializarCruces();
-//                }catch(IOException ex){}
+                
+                try{
+                ClienteSemaforos.inicializarCruces();
+                ClienteSemaforos.actualizarCruces();
+                }catch(IOException ex){}
                 hilo= new Thread(simu);
                 hilo.start();
     }//GEN-LAST:event_btnPlayActionPerformed
@@ -199,7 +204,19 @@ public class MenuPrincipalSimulacion extends JFrame{
 
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
         Simulacion.seguir=false;
+        try{
+            ClienteSemaforos.cambiarVelocidad(0);
+            Simulacion.velocidadSimulacion=0;
+        }catch(IOException e){}
     }//GEN-LAST:event_btnPauseActionPerformed
+
+    private void btnReanudarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReanudarActionPerformed
+        Simulacion.seguir=true;
+        try{
+            ClienteSemaforos.cambiarVelocidad(1);
+            Simulacion.velocidadSimulacion=1;
+        }catch(IOException e){}
+    }//GEN-LAST:event_btnReanudarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -242,8 +259,8 @@ public class MenuPrincipalSimulacion extends JFrame{
     private javax.swing.JPanel barraMenu;
     private javax.swing.JButton btnPause;
     private javax.swing.JButton btnPlay;
+    private javax.swing.JButton btnReanudar;
     private javax.swing.JButton btnStop;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;

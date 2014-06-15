@@ -6,9 +6,11 @@
 
 package inf.pucp.edu.pe.vista.simulacion;
 
+import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.modelo.Vehiculo;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
 
 /**
  *
@@ -19,6 +21,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
     public Panel p;
     public static boolean run = false;
     public static boolean seguir= false;
+    public static int velocidadSimulacion= 1;
     Graphics g;
     Color claro = new Color(217, 228, 232);
     /**
@@ -90,8 +93,8 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
         while(seguir){
         try{                    
            moverVehiculos();
-            //p.crearSemaforos();
-            p.repaint();
+           p.crearSemaforos();
+           p.repaint();
         }
         catch(Exception e){
                System.out.println("sleeping thread Error");
@@ -130,8 +133,8 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
         jPanel5 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAumentarVelocidad = new javax.swing.JButton();
+        btnReducirVelocidad = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Controles de Cambio de Zona:"));
         jPanel2.setToolTipText("");
@@ -279,9 +282,19 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
 
         jLabel4.setText("Velocidad: ");
 
-        jButton2.setText("+");
+        btnAumentarVelocidad.setText("+");
+        btnAumentarVelocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAumentarVelocidadActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("-");
+        btnReducirVelocidad.setText("-");
+        btnReducirVelocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReducirVelocidadActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -293,9 +306,9 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jButton3)
+                        .addComponent(btnReducirVelocidad)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2))
+                        .addComponent(btnAumentarVelocidad))
                     .addComponent(jTextField2))
                 .addGap(26, 26, 26))
         );
@@ -308,8 +321,8 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAumentarVelocidad)
+                    .addComponent(btnReducirVelocidad))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -400,15 +413,38 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                 lPosicionY.setText("Posicion Y:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.factor);
     }//GEN-LAST:event_btnRIGHTActionPerformed
 
+    private void btnReducirVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReducirVelocidadActionPerformed
+         
+                if(velocidadSimulacion != 1){
+                    
+                    velocidadSimulacion--;
+                    try{
+                    ClienteSemaforos.cambiarVelocidad(velocidadSimulacion);
+                    }catch(IOException ioe){}
+                }
+    }//GEN-LAST:event_btnReducirVelocidadActionPerformed
+
+    private void btnAumentarVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAumentarVelocidadActionPerformed
+                        
+                if(velocidadSimulacion != 4){
+                    
+                    velocidadSimulacion++;
+                    try{
+                    ClienteSemaforos.cambiarVelocidad(velocidadSimulacion);
+                    }catch(IOException ioe){}
+                    
+                }
+    }//GEN-LAST:event_btnAumentarVelocidadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAumentarVelocidad;
     private javax.swing.JButton btnDOWN;
     private javax.swing.JButton btnLEFT;
     private javax.swing.JButton btnRIGHT;
+    private javax.swing.JButton btnReducirVelocidad;
     private javax.swing.JButton btnUP;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
