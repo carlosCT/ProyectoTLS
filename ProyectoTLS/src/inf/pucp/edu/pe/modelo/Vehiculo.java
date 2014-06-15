@@ -29,7 +29,7 @@ public final class Vehiculo extends Thread{
     public BufferedImage imagen;
     private int dimensionX;
     private int dimensionY;
-    private boolean direccion;
+    private int direccion;
 
     
     
@@ -38,7 +38,7 @@ public final class Vehiculo extends Thread{
     public Vehiculo() {       
     }
 
-    public Vehiculo(int actualX, int actualY, int meta, int velocidad, int dimensionX, int dimensionY, boolean direccion) {
+    public Vehiculo(int actualX, int actualY, int meta, int velocidad, int dimensionX, int dimensionY, int direccion) {
         this.actualX = actualX;        
         this.actualY = actualY;
         this.meta = meta;
@@ -113,13 +113,14 @@ public final class Vehiculo extends Thread{
         int offset=6;
         return new Rectangle(this.actualX, this.actualY, this.dimensionX, this.dimensionY);
     }
-    
-    public boolean isDireccion() {
+
+    public int getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(boolean direccion) {
+    public void setDireccion(int direccion) {
         this.direccion = direccion;
     }
+    
 
 }

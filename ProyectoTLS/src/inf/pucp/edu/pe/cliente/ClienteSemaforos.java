@@ -17,7 +17,8 @@ import java.util.ArrayList;
  */
 public class ClienteSemaforos {
 
-   public static String ip= "192.168.1.38";
+   //public static String ip= "192.168.1.38";
+    public static String ip= "192.168.1.42";
     public ClienteSemaforos(){
         
     }
