@@ -9,8 +9,10 @@ package inf.pucp.edu.pe.vista.simulacion;
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.modelo.Vehiculo;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.IOException;
+import javax.swing.JComponent;
 
 /**
  *
@@ -18,6 +20,10 @@ import java.io.IOException;
  */
 public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
 
+    private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
+    private Dimension dimBarra = null; 
+    
+    
     public Panel p;
     public static boolean run = false;
     public static boolean seguir= false;
@@ -29,13 +35,16 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
      */
     public Simulacion() {
        initComponents();
+       ocultarBarraTitulo();
        setSize(MenuPrincipalSimulacion.ancho+MenuPrincipalSimulacion.defectoAncho+350, MenuPrincipalSimulacion.alto+MenuPrincipalSimulacion.defectoAlto);
-       setTitle("Simulacion");
+      // setTitle("Simulacion");
        setLocation(0, 28);
        
        setVisible(true);
         //se agrega el panel principal
        this.setBackground(claro);
+       
+       
        p= new Panel();
        p.setBackground(claro);
        jPanel1.setBackground(claro);
@@ -55,6 +64,14 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
     }
 
     
+    public void ocultarBarraTitulo()
+    { 
+        Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane(); 
+        dimBarra = Barra.getPreferredSize(); 
+        Barra.setSize(0,0); 
+        Barra.setPreferredSize(new Dimension(0,0)); 
+        repaint(); 
+    }
    
   public void moverVehiculos(){
      byte estado=0; // esta en verde

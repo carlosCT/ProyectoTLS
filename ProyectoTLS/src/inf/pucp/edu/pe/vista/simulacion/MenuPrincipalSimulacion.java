@@ -66,7 +66,7 @@ public class MenuPrincipalSimulacion extends JFrame{
     public Color claro= new Color(217, 228, 232);
     public MenuPrincipalSimulacion(){
              
-        
+       /*caracteristicas basicas de la ventana*/ 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
@@ -76,6 +76,7 @@ public class MenuPrincipalSimulacion extends JFrame{
         this.add(simu);
      
         barraMenu.setBackground(claro);
+        /*********************************************/
         
     }
     
