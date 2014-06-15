@@ -21,6 +21,9 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import inf.pucp.edu.pe.vista.reporte.MenuPrincipalReporte;
 import inf.pucp.edu.pe.vista.seguridad.MenuPrincipalSeguridad;
+import java.beans.PropertyVetoException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -190,8 +193,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeguridadActionPerformed
 
     private void btnSimulacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimulacion1ActionPerformed
-        MenuPrincipalSimulacion mps= new MenuPrincipalSimulacion();
-        mps.setVisible(true);
+            MenuPrincipalSimulacion mps = null;
+            mps = new MenuPrincipalSimulacion();
+            mps.setVisible(true);
     }//GEN-LAST:event_btnSimulacion1ActionPerformed
 
     private void btnCargarMasiva(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarMasiva

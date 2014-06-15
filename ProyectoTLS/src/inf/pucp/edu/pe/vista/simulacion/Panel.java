@@ -24,8 +24,7 @@ import javax.swing.JPanel;
  * @author juancarlos
  */
 public final class Panel extends JPanel{
-    
-    public int factor =40;
+    public static int factor =20;
     public int cantidadDeVehiculos=10;
     public int cantidadDeSemaforos=400;
     
@@ -60,7 +59,7 @@ public final class Panel extends JPanel{
         ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
         
         try{
-        listaCruces = Cliente.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*10, MenuPrincipalSimulacion.posicionRelativaY*10,MenuPrincipalSimulacion.posicionRelativaX*10 + MenuPrincipalSimulacion.ancho*10, MenuPrincipalSimulacion.posicionRelativaY*10 + MenuPrincipalSimulacion.alto*10);
+        listaCruces = Cliente.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*factor, MenuPrincipalSimulacion.posicionRelativaY*factor,MenuPrincipalSimulacion.posicionRelativaX*factor + MenuPrincipalSimulacion.ancho*factor, MenuPrincipalSimulacion.posicionRelativaY*factor + MenuPrincipalSimulacion.alto*factor);
         Thread.sleep(333);
         }catch(IOException e){} catch (InterruptedException ex) {
             Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
@@ -74,30 +73,12 @@ public final class Panel extends JPanel{
         for(Cruce c : listaCruces){
             
             
-             semaf[count]= new Semaforo(c.getPosX()/10-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/10-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
+             semaf[count]= new Semaforo(c.getPosX()/factor-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/factor-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
              count++;
              
         }
         
-        /*int k=0;
-        while(k<4000){
-            k++;
-        }
-        semaf= new Semaforo[cantidadDeSemaforos];
-        int count=0;
-        int Xo=factor,Yo=factor; 
-        for(int i=0; i<MenuPrincipalSimulacion.alto/factor; i++){
-            for(int j=0; j<MenuPrincipalSimulacion.ancho/factor; j++){            
-                semaf[count]= new Semaforo(Xo, Yo, estado[count]);
-                if(count>semaf.length)break;
-                Xo+=factor;
-                count++;
-            }
-            if(count>semaf.length)break;
-            Yo+=factor;
-            Xo=factor;
-        }
-        */
+        
         
     }
     
@@ -111,9 +92,6 @@ public final class Panel extends JPanel{
             
             vehiculo[i]= new Vehiculo(0, 40*count, 700, velocidad+1 , 5, 5, true);     //true es para horizontal      
             
-//            else{
-//            vehiculo[i]= new Vehiculo(40*i, 40*i, 800, 4, 5, 5, true);           
-//            }
             if(count>15){
                 count=0;
             }
