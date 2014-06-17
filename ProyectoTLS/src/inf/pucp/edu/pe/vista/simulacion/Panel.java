@@ -29,7 +29,7 @@ public final class Panel extends JPanel{
     
     //Se manejara 3 escalas por defecto 1:1, 1:10, 1:20
     
-    public static int escala=4;
+    public static int escala=20;
     public static int factor =400/escala;
     
     public static int cantidadSemaforos;
@@ -47,41 +47,75 @@ public final class Panel extends JPanel{
     public Panel() {           
         this.setSize(MenuPrincipalSimulacion.ancho, MenuPrincipalSimulacion.alto);
         crearVehiculos();
-        //crearVehiculosVerticales();
         crearSemaforos();
         
     }
     
+    Thread actualizarSemaforos = new Thread(){
+        
+      public void run(){
+        
+        while(Simulacion.run){  
+            while(Simulacion.seguir){  
+                ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
+                escala=400/factor;
+                try{
+
+                  listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+
+                cantidadSemaforos=listaCruces.size();
+                Thread.sleep(333);
+                }catch(IOException e){} catch (InterruptedException ex) {
+                    Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+                semaf= new Semaforo[listaCruces.size()];
+                int count=0;
+
+                for(Cruce c : listaCruces){
+
+
+                     semaf[count]= new Semaforo(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
+                     count++;
+
+                }  
+
+              }  
+          }
+      }
+    };
     
     public void crearSemaforos() {
         
+        //actualizarSemaforos.start();
         ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
-        escala=400/factor;
-        try{
-                   
-          listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
-          
-        cantidadSemaforos=listaCruces.size();
-        Thread.sleep(333);
-        }catch(IOException e){} catch (InterruptedException ex) {
-            Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-        semaf= new Semaforo[listaCruces.size()];
-        int count=0;
-        
-        for(Cruce c : listaCruces){
-            
-            
-             semaf[count]= new Semaforo(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
-             count++;
-             
-        }
-        
-        
-        
-    }
+                escala=400/factor;
+                try{
+
+                  listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+
+                cantidadSemaforos=listaCruces.size();
+                Thread.sleep(333);
+                }catch(IOException e){} catch (InterruptedException ex) {
+                    Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+
+                semaf= new Semaforo[listaCruces.size()];
+                int count=0;
+
+                for(Cruce c : listaCruces){
+
+
+                     semaf[count]= new Semaforo(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
+                     count++;
+
+                }  
+
+    } 
+
+    
     
     
     public void crearVehiculos(){
@@ -111,7 +145,7 @@ public final class Panel extends JPanel{
     public void paint(Graphics g){  
             dibujarZona(g);
             dibujarTodosLosSemaforos(g, semaf);
-    //        dibujarTodosLosVehiculos(g, carro);
+            dibujarTodosLosVehiculos(g, carro);
     }
     
     private void dibujarZona(Graphics g){
@@ -136,14 +170,14 @@ public final class Panel extends JPanel{
     
     
     private void dibujarTodosLosSemaforos(Graphics g, Semaforo [] semaforo) {
-            for(int i=0;i<semaforo.length; i++){
-                if(1==semaforo[i].getEstadoLuz()){
+        for (Semaforo semaforo1 : semaforo) {
+            if (1 == semaforo1.getEstadoLuz()) {
                 g.setColor(Color.red);
-                }
-                else 
+            } else {
                 g.setColor(Color.green);
-                dibujaSemaforo(g, semaforo[i]);
             }
+            dibujaSemaforo(g, semaforo1);
+        }
     }
         
         
@@ -164,7 +198,6 @@ public final class Panel extends JPanel{
     
     private void dibujarTodosLosVehiculos(Graphics g, carro [] vehi){
         for (carro vehi1 : vehi) {
-            //verificacion de si alcanzo la meta
             dibujaVehiculo(g, vehi1);
         }
     }

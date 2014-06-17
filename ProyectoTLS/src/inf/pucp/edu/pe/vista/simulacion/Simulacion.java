@@ -117,14 +117,17 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
  
   public void run(){
    
+   
+   
    while(run){
        
         while(seguir){
         try{
            actualizarInformacionDeSimulacion();
-           //p.crearVehiculos();
+           p.crearVehiculos();
            p.crearSemaforos();
            p.repaint();
+           
         }
         catch(Exception e){
                System.out.println("sleeping thread Error");
