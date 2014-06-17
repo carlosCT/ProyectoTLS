@@ -9,6 +9,7 @@ package inf.pucp.edu.pe.vista.simulacion;
 
 
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
+import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.Mapa;
 import inf.pucp.edu.pe.modelo.Semaforo;
 import inf.pucp.edu.pe.modelo.Zona;
@@ -242,6 +243,7 @@ public class MenuPrincipalSimulacion extends JFrame{
         Simulacion.seguir=false;
         try{
             ClienteSemaforos.cambiarVelocidad(0);
+            ClienteVehiculos.cambiarVelocidad(0);
             Simulacion.velocidadSimulacion=0;
         }catch(IOException e){}
     }//GEN-LAST:event_btnPauseActionPerformed
@@ -250,6 +252,7 @@ public class MenuPrincipalSimulacion extends JFrame{
         Simulacion.seguir=true;
         try{
             ClienteSemaforos.cambiarVelocidad(1);
+            ClienteVehiculos.cambiarVelocidad(1);
             Simulacion.velocidadSimulacion=1;
         }catch(IOException e){}
     }//GEN-LAST:event_btnReanudarActionPerformed

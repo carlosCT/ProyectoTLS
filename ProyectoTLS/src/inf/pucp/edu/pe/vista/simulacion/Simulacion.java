@@ -7,6 +7,7 @@
 package inf.pucp.edu.pe.vista.simulacion;
 
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
+import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.carro;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -451,6 +452,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                     velocidadSimulacion--;
                     try{
                     ClienteSemaforos.cambiarVelocidad(velocidadSimulacion);
+                    ClienteVehiculos.cambiarVelocidad(velocidadSimulacion);
                     }catch(IOException ioe){}
                 }
     }//GEN-LAST:event_btnReducirVelocidadActionPerformed
@@ -462,6 +464,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                     velocidadSimulacion++;
                     try{
                     ClienteSemaforos.cambiarVelocidad(velocidadSimulacion);
+                    ClienteVehiculos.cambiarVelocidad(velocidadSimulacion);
                     }catch(IOException ioe){}
                     
                 }
