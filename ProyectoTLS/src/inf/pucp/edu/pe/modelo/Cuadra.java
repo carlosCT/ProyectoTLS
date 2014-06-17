@@ -27,7 +27,15 @@ public class Cuadra {
     
     public BufferedImage getCuadra(){    
         try {
+            if(Panel.escala==4){
+                zonaCuadrada = ImageIO.read(new File(getClass().getResource("/res/cuadra0.png").toURI()));
+            }
+            else if(Panel.escala==10){
+            zonaCuadrada = ImageIO.read(new File(getClass().getResource("/res/cuadra1.png").toURI()));
+            }else if(Panel.escala==20){
+               
             zonaCuadrada = ImageIO.read(new File(getClass().getResource("/res/cuadra2.png").toURI()));
+            }
         } catch (URISyntaxException ex) {
             Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

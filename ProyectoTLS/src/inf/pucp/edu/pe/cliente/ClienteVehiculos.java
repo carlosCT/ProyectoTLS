@@ -6,6 +6,7 @@ package inf.pucp.edu.pe.cliente;
 
 
 
+
 import inf.pucp.edu.pe.modelo.Vehiculo;
 import java.io.*;
 import java.net.*;
@@ -18,7 +19,9 @@ import java.util.ArrayList;
  */
 public class ClienteVehiculos {
 
-   
+    public static String ip = "192.168.1.34";
+    public static int puerto = 8001;
+    
     public ClienteVehiculos(){
         
     }
@@ -29,8 +32,8 @@ public class ClienteVehiculos {
     
     public static void cargarVehiculos(ArrayList<Vehiculo> vehiculos ) throws IOException{
     
-        String IP_SERVIDOR="127.0.0.1";
-        int PUERTO_SERVIDOR=5000;
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=puerto;
         String lista[];
         
             try{
@@ -51,8 +54,8 @@ public class ClienteVehiculos {
     
     public static ArrayList<Vehiculo> solicitarVehiculos(int xi, int yi, int xf, int yf) throws IOException{
     
-        String IP_SERVIDOR="127.0.0.1";
-        int PUERTO_SERVIDOR=5000;
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=puerto;
         String lista[];
         ArrayList<Vehiculo> listaVehiculos = new ArrayList<Vehiculo>();
         
@@ -76,8 +79,8 @@ public class ClienteVehiculos {
         
     public static void actualizarVehiculos() throws IOException{
     
-        String IP_SERVIDOR="127.0.0.1";
-        int PUERTO_SERVIDOR=5000;
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=puerto;
         String lista[];
         String resultado = null;
         
@@ -96,8 +99,8 @@ public class ClienteVehiculos {
     
     public static void cambiarVelocidad(int velocidad) throws IOException{
     
-        String IP_SERVIDOR="127.0.0.1";
-        int PUERTO_SERVIDOR=5000;
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=puerto;
         String lista[];
         String resultado = null;
                       

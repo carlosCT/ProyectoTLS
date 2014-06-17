@@ -7,7 +7,7 @@
 package inf.pucp.edu.pe.vista.simulacion;
 
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
-import inf.pucp.edu.pe.modelo.Vehiculo;
+import inf.pucp.edu.pe.modelo.carro;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -72,32 +72,29 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
         Barra.setPreferredSize(new Dimension(0,0)); 
         repaint(); 
     }
-   
-  public void moverVehiculos(){
-     byte estado=0; // esta en verde
-      for(int i=0; i<p.vehiculo.length; i++){
-         if(p.vehiculo[i].getActualX()<p.vehiculo[i].getMeta()){
-             //verificamos si se encuentra cerca de un semaforo y si esta en verde avansa
-             estado= estaElCruceEnRojo(p.vehiculo[i]); // 1 si esta en rojo
-             if(estado==0 &&  p.vehiculo[i].getDireccion()==0){//si la direccion es true se mueve por la horizontal
-             p.vehiculo[i].setActualX(p.vehiculo[i].getActualX()+p.vehiculo[i].getVelocidad());        
-             }else
-             if(estado==1 && p.vehiculo[i].getDireccion()==1){
-             p.vehiculo[i].setActualY(p.vehiculo[i].getActualY()+p.vehiculo[i].getVelocidad());        
-             }
-
-         }
-         
-     }
-  }
+//   
+//  public void moverVehiculos(){
+//     byte estado=0; // esta en verde
+//      for(int i=0; i<p.vehiculo.length; i++){
+//         if(p.vehiculo[i].getActualX()<p.vehiculo[i].getMeta()){
+//             //verificamos si se encuentra cerca de un semaforo y si esta en verde avansa
+//             estado= estaElCruceEnRojo(p.vehiculo[i]); // 1 si esta en rojo
+//             if(estado==0 &&  p.vehiculo[i].getDireccion()==0){//si la direccion es true se mueve por la horizontal
+//             p.vehiculo[i].setActualX(p.vehiculo[i].getActualX()+p.vehiculo[i].getVelocidad());        
+//             }
+//
+//         }
+//         
+//     }
+//  }
   
   
-  private byte estaElCruceEnRojo(Vehiculo veh){//necesita mejorar
+  private byte estaElCruceEnRojo(carro veh){//necesita mejorar
       byte estado= 0; //esta en verde
       for(int i=0; i<p.semaf.length; i++){
           if(p.semaf[i].getBounds().intersects(veh.getBounds())){
               //se cruza
-              if(p.semaf[i].getEstadoLuz()==0){
+              if(p.semaf[i].getEstadoLuz()==1){
                   estado=1; //esta en rojo
                   break;
               }
@@ -107,19 +104,26 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
       }
       return estado;
   }
-  
-
+   
+  public void actualizarInformacionDeSimulacion(){
+           lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
+           lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+           lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
+           lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
+           
+           lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
+           lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
+  }
  
   public void run(){
    
    while(run){
        
         while(seguir){
-        try{                    
-           moverVehiculos();
+        try{
+           actualizarInformacionDeSimulacion();
+           //p.crearVehiculos();
            p.crearSemaforos();
-           lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
-           lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
            p.repaint();
         }
         catch(Exception e){
@@ -154,7 +158,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
         lPosicionY = new javax.swing.JLabel();
         lPosicionX = new javax.swing.JLabel();
         lZona = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblEscala = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jTextField2 = new javax.swing.JTextField();
@@ -265,7 +269,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
 
         lZona.setText("Zona:     1 ");
 
-        jLabel2.setText("Escala del Mapa: 1 : 20");
+        lblEscala.setText("Escala del Mapa: 1 : 20");
 
         jLabel3.setText("Velocidad Promedio: ");
 
@@ -281,7 +285,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                     .addComponent(lPosicionY)
                     .addComponent(lPosicionX)
                     .addComponent(lZona)
-                    .addComponent(jLabel2)
+                    .addComponent(lblEscala)
                     .addComponent(jLabel3))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -289,7 +293,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2)
+                .addComponent(lblEscala)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lZona)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -388,9 +392,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 657, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 90, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 755, Short.MAX_VALUE)
         );
 
         pack();
@@ -399,11 +401,11 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
     private void btnUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUPActionPerformed
         if(MenuPrincipalSimulacion.posicionRelativaY>0){
                 MenuPrincipalSimulacion.posicionRelativaY-=MenuPrincipalSimulacion.alto;
-                MenuPrincipalSimulacion.zonaActual-=MenuPrincipalSimulacion.dimensionXMapa/MenuPrincipalSimulacion.ancho;
+                MenuPrincipalSimulacion.zonaActual-=MenuPrincipalSimulacion.dimensionXMapa/(Panel.escala*MenuPrincipalSimulacion.ancho);
                 }
                 lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.factor);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.factor);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
     }//GEN-LAST:event_btnUPActionPerformed
 
     private void btnLEFTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLEFTActionPerformed
@@ -413,19 +415,19 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                 }
                 
                 lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.factor);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.factor);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
     }//GEN-LAST:event_btnLEFTActionPerformed
 
     private void btnDOWNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDOWNActionPerformed
        if(MenuPrincipalSimulacion.posicionRelativaY<=6400){
                 MenuPrincipalSimulacion.posicionRelativaY+=MenuPrincipalSimulacion.alto;
-                MenuPrincipalSimulacion.zonaActual+=MenuPrincipalSimulacion.dimensionXMapa/MenuPrincipalSimulacion.ancho;
+                MenuPrincipalSimulacion.zonaActual+=MenuPrincipalSimulacion.dimensionXMapa/(Panel.escala*MenuPrincipalSimulacion.ancho);
                 }
                  
                 lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.factor);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.factor);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
     }//GEN-LAST:event_btnDOWNActionPerformed
 
     private void btnRIGHTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRIGHTActionPerformed
@@ -435,8 +437,8 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                 }
                 
                 lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.factor);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.factor);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
     }//GEN-LAST:event_btnRIGHTActionPerformed
 
     private void btnReducirVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReducirVelocidadActionPerformed
@@ -472,7 +474,6 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
     private javax.swing.JButton btnUP;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
@@ -487,5 +488,6 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
     private javax.swing.JLabel lZona;
     private javax.swing.JLabel lblCantidadSemaforos;
     private javax.swing.JLabel lblCantidadVehiculos;
+    private javax.swing.JLabel lblEscala;
     // End of variables declaration//GEN-END:variables
 }

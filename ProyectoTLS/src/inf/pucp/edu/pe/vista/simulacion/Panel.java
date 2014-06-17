@@ -7,10 +7,12 @@
 package inf.pucp.edu.pe.vista.simulacion;
 
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
+import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.*;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -24,12 +26,18 @@ import javax.swing.JPanel;
  * @author juancarlos
  */
 public final class Panel extends JPanel{
-    public static int factor =20;
+    
+    //Se manejara 3 escalas por defecto 1:1, 1:10, 1:20
+    
+    public static int escala=4;
+    public static int factor =400/escala;
+    
     public static int cantidadSemaforos;
-    public static int cantidadDeVehiculos=1000;
+    public static int cantidadDeVehiculos;
     public int dimensionX=4;
     public int dimensionY=4;
-    public Vehiculo [] vehiculo;
+    public carro [] carro;
+    
     public Semaforo [] semaf;
     
     public byte eleccion=0;
@@ -38,11 +46,8 @@ public final class Panel extends JPanel{
     
     public Panel() {           
         this.setSize(MenuPrincipalSimulacion.ancho, MenuPrincipalSimulacion.alto);
-        /*INSTANCIAMOS LOS VEHICULOS*/   // vehiculo= new Vehiculo(100, 100,400, 1);
-    //    definirEstados();
-        vehiculo= new Vehiculo[cantidadDeVehiculos];
-        crearVehiculosHorizontales();
-        crearVehiculosVerticales();
+        crearVehiculos();
+        //crearVehiculosVerticales();
         crearSemaforos();
         
     }
@@ -51,9 +56,11 @@ public final class Panel extends JPanel{
     public void crearSemaforos() {
         
         ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
-        
+        escala=400/factor;
         try{
-        listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*factor, MenuPrincipalSimulacion.posicionRelativaY*factor,MenuPrincipalSimulacion.posicionRelativaX*factor + MenuPrincipalSimulacion.ancho*factor, MenuPrincipalSimulacion.posicionRelativaY*factor + MenuPrincipalSimulacion.alto*factor);
+                   
+          listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+          
         cantidadSemaforos=listaCruces.size();
         Thread.sleep(333);
         }catch(IOException e){} catch (InterruptedException ex) {
@@ -63,12 +70,11 @@ public final class Panel extends JPanel{
         
         semaf= new Semaforo[listaCruces.size()];
         int count=0;
-        int Xo=factor,Yo=factor; 
         
         for(Cruce c : listaCruces){
             
             
-             semaf[count]= new Semaforo(c.getPosX()/factor-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/factor-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
+             semaf[count]= new Semaforo(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
              count++;
              
         }
@@ -78,45 +84,39 @@ public final class Panel extends JPanel{
     }
     
     
-    public void crearVehiculosHorizontales(){
-        int velocidad;
+    public void crearVehiculos(){
+        ArrayList<Vehiculo> listaVehiculos = new ArrayList<Vehiculo>();
+        escala=400/factor;
         
-        int count=1;
-        for(int i=0; i<cantidadDeVehiculos/2; i++){
-            velocidad=(int)Math.round(Math.random()*30);
-            
-            vehiculo[i]= new Vehiculo(0, Panel.factor*count, 900, velocidad+1 , 5, 5, 0);     //0 es para horizontal      
-            
-            if(count>30){
-                count=0;
-            }
-            count++;
+                   
+        try {
+            listaVehiculos = ClienteVehiculos.solicitarVehiculos(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+        } catch (IOException ex) {
+            Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
         }
+          
+        cantidadDeVehiculos=listaVehiculos.size();
+        
+        
+        carro= new carro[listaVehiculos.size()];
+        int count=0;
+        
+        for(Vehiculo c: listaVehiculos){                        
+             carro[count]= new carro(Math.round(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY));
+             count++;             
+        }               
     }
-    
-    public void crearVehiculosVerticales(){
-        int velocidad;
-        int count=1;
-        for(int i=cantidadDeVehiculos/2; i<cantidadDeVehiculos; i++){
-            velocidad=(int)Math.round(Math.random()*30);
-            
-            vehiculo[i]= new Vehiculo(Panel.factor*count,0, 800, velocidad+1 , 5, 5, 1);     //1 es para horizontal      
-            
-            if(count>20){
-                count=0;
-            }
-            count++;
-        }
-    }
+
     
     public void paint(Graphics g){  
             dibujarZona(g);
             dibujarTodosLosSemaforos(g, semaf);
-            dibujarTodosLosVehiculos(g, vehiculo);
+    //        dibujarTodosLosVehiculos(g, carro);
     }
     
     private void dibujarZona(Graphics g){
         /*dibujar la zona*/
+        
         int Xo=0, Yo=0;
             /*DIBUJAR ZONA*/
             cuadra=  new Cuadra();
@@ -125,6 +125,7 @@ public final class Panel extends JPanel{
                 for(int j=0; j<MenuPrincipalSimulacion.ancho/factor; j++){
                     //contiene imagen, posX, posY, Ancho,Alto
                     g.drawImage(cuadra.getCuadra(), Xo, Yo,factor,factor,null);
+ 
                     Xo+=factor;
                 }
                 Yo+=factor;
@@ -136,7 +137,7 @@ public final class Panel extends JPanel{
     
     private void dibujarTodosLosSemaforos(Graphics g, Semaforo [] semaforo) {
             for(int i=0;i<semaforo.length; i++){
-                if(0==semaforo[i].getEstadoLuz()){
+                if(1==semaforo[i].getEstadoLuz()){
                 g.setColor(Color.red);
                 }
                 else 
@@ -149,26 +150,37 @@ public final class Panel extends JPanel{
     
     
     public void dibujaSemaforo(Graphics g, Semaforo semaforo){
-        int offset= 1; 
-        g.fillRect(semaforo.getPosicionX()-offset, semaforo.getPosicionY()-offset, semaforo.getDimensionX(), semaforo.getDimensionY());
+        int offset20= 1, offset10=3, offset4=7; 
+        if(factor==100){
+        g.fillRect(semaforo.getPosicionX()-offset4, semaforo.getPosicionY()-offset4, 14, 14);
+        }else
+         if(factor==40){
+        g.fillRect(semaforo.getPosicionX()-offset10, semaforo.getPosicionY()-offset10, 7, 7);
+        }else
+          if(factor==20){
+        g.fillRect(semaforo.getPosicionX()-offset20, semaforo.getPosicionY()-offset20, 3, 3);
+        }
     }
     
-    private void dibujarTodosLosVehiculos(Graphics g, Vehiculo [] vehi){
-        for (Vehiculo vehi1 : vehi) {
+    private void dibujarTodosLosVehiculos(Graphics g, carro [] vehi){
+        for (carro vehi1 : vehi) {
             //verificacion de si alcanzo la meta
-            
             dibujaVehiculo(g, vehi1);
         }
     }
     
 
-    public void dibujaVehiculo(Graphics g, Vehiculo vehi) {
-        
+    public void dibujaVehiculo(Graphics g, carro vehi) {        
          //g.drawImage(vehi.getImagen(), vehi.getActualX(), vehi.getActualY(), vehi.getDimensionX(), vehi.getDimensionY(), null);
-        
-          g.setColor(Color.blue);
-          g.fillOval(vehi.getActualX(), vehi.getActualY(), 4, 4);
-          
-        
+        if(factor==100){
+          g.setColor(Color.WHITE);
+          g.fillOval(vehi.getActualX(), vehi.getActualY(), 7, 7);
+        }else if(factor==40){
+          g.setColor(Color.white);
+          g.fillOval(vehi.getActualX(), vehi.getActualY(), 5, 5);
+        }else if(factor==20){
+          g.setColor(Color.white);
+          g.fillOval(vehi.getActualX(), vehi.getActualY(), 3, 3);
+        }        
     }
 }

@@ -27,9 +27,6 @@ public class Semaforo {
         this.posicionX = posicionX;
         this.posicionY = posicionY;
         this.estadoLuz = estadoLuz;
-        /*DIMENSIONES*/
-        this.dimensionX=3;
-        this.dimensionY=3;
     }
 
     public int getPosicionX() {

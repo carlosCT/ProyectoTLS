@@ -28,7 +28,8 @@ public class Cruce implements Serializable{
         this.posY = cruce.posY;
         this.estadoLuz = cruce.estadoLuz;
         
-        this.tiempoLuz = cruce.tiempoLuz;
+        this.tiempoLuzVerde = cruce.tiempoLuzVerde;
+        this.tiempoLuzRoja = cruce.tiempoLuzRoja;
         //this.viaDerecha = cruce.viaDerecha;
         //this.viaInferior = cruce.viaInferior;
         //this.viaIzquierda = cruce.viaIzquierda;
@@ -44,7 +45,8 @@ public class Cruce implements Serializable{
     private int posY;
     
     private int estadoLuz; // 0 = horizontal verde, vertical rojo; 1 = horizontal rojo, vertical verde;
-    private int tiempoLuz; // tiempo en segundos de la luz.
+    private int tiempoLuzVerde; // tiempo en segundos de la luz verde. HORIZONTAL
+    private int tiempoLuzRoja;  // tiempo en segundos de la luz roja. HORIZONTAL
     private boolean seCambioTiempo; 
     private int tiempoActual;
     
@@ -84,8 +86,12 @@ public class Cruce implements Serializable{
         return estadoLuz;
     }
 
-    public int getTiempoLuz() {
-        return tiempoLuz;
+    public int getTiempoLuzVerde() {
+        return tiempoLuzVerde;
+    }
+    
+    public int getTiempoLuzRoja() {
+        return tiempoLuzRoja;
     }
 /*
     public Via getViaSuperior() {
@@ -130,9 +136,14 @@ public class Cruce implements Serializable{
         this.estadoLuz = estadoLuz;
     }
 
-    public void setTiempoLuz(int tiempoLuz) {
-        this.tiempoLuz = tiempoLuz;
+    public void setTiempoLuzVerde(int tiempoLuzVerde) {
+        this.tiempoLuzVerde = tiempoLuzVerde;
     }
+    
+    public void setTiempoLuzRoja(int tiempoLuzRoja) {
+        this.tiempoLuzRoja = tiempoLuzRoja;
+    }
+    
 /*
     public void setViaSuperior(Via viaSuperior) {
         this.viaSuperior = viaSuperior;
@@ -166,9 +177,21 @@ public class Cruce implements Serializable{
             
             
            if(tiempoActual == -1){
-               this.tiempoActual = this.tiempoLuz;
+               
+               if(this.getEstadoLuz() == 0){
+                this.tiempoActual = this.tiempoLuzRoja;
+               }else{
+                this.tiempoActual = this.tiempoLuzVerde;
+               }
+               
            }else{
-               this.tiempoActual = this.tiempoLuz + tiempoActual + 1;
+               
+               if(this.getEstadoLuz() == 0){
+                    this.tiempoActual = this.tiempoLuzRoja + tiempoActual + 1;
+               }else{
+                   
+                    this.tiempoActual = this.tiempoLuzVerde + tiempoActual + 1;
+               }
            }
               
            this.estadoLuz = Math.abs(this.estadoLuz-1);
@@ -177,139 +200,6 @@ public class Cruce implements Serializable{
     }
     
 }
-    /*
-    public static void actualizarTodosCruces(ArrayList<Cruce> cruces){
-             
-        for(Cruce c : cruces){
-            
-            c.actualizarCruce();
-                        
-        }*/
-        
-        /*
-        for(int i=0; i<simulacion.numCrucesEnColumna; i++){
-            
-            for(int j=0; j<simulacion.numCrucesEnFila; j++){
-                
-                    simulacion.matrizCruces[i][j].actualizarCruce();
-            }            
-           
-        }
-        */
-        
-    //}
-    /*
-    public void establecerVias(ArrayList<Via> Vias){
-        
-        int n = 0;
-        
-        for(Via element: Vias){
-            
-            if(element.getPuntoXFinal() == this.posX && element.getPuntoYFinal() == this.posY){
-                
-                if(this.posX == element.getPuntoXInicial()){
-                    
-                    this.viaSuperior = element;
-                    n++;
-                    
-                }else{
-                    
-                    this.viaIzquierda = element;
-                    n++;
-                    
-                }                
-            }
-            
-            if(element.getPuntoXInicial() == this.posX && element.getPuntoYInicial() == this.posY){
-                
-                if(this.posX == element.getPuntoXFinal()){
-                    
-                    this.viaInferior = element;
-                    n++;
-                    
-                }else{
-                    
-                    this.viaDerecha = element;
-                    n++;
-                    
-                }                
-            }
-            
-            if(n == 3) break;
-            
-        }
-        
-    }
-    */
-    /*
-    private int densidadVertical(){
-     
-        int densidad = 0;
-        
-       if(this.viaSuperior == null && this.viaInferior != null){
-           
-           densidad = this.viaInferior.getVehVelNeg().size();
-           
-       } else if(this.viaSuperior != null && this.viaInferior == null){
-           
-           densidad = this.viaSuperior.getVehVelPos().size();
-           
-       }else if(this.viaSuperior != null && this.viaInferior != null) {
-        densidad = this.viaSuperior.getVehVelPos().size() + this.viaInferior.getVehVelNeg().size();
-       }
-       
-       return densidad;        
-    }
-    
-     
-     
-    private int densidadHorizontal(){
-     
-       
-       int densidad = 0;
-        
-       if(this.viaDerecha == null && this.viaIzquierda != null){
-           
-           densidad = this.viaIzquierda.getVehVelPos().size();
-           
-       } else if(this.viaDerecha != null && this.viaIzquierda == null){
-           
-           densidad = this.viaDerecha.getVehVelNeg().size();
-           
-       }
-        
-       if(this.viaDerecha != null && this.viaIzquierda != null) {
-        densidad = this.viaDerecha.getVehVelNeg().size() + this.viaInferior.getVehVelPos().size();
-       }
-       
-       return densidad;  
-        
-       
-    }
-    
-    
-    //Metodo que devuelve la cantidad de carros acumulados en los semaforos
-    //rojos de lcruce.
-    
-    // 0 = horizontal verde, vertical rojo; 1 = horizontal rojo, vertical verde;
-    
-    public int densidadEnRojo(){
-        
-        int densidad = 0;
-        
-        if(this.estadoLuz == 0){
-            
-            densidad = this.densidadVertical();
-            
-        }else if(this.estadoLuz == 1){
-            
-            densidad = this.densidadHorizontal();
-            
-        }
-        
-        return densidad;
-    }
-    
-    */
+
     
  

@@ -30,7 +30,10 @@ import java.util.logging.Logger;
  * @author JuanCarlos
  */
 public class MenuPrincipalSimulacion extends JFrame{
-
+    /*escala de mapa*/
+    public int variacionEscala=1;
+    
+    
     /*Semaforos*/
     Semaforo[] semaforo;
     
@@ -50,8 +53,8 @@ public class MenuPrincipalSimulacion extends JFrame{
     public static int defectoAlto=29;
     
   /*parametros de mapa a escala 1:10*/
-    public static int dimensionXMapa=24000;
-    public static int dimensionYMapa=16000;
+    public static int dimensionXMapa=240000;
+    public static int dimensionYMapa=160000;
     public Mapa m;
     
     /*Zona*/
@@ -95,6 +98,9 @@ public class MenuPrincipalSimulacion extends JFrame{
         btnPlay = new javax.swing.JButton();
         btnStop = new javax.swing.JButton();
         btnReanudar = new javax.swing.JButton();
+        btnReducirZoom = new javax.swing.JButton();
+        btnAumentarZoom = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jMenu5.setText("File");
         jMenuBar2.add(jMenu5);
@@ -143,6 +149,22 @@ public class MenuPrincipalSimulacion extends JFrame{
             }
         });
 
+        btnReducirZoom.setText("-");
+        btnReducirZoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReducirZoomActionPerformed(evt);
+            }
+        });
+
+        btnAumentarZoom.setText("+");
+        btnAumentarZoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAumentarZoomActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Zoom");
+
         javax.swing.GroupLayout barraMenuLayout = new javax.swing.GroupLayout(barraMenu);
         barraMenu.setLayout(barraMenuLayout);
         barraMenuLayout.setHorizontalGroup(
@@ -156,7 +178,13 @@ public class MenuPrincipalSimulacion extends JFrame{
                 .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(269, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(btnReducirZoom)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAumentarZoom)
+                .addGap(13, 13, 13))
         );
         barraMenuLayout.setVerticalGroup(
             barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,8 +194,15 @@ public class MenuPrincipalSimulacion extends JFrame{
                     .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, barraMenuLayout.createSequentialGroup()
-                .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(barraMenuLayout.createSequentialGroup()
+                .addGroup(barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnReanudar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(barraMenuLayout.createSequentialGroup()
+                        .addGroup(barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnReducirZoom)
+                            .addComponent(btnAumentarZoom)
+                            .addComponent(jLabel1))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -219,6 +254,28 @@ public class MenuPrincipalSimulacion extends JFrame{
         }catch(IOException e){}
     }//GEN-LAST:event_btnReanudarActionPerformed
 
+    private void btnReducirZoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReducirZoomActionPerformed
+        if(variacionEscala>1){
+            variacionEscala--;
+        
+            if(variacionEscala==1)Panel.factor=20;
+            else if(variacionEscala==2)Panel.factor=40;
+            else if(variacionEscala==3)Panel.factor=100;
+            
+        }
+    }//GEN-LAST:event_btnReducirZoomActionPerformed
+
+    private void btnAumentarZoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAumentarZoomActionPerformed
+        if(variacionEscala<3){
+            variacionEscala++;
+        
+             if(variacionEscala==1)Panel.factor=20;
+             else if(variacionEscala==2)Panel.factor=40;
+             else if(variacionEscala==3)Panel.factor=100;
+        
+        }
+    }//GEN-LAST:event_btnAumentarZoomActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -258,11 +315,14 @@ public class MenuPrincipalSimulacion extends JFrame{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barraMenu;
+    private javax.swing.JButton btnAumentarZoom;
     private javax.swing.JButton btnPause;
     private javax.swing.JButton btnPlay;
     private javax.swing.JButton btnReanudar;
+    private javax.swing.JButton btnReducirZoom;
     private javax.swing.JButton btnStop;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
