@@ -19,7 +19,7 @@ import javax.swing.JComponent;
  *
  * @author juancarlos
  */
-public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
+public class Simulacion extends javax.swing.JInternalFrame{
 
     private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
     private Dimension dimBarra = null; 
@@ -37,7 +37,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
     public Simulacion() {
        initComponents();
        ocultarBarraTitulo();
-       setSize(MenuPrincipalSimulacion.ancho+MenuPrincipalSimulacion.defectoAncho+350, MenuPrincipalSimulacion.alto+MenuPrincipalSimulacion.defectoAlto);
+       setSize(MenuPrincipalSimulacion.ancho+MenuPrincipalSimulacion.defectoAncho+350, MenuPrincipalSimulacion.alto+MenuPrincipalSimulacion.defectoAlto+50);
       // setTitle("Simulacion");
        setLocation(0, 28);
        
@@ -48,20 +48,21 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
        
        p= new Panel();
        p.setBackground(claro);
-       jPanel1.setBackground(claro);
+       //jPanel1.setBackground(claro);
        jPanel2.setBackground(claro);
-       jPanel3.setBackground(claro);
-       jPanel4.setBackground(claro);
+       
+       jPanel6.setBackground(claro);
        jPanel5.setBackground(claro);
        
        add(p);
        p.setVisible(true);
        
-       jTextField1.setEditable(false);
-       jTextField2.setEditable(false);
+   //    jTextField1.setEditable(false);
+       txtVelocidad.setEditable(false);
        
-       lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
-       lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
+       //lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
+       //lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
+       txtVelocidad.setText(""+velocidadSimulacion);
     }
 
     
@@ -73,47 +74,15 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
         Barra.setPreferredSize(new Dimension(0,0)); 
         repaint(); 
     }
-//   
-//  public void moverVehiculos(){
-//     byte estado=0; // esta en verde
-//      for(int i=0; i<p.vehiculo.length; i++){
-//         if(p.vehiculo[i].getActualX()<p.vehiculo[i].getMeta()){
-//             //verificamos si se encuentra cerca de un semaforo y si esta en verde avansa
-//             estado= estaElCruceEnRojo(p.vehiculo[i]); // 1 si esta en rojo
-//             if(estado==0 &&  p.vehiculo[i].getDireccion()==0){//si la direccion es true se mueve por la horizontal
-//             p.vehiculo[i].setActualX(p.vehiculo[i].getActualX()+p.vehiculo[i].getVelocidad());        
-//             }
-//
-//         }
-//         
-//     }
-//  }
-  
-//  
-//  private byte estaElCruceEnRojo(carro veh){//necesita mejorar
-//      byte estado= 0; //esta en verde
-//      for(int i=0; i<p.semaf.length; i++){
-//          if(p.semaf[i].getBounds().intersects(veh.getBounds())){
-//              //se cruza
-//              if(p.semaf[i].getEstadoLuz()==1){
-//                  estado=1; //esta en rojo
-//                  break;
-//              }
-//              
-//          }
-//         
-//      }
-//      return estado;
-//  }
    
   public void actualizarInformacionDeSimulacion(){
-           lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
-           lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+         //  lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
+        //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
            lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
            lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
            
-           lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
-           lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
+           //lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
+  //         lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
   }
   
   Thread actualizarInformacion= new Thread(){
@@ -122,13 +91,13 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
           while(Simulacion.run){
            
               while(Simulacion.seguir){
-                lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
-                lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+               MenuPrincipalSimulacion.lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
+            //    lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
                 lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
                 lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
 
-                lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
-                lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
+                MenuPrincipalSimulacion.lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
+                MenuPrincipalSimulacion.lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
            
               }
           }
@@ -137,27 +106,45 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
   
   };
  
-  public void run(){
-   try{
-   p.actualizarSemaforos.start();
-   p.actualizarVehiculos.start();
-   actualizarInformacion.start();
-   }catch(Exception e){}
-   
-   
-   while(run){
-       while(seguir){
-        try{
-           p.repaint();
-           
-        }
-        catch(Exception e){
-               System.out.println("sleeping thread Error");
-        }
-       }
-   
-   }
+  
+  Thread actualizarPaint = new Thread(){
+      public void run(){
+          while(run){
+            p.repaint();
+          }
+          
+      }
+  };
+  
+  
+  public void iniciarSimulacion(){
+      p.repaint();
+      p.actualizarSemaforos.start();
+      p.actualizarVehiculos.start();
+      actualizarInformacion.start();
+      actualizarPaint.start();
   }
+  
+//  public void run(){
+//   try{
+////   p.actualizarVehiculos.start();
+  
+//     actualizarInformacion.start();
+//     p.actualizarSemaforos.start();
+//   
+//   }catch(Exception e){}
+//   
+//   
+//   while(run){
+//        try{
+//           p.repaint();
+//        }
+//        catch(Exception e){
+//              System.out.println("sleeping thread Error"); 
+//       }
+//   
+//   }
+//  }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -167,31 +154,91 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanel5 = new javax.swing.JPanel();
+        txtVelocidad = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        btnAumentarVelocidad = new javax.swing.JButton();
+        btnReducirVelocidad = new javax.swing.JButton();
+        jPanel6 = new javax.swing.JPanel();
+        lPosicionX = new javax.swing.JLabel();
+        lPosicionY = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnUP = new javax.swing.JButton();
         btnLEFT = new javax.swing.JButton();
         btnDOWN = new javax.swing.JButton();
         btnRIGHT = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
-        lblCantidadVehiculos = new javax.swing.JLabel();
-        lblCantidadSemaforos = new javax.swing.JLabel();
-        lPosicionY = new javax.swing.JLabel();
-        lPosicionX = new javax.swing.JLabel();
-        lZona = new javax.swing.JLabel();
-        lblEscala = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        btnAumentarVelocidad = new javax.swing.JButton();
-        btnReducirVelocidad = new javax.swing.JButton();
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Controles de Cambio de Zona:"));
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
+
+        jLabel4.setText("Velocidad: ");
+
+        btnAumentarVelocidad.setText("+");
+        btnAumentarVelocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAumentarVelocidadActionPerformed(evt);
+            }
+        });
+
+        btnReducirVelocidad.setText("-");
+        btnReducirVelocidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReducirVelocidadActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnReducirVelocidad)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAumentarVelocidad)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAumentarVelocidad)
+                    .addComponent(btnReducirVelocidad)
+                    .addComponent(txtVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)))
+        );
+
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
+
+        lPosicionX.setText("Posicion X en el Mapa :    0");
+
+        lPosicionY.setText("Posicion Y en el Mapa :    0");
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(lPosicionX)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addComponent(lPosicionY)
+                .addGap(50, 50, 50))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lPosicionX)
+                    .addComponent(lPosicionY))
+                .addContainerGap())
+        );
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
         jPanel2.setToolTipText("");
 
         btnUP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/up.png"))); // NOI18N
@@ -226,185 +273,27 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnUP, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnLEFT, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnLEFT, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDOWN, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
-                .addComponent(btnRIGHT, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                        .addComponent(btnDOWN, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRIGHT, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnUP, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnUP, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnDOWN, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLEFT, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnRIGHT, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57))
-        );
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Ir a la Zona: ")));
-
-        jLabel1.setText("Zona :");
-
-        jButton1.setText("ACEPTAR");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(40, 40, 40)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addGap(16, 16, 16))
-        );
-
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Información de la Zona:"));
-
-        lblCantidadVehiculos.setText("Cantidad de Vehiculos: ");
-
-        lblCantidadSemaforos.setText("Cantidad de Semaforos: ");
-
-        lPosicionY.setText("Posicion Y en el Mapa :    0");
-
-        lPosicionX.setText("Posicion X en el Mapa :    0");
-
-        lZona.setText("Zona:     1 ");
-
-        lblEscala.setText("Escala del Mapa: 1 : 20");
-
-        jLabel3.setText("Velocidad Promedio: ");
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCantidadVehiculos)
-                    .addComponent(lblCantidadSemaforos)
-                    .addComponent(lPosicionY)
-                    .addComponent(lPosicionX)
-                    .addComponent(lZona)
-                    .addComponent(lblEscala)
-                    .addComponent(jLabel3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblEscala)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lZona)
+                .addComponent(btnUP, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lPosicionX)
-                .addGap(16, 16, 16)
-                .addComponent(lPosicionY)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblCantidadSemaforos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblCantidadVehiculos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3))
-        );
-
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Velocidad de la Simulación: "));
-
-        jLabel4.setText("Velocidad: ");
-
-        btnAumentarVelocidad.setText("+");
-        btnAumentarVelocidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAumentarVelocidadActionPerformed(evt);
-            }
-        });
-
-        btnReducirVelocidad.setText("-");
-        btnReducirVelocidad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReducirVelocidadActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(btnReducirVelocidad)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAumentarVelocidad))
-                    .addComponent(jTextField2))
-                .addGap(26, 26, 26))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAumentarVelocidad)
-                    .addComponent(btnReducirVelocidad))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(46, 46, 46)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(56, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(277, 277, 277))
+                .addComponent(btnRIGHT, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(btnLEFT, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnDOWN, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -412,12 +301,21 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 789, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(306, 306, 306))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 755, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 586, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -428,7 +326,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                 MenuPrincipalSimulacion.posicionRelativaY-=MenuPrincipalSimulacion.alto;
                 MenuPrincipalSimulacion.zonaActual-=MenuPrincipalSimulacion.dimensionXMapa/(Panel.escala*MenuPrincipalSimulacion.ancho);
                 }
-                lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+              //  lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
                 lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
                 lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
     }//GEN-LAST:event_btnUPActionPerformed
@@ -439,7 +337,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                 MenuPrincipalSimulacion.zonaActual-=1;
                 }
                 
-                lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+             //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
                 lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
                 lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
     }//GEN-LAST:event_btnLEFTActionPerformed
@@ -450,7 +348,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                 MenuPrincipalSimulacion.zonaActual+=MenuPrincipalSimulacion.dimensionXMapa/(Panel.escala*MenuPrincipalSimulacion.ancho);
                 }
                  
-                lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+             //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
                 lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
                 lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
     }//GEN-LAST:event_btnDOWNActionPerformed
@@ -461,7 +359,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                 MenuPrincipalSimulacion.zonaActual+=1;
                 }
                 
-                lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+           //     lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
                 lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
                 lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
     }//GEN-LAST:event_btnRIGHTActionPerformed
@@ -475,6 +373,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                     ClienteSemaforos.cambiarVelocidad(velocidadSimulacion);
                     ClienteVehiculos.cambiarVelocidad(velocidadSimulacion);
                     }catch(IOException ioe){}
+                    txtVelocidad.setText(""+velocidadSimulacion);
                 }
     }//GEN-LAST:event_btnReducirVelocidadActionPerformed
 
@@ -487,7 +386,7 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
                     ClienteSemaforos.cambiarVelocidad(velocidadSimulacion);
                     ClienteVehiculos.cambiarVelocidad(velocidadSimulacion);
                     }catch(IOException ioe){}
-                    
+                    txtVelocidad.setText(""+velocidadSimulacion);
                 }
     }//GEN-LAST:event_btnAumentarVelocidadActionPerformed
 
@@ -499,22 +398,12 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
     private javax.swing.JButton btnRIGHT;
     private javax.swing.JButton btnReducirVelocidad;
     private javax.swing.JButton btnUP;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JLabel lPosicionX;
     private javax.swing.JLabel lPosicionY;
-    private javax.swing.JLabel lZona;
-    private javax.swing.JLabel lblCantidadSemaforos;
-    private javax.swing.JLabel lblCantidadVehiculos;
-    private javax.swing.JLabel lblEscala;
+    private javax.swing.JTextField txtVelocidad;
     // End of variables declaration//GEN-END:variables
 }

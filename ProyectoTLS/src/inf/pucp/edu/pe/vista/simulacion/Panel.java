@@ -75,34 +75,6 @@ public final class Panel extends JPanel{
       }
     };
     
-//    public void crearSemaforos() {
-//        
-//        //actualizarSemaforos.start();
-//        ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
-//                escala=400/factor;
-//                try{
-//
-//                  listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
-//
-//                cantidadSemaforos=listaCruces.size();
-//                Thread.sleep(333);
-//                }catch(IOException e){} catch (InterruptedException ex) {
-//                    Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//
-//
-//                semaf= new Semaforo[listaCruces.size()];
-//                int count=0;
-//
-//                for(Cruce c : listaCruces){
-//
-//
-//                     semaf[count]= new Semaforo(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
-//                     count++;
-//
-//                }  
-//
-//    } 
 
     
     Thread actualizarVehiculos = new Thread(){
@@ -123,36 +95,15 @@ public final class Panel extends JPanel{
         
     };
     
-//    
-//    public void crearVehiculos(){
-//        ArrayList<Vehiculo> listaVehiculos = new ArrayList<Vehiculo>();
-//        escala=400/factor;
-//        
-//                   
-//        try {
-//            listaVehiculos = ClienteVehiculos.solicitarVehiculos(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
-//        } catch (IOException ex) {
-//            Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//          
-//        cantidadDeVehiculos=listaVehiculos.size();
-//        
-//        
-//        carro= new carro[listaVehiculos.size()];
-//        int count=0;
-//        
-//        for(Vehiculo c: listaVehiculos){                        
-//             carro[count]= new carro(Math.round(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY));
-//             count++;             
-//        }               
-//    }
-
     
     public void paint(Graphics g){  
             dibujarZona(g);
             dibujarTodosLosSemaforos(g);
-            dibujarTodosLosVehiculos(g);
+            //dibujarTodosLosVehiculos(g);
     }
+
+    
+    
     
     private void dibujarZona(Graphics g){
         /*dibujar la zona*/
@@ -197,10 +148,10 @@ public final class Panel extends JPanel{
         int offset20= 1, offset10=3, offset4=7; 
         if(factor==100){
             //Math.round(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY)
-        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset4, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset4), 14, 14);
+        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset4, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset4), 9, 9);
         }else
          if(factor==40){
-        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset10, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset10), 7, 7);
+        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset10, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset10), 6, 6);
         }else
           if(factor==20){
         g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset20, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset20), 3, 3);

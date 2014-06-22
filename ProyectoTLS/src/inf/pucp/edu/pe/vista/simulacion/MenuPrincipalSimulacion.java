@@ -49,7 +49,7 @@ public class MenuPrincipalSimulacion extends JFrame{
     
  /*parametros de la frame*/    
     public static String name="Simulador";
-    public static int ancho=1000, alto=800;
+    public static int ancho=1000, alto=600;
     public static int defectoAncho =6;
     public static int defectoAlto=29;
     
@@ -72,6 +72,7 @@ public class MenuPrincipalSimulacion extends JFrame{
              
        /*caracteristicas basicas de la ventana*/ 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+    //    this.setSize(1000, 750);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
         //ven= new VentanaDeInformacion();
@@ -102,6 +103,10 @@ public class MenuPrincipalSimulacion extends JFrame{
         btnReducirZoom = new javax.swing.JButton();
         btnAumentarZoom = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        lblCantidadSemaforos = new javax.swing.JLabel();
+        lblCantidadVehiculos = new javax.swing.JLabel();
+        lblVelocidad = new javax.swing.JLabel();
+        lblEscala = new javax.swing.JLabel();
 
         jMenu5.setText("File");
         jMenuBar2.add(jMenu5);
@@ -166,6 +171,14 @@ public class MenuPrincipalSimulacion extends JFrame{
 
         jLabel1.setText("Zoom");
 
+        lblCantidadSemaforos.setText("Cantidad de Semaforos: ");
+
+        lblCantidadVehiculos.setText("Cantidad de Vehiculos");
+
+        lblVelocidad.setText("V.Promedio: ");
+
+        lblEscala.setText("Escala: ");
+
         javax.swing.GroupLayout barraMenuLayout = new javax.swing.GroupLayout(barraMenu);
         barraMenu.setLayout(barraMenuLayout);
         barraMenuLayout.setHorizontalGroup(
@@ -179,7 +192,15 @@ public class MenuPrincipalSimulacion extends JFrame{
                 .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addGap(33, 33, 33)
+                .addComponent(lblCantidadSemaforos)
+                .addGap(91, 91, 91)
+                .addComponent(lblCantidadVehiculos)
+                .addGap(55, 55, 55)
+                .addComponent(lblVelocidad)
+                .addGap(67, 67, 67)
+                .addComponent(lblEscala)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(btnReducirZoom)
@@ -202,7 +223,11 @@ public class MenuPrincipalSimulacion extends JFrame{
                         .addGroup(barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnReducirZoom)
                             .addComponent(btnAumentarZoom)
-                            .addComponent(jLabel1))
+                            .addComponent(jLabel1)
+                            .addComponent(lblCantidadSemaforos)
+                            .addComponent(lblCantidadVehiculos)
+                            .addComponent(lblVelocidad)
+                            .addComponent(lblEscala))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -231,8 +256,9 @@ public class MenuPrincipalSimulacion extends JFrame{
                     ClienteSemaforos.inicializarCruces();
                     ClienteSemaforos.actualizarCruces();
                 }catch(IOException ex){}
-                hilo= new Thread(simu);
-                hilo.start();
+                simu.iniciarSimulacion();
+                
+                
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
@@ -329,6 +355,10 @@ public class MenuPrincipalSimulacion extends JFrame{
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
+    public static javax.swing.JLabel lblCantidadSemaforos;
+    public static javax.swing.JLabel lblCantidadVehiculos;
+    public static javax.swing.JLabel lblEscala;
+    public static javax.swing.JLabel lblVelocidad;
     // End of variables declaration//GEN-END:variables
 
 
