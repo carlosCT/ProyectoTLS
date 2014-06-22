@@ -17,8 +17,8 @@ import java.util.ArrayList;
  */
 public class ClienteSemaforos {
 
-   //public static String ip= "192.168.1.35";
-    public static String ip= "192.168.1.41";
+   public static String ip = "127.0.0.1";
+    
     public ClienteSemaforos(){
         
     }
@@ -28,7 +28,8 @@ public class ClienteSemaforos {
     
     public static ArrayList<Cruce> solicitarCruces(int xi, int yi, int xf, int yf) throws IOException{
     
-        String IP_SERVIDOR=ip;
+        String IP_SERVIDOR= ip;
+        //String IP_SERVIDOR="127.0.0.1";
         int PUERTO_SERVIDOR=5001;
         String lista[];
         ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
@@ -93,7 +94,7 @@ public class ClienteSemaforos {
             try{
                 
                 String valor="actualizar";                                                               
-                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                actualizar(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
                 
             }catch(Exception e){
                 System.err.println(e);
@@ -123,6 +124,61 @@ public class ClienteSemaforos {
         
     }
     
+    public static boolean verificarLuz(int x, int y, int dir, double vel) throws IOException{
+    
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=5001;
+        String lista[];
+        String resultado = null;
+                      
+            try{
+                
+                String valor="cv " + x + " " + y + " " + dir + " " + vel;                                                               
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            //System.out.print("Fin Cliente");
+        
+            boolean pase = true;
+            
+            if(resultado.equalsIgnoreCase("true")){
+                pase = true;
+            }else if(resultado.equalsIgnoreCase("false")){
+                pase = false;                
+            }
+            
+            return pase;
+    }
+    
+    public static void detenerSimulacion() throws IOException{
+    
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=5001;
+        String lista[];
+        String resultado = null;
+        
+            try{
+                
+                String valor="detenerSimulacion";                                                               
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+                
+//                for(Cruce c : listaCruces){
+//                    
+//                    System.out.println("Pos x: " + c.getPosX() + " Pos y: " + c.getPosY() + " Estado: " + c.getEstadoLuz());
+//                }
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+            
+    }
+    
      private static String realizar_operacion(String host, int puerto, String valor) {
         String respuesta=null;
         try{
@@ -150,14 +206,6 @@ public class ClienteSemaforos {
             System.out.println("Creando socket");
             Socket socketEn=new Socket(host, puerto);
             System.out.println("obteniendo DataInputStream");
-            
-            
-            
-            
-            
-            
-            
-            
             
             
             DataOutputStream salida=new DataOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
@@ -193,5 +241,23 @@ public class ClienteSemaforos {
         }
         return listaCruces;
     }
+     
+    private static void actualizar(String host, int puerto, String valor) {
+        String respuesta=null;
+        try{
+            Socket socketEn=new Socket(host, puerto);
+            DataOutputStream salida=new DataOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
+            DataInputStream entrada=new DataInputStream(new BufferedInputStream(socketEn.getInputStream()));
+                        
+            salida.writeUTF(valor);
+            salida.flush();
+            //respuesta=entrada.readUTF();
+            try{
+                socketEn.close();
+            }catch(Exception ex){}
+        }catch(Exception e){
+            System.err.println(e);
+        }
+    } 
 }
 

@@ -6,7 +6,6 @@ package inf.pucp.edu.pe.cliente;
 
 
 
-
 import inf.pucp.edu.pe.modelo.Vehiculo;
 import java.io.*;
 import java.net.*;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  */
 public class ClienteVehiculos {
 
-    public static String ip = "192.168.1.33";
+    public static String ip = "127.0.0.1";
     public static int puerto = 8001;
     
     public ClienteVehiculos(){
@@ -87,7 +86,7 @@ public class ClienteVehiculos {
             try{
                 
                 String valor="actualizar";                                                               
-                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                actualizar(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
                 
             }catch(Exception e){
                 System.err.println(e);
@@ -115,6 +114,28 @@ public class ClienteVehiculos {
             
             System.out.print("Fin Cliente");
         
+    }
+    
+    public static void detenerSimulacion(ArrayList<Vehiculo> vehiculos ) throws IOException{
+    
+        String IP_SERVIDOR=ip;
+        int PUERTO_SERVIDOR=puerto;
+        String lista[];
+        
+            try{
+                
+                String valor="detenerSimulacion";
+                lista = valor.split(" ");
+                                                                
+                enviarVehiculos(IP_SERVIDOR, PUERTO_SERVIDOR, valor, vehiculos);
+                System.out.println("Se enviaron los vehiculos");
+                                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+            
     }
     
      private static String realizar_operacion(String host, int puerto, String valor) {
@@ -204,6 +225,23 @@ public class ClienteVehiculos {
             System.out.println(e);
         }
     } 
+    
+    private static void actualizar(String host, int puerto, String valor) {
+        String respuesta=null;
+        try{
+            Socket socketEn=new Socket(host, puerto);
+            DataOutputStream salida=new DataOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
+            DataInputStream entrada=new DataInputStream(new BufferedInputStream(socketEn.getInputStream()));
+                        
+            salida.writeUTF(valor);
+            salida.flush();
+            try{
+                socketEn.close();
+            }catch(Exception ex){}
+        }catch(Exception e){
+            System.err.println(e);
+        }
+    }
     
 }
 
