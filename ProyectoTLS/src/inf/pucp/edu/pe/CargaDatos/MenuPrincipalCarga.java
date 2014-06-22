@@ -84,7 +84,6 @@ LeeArchivo arch = null;
         });
 
         jProgressBar1.setBackground(new java.awt.Color(255, 255, 255));
-        jProgressBar1.setForeground(new java.awt.Color(0, 153, 204));
         jProgressBar1.setToolTipText("");
         jProgressBar1.setBorderPainted(false);
         jProgressBar1.setFocusCycleRoot(true);
@@ -260,7 +259,9 @@ LeeArchivo arch = null;
 
     @SuppressWarnings("empty-statement")
     private void btnIniciarCarga(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarCarga
-       
+       jProgressBar1.setForeground(Color.DARK_GRAY);
+       jProgressBar1.setForeground(Color.LIGHT_GRAY);
+        
         jProgressBar1.setIndeterminate(true);
          this.actualizacion.start();
          this.cargahilo.start();
@@ -331,6 +332,8 @@ LeeArchivo arch = null;
         //
         jProgressBar1.setIndeterminate(false);
         jProgressBar1.setString("100%"); 
+        jProgressBar1.setValue(100);
+        nombre.setText("Carga Finalizada con Exito");
         }
     };
     
