@@ -239,7 +239,8 @@ LeeArchivo arch = null;
       if(opt==JFileChooser.APPROVE_OPTION ){
          file = dlg.getSelectedFile().getPath();
     }
-         int n = file.lastIndexOf('/');
+         System.out.println(file);
+         int n = file.lastIndexOf('\\');
          file = file.substring(0, n);
          System.out.print("---"+ file + "---");
          arch = new LeeArchivo(file);

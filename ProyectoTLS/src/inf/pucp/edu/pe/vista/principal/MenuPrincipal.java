@@ -6,24 +6,26 @@
 
 package inf.pucp.edu.pe.vista.principal;
 
+import inf.pucp.edu.pe.CargaDatos.LeeArchivo;
 import inf.pucp.edu.pe.CargaDatos.MenuPrincipalCarga;
+import inf.pucp.edu.pe.vista.reporte.MenuPrincipalReporte;
+import inf.pucp.edu.pe.vista.seguridad.MenuPrincipalSeguridad;
 import inf.pucp.edu.pe.vista.simulacion.MenuPrincipalSimulacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.beans.PropertyVetoException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import inf.pucp.edu.pe.vista.reporte.MenuPrincipalReporte;
-import inf.pucp.edu.pe.vista.seguridad.MenuPrincipalSeguridad;
-import java.beans.PropertyVetoException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**
@@ -193,6 +195,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSeguridadActionPerformed
 
     private void btnSimulacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimulacion1ActionPerformed
+            
+            if(!LeeArchivo.ter){
+                
+                JOptionPane.showMessageDialog(null, "Por favor cargue primero los datos de simulacion");
+                return;
+            }
             MenuPrincipalSimulacion mps = null;
             mps = new MenuPrincipalSimulacion();
             mps.setVisible(true);

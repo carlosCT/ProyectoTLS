@@ -8,6 +8,7 @@ package inf.pucp.edu.pe.vista.simulacion;
 
 
 
+import inf.pucp.edu.pe.CargaDatos.LeeArchivo;
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.Mapa;
@@ -79,7 +80,10 @@ public class MenuPrincipalSimulacion extends JFrame{
         simu= new Simulacion();
         simu.setMaximizable(true);
         this.add(simu);
-     
+        try{
+        ClienteSemaforos.inicializarCruces();
+        ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
+        }catch(IOException ex){}
         barraMenu.setBackground(claro);
         /*********************************************/
         
@@ -117,6 +121,11 @@ public class MenuPrincipalSimulacion extends JFrame{
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/pausa.png"))); // NOI18N
         btnPause.setFocusable(false);
@@ -253,8 +262,8 @@ public class MenuPrincipalSimulacion extends JFrame{
                 Simulacion.seguir=true;
                 
                 try{
-                    ClienteSemaforos.inicializarCruces();
                     ClienteSemaforos.actualizarCruces();
+                    ClienteVehiculos.actualizarVehiculos();
                 }catch(IOException ex){}
                 simu.iniciarSimulacion();
                 
@@ -305,6 +314,17 @@ public class MenuPrincipalSimulacion extends JFrame{
         }
     }//GEN-LAST:event_btnAumentarZoomActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        
+        try{
+            
+            ClienteSemaforos.detenerSimulacion();
+            ClienteVehiculos.detenerSimulacion();
+            
+        }catch(IOException ex){}
+        
+    }//GEN-LAST:event_formWindowClosing
+
     /**
      * @param args the command line arguments
      */
@@ -335,7 +355,7 @@ public class MenuPrincipalSimulacion extends JFrame{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-            
+                    
                     new MenuPrincipalSimulacion().setVisible(true);
                
             }

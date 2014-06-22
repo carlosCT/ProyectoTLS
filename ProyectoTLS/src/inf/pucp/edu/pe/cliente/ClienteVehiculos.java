@@ -116,20 +116,17 @@ public class ClienteVehiculos {
         
     }
     
-    public static void detenerSimulacion(ArrayList<Vehiculo> vehiculos ) throws IOException{
+    public static void detenerSimulacion() throws IOException{
     
         String IP_SERVIDOR=ip;
         int PUERTO_SERVIDOR=puerto;
         String lista[];
-        
+        String resultado = null;
             try{
                 
-                String valor="detenerSimulacion";
-                lista = valor.split(" ");
-                                                                
-                enviarVehiculos(IP_SERVIDOR, PUERTO_SERVIDOR, valor, vehiculos);
-                System.out.println("Se enviaron los vehiculos");
-                                
+                String valor="detenerSimulacion";                                                             
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
             }catch(Exception e){
                 System.err.println(e);
             }

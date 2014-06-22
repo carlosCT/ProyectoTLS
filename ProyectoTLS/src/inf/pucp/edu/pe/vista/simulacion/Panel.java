@@ -99,7 +99,7 @@ public final class Panel extends JPanel{
     public void paint(Graphics g){  
             dibujarZona(g);
             dibujarTodosLosSemaforos(g);
-            //dibujarTodosLosVehiculos(g);
+            dibujarTodosLosVehiculos(g);
     }
 
     

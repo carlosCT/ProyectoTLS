@@ -27,10 +27,10 @@ import java.util.logging.Logger;
 
 public class LeeArchivo {
 
-     public ArrayList<Vehiculo> autos = new ArrayList<>();
+    public static ArrayList<Vehiculo> autos = new ArrayList<>();
     public  String s;//"/Users/Alejandro/Documents/PUCP/2014-1/dp1/Archivos2";
     public String archact;
-    public boolean ter= false;
+    public static boolean ter= false;
         
        
     
@@ -137,8 +137,8 @@ public LeeArchivo(String s){
   if (listaDirectorio == null) {
             System.out.println("No hay ficheros en el directorio especificado");
         } else {
-            
-            for (int x = 1; x <listaDirectorio.length; x++) //System.out.println(listaDirectorio[x]);                      
+            for (int x = 1; x <1000; x++)
+            //for (int x = 1; x <listaDirectorio.length; x++) //System.out.println(listaDirectorio[x]);                      
             {
                 try {
                     leerFile(new File(s + "/" + listaDirectorio[x]));
