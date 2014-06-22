@@ -228,8 +228,8 @@ public class MenuPrincipalSimulacion extends JFrame{
                 Simulacion.seguir=true;
                 
                 try{
-                ClienteSemaforos.inicializarCruces();
-                ClienteSemaforos.actualizarCruces();
+                    ClienteSemaforos.inicializarCruces();
+                    ClienteSemaforos.actualizarCruces();
                 }catch(IOException ex){}
                 hilo= new Thread(simu);
                 hilo.start();

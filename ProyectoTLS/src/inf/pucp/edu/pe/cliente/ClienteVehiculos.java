@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class ClienteVehiculos {
 
-    public static String ip = "192.168.1.34";
+    public static String ip = "192.168.1.33";
     public static int puerto = 8001;
     
     public ClienteVehiculos(){

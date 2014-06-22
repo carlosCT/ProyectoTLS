@@ -89,22 +89,22 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
 //     }
 //  }
   
-  
-  private byte estaElCruceEnRojo(carro veh){//necesita mejorar
-      byte estado= 0; //esta en verde
-      for(int i=0; i<p.semaf.length; i++){
-          if(p.semaf[i].getBounds().intersects(veh.getBounds())){
-              //se cruza
-              if(p.semaf[i].getEstadoLuz()==1){
-                  estado=1; //esta en rojo
-                  break;
-              }
-              
-          }
-         
-      }
-      return estado;
-  }
+//  
+//  private byte estaElCruceEnRojo(carro veh){//necesita mejorar
+//      byte estado= 0; //esta en verde
+//      for(int i=0; i<p.semaf.length; i++){
+//          if(p.semaf[i].getBounds().intersects(veh.getBounds())){
+//              //se cruza
+//              if(p.semaf[i].getEstadoLuz()==1){
+//                  estado=1; //esta en rojo
+//                  break;
+//              }
+//              
+//          }
+//         
+//      }
+//      return estado;
+//  }
    
   public void actualizarInformacionDeSimulacion(){
            lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
@@ -115,18 +115,39 @@ public class Simulacion extends javax.swing.JInternalFrame implements Runnable{
            lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
            lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
   }
+  
+  Thread actualizarInformacion= new Thread(){
+           
+      public void run(){
+          while(Simulacion.run){
+           
+              while(Simulacion.seguir){
+                lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
+                lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
+
+                lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
+                lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
+           
+              }
+          }
+      }
+  
+  
+  };
  
   public void run(){
-   
+   try{
+   p.actualizarSemaforos.start();
+   p.actualizarVehiculos.start();
+   actualizarInformacion.start();
+   }catch(Exception e){}
    
    
    while(run){
-       
-        while(seguir){
+       while(seguir){
         try{
-           actualizarInformacionDeSimulacion();
-           p.crearVehiculos();
-           p.crearSemaforos();
            p.repaint();
            
         }

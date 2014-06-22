@@ -36,9 +36,10 @@ public final class Panel extends JPanel{
     public static int cantidadDeVehiculos;
     public int dimensionX=4;
     public int dimensionY=4;
-    public carro [] carro;
     
-    public Semaforo [] semaf;
+    //estructura de semaforo y vehiculo   
+    ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
+    ArrayList<Vehiculo> listaVehiculos= new ArrayList<Vehiculo>();
     
     public byte eleccion=0;
     
@@ -46,8 +47,8 @@ public final class Panel extends JPanel{
     
     public Panel() {           
         this.setSize(MenuPrincipalSimulacion.ancho, MenuPrincipalSimulacion.alto);
-        crearVehiculos();
-        crearSemaforos();
+        //crearVehiculos();
+        //crearSemaforos();
         
     }
     
@@ -57,7 +58,7 @@ public final class Panel extends JPanel{
         
         while(Simulacion.run){  
             while(Simulacion.seguir){  
-                ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
+                
                 escala=400/factor;
                 try{
 
@@ -67,18 +68,6 @@ public final class Panel extends JPanel{
                 Thread.sleep(333);
                 }catch(IOException e){} catch (InterruptedException ex) {
                     Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-
-                semaf= new Semaforo[listaCruces.size()];
-                int count=0;
-
-                for(Cruce c : listaCruces){
-
-
-                     semaf[count]= new Semaforo(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
-                     count++;
-
                 }  
 
               }  
@@ -86,66 +75,83 @@ public final class Panel extends JPanel{
       }
     };
     
-    public void crearSemaforos() {
-        
-        //actualizarSemaforos.start();
-        ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
-                escala=400/factor;
-                try{
+//    public void crearSemaforos() {
+//        
+//        //actualizarSemaforos.start();
+//        ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
+//                escala=400/factor;
+//                try{
+//
+//                  listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+//
+//                cantidadSemaforos=listaCruces.size();
+//                Thread.sleep(333);
+//                }catch(IOException e){} catch (InterruptedException ex) {
+//                    Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//
+//                semaf= new Semaforo[listaCruces.size()];
+//                int count=0;
+//
+//                for(Cruce c : listaCruces){
+//
+//
+//                     semaf[count]= new Semaforo(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
+//                     count++;
+//
+//                }  
+//
+//    } 
 
-                  listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
-
-                cantidadSemaforos=listaCruces.size();
-                Thread.sleep(333);
-                }catch(IOException e){} catch (InterruptedException ex) {
-                    Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+    
+    Thread actualizarVehiculos = new Thread(){
+        public void run(){
+            while(Simulacion.run){
+                while(Simulacion.seguir){
+                    escala=400/factor;
+                    try {
+                        listaVehiculos = ClienteVehiculos.solicitarVehiculos(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+                    } catch (IOException ex) {
+                        Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    cantidadDeVehiculos=listaVehiculos.size();                     
+                         //carro[count]= new carro(Math.round(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY));                   
                 }
-
-
-                semaf= new Semaforo[listaCruces.size()];
-                int count=0;
-
-                for(Cruce c : listaCruces){
-
-
-                     semaf[count]= new Semaforo(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX, c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY, c.getEstadoLuz());
-                     count++;
-
-                }  
-
-    } 
-
-    
-    
-    
-    public void crearVehiculos(){
-        ArrayList<Vehiculo> listaVehiculos = new ArrayList<Vehiculo>();
-        escala=400/factor;
-        
-                   
-        try {
-            listaVehiculos = ClienteVehiculos.solicitarVehiculos(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
-        } catch (IOException ex) {
-            Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-          
-        cantidadDeVehiculos=listaVehiculos.size();
         
-        
-        carro= new carro[listaVehiculos.size()];
-        int count=0;
-        
-        for(Vehiculo c: listaVehiculos){                        
-             carro[count]= new carro(Math.round(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY));
-             count++;             
-        }               
-    }
+    };
+    
+//    
+//    public void crearVehiculos(){
+//        ArrayList<Vehiculo> listaVehiculos = new ArrayList<Vehiculo>();
+//        escala=400/factor;
+//        
+//                   
+//        try {
+//            listaVehiculos = ClienteVehiculos.solicitarVehiculos(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+//        } catch (IOException ex) {
+//            Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//          
+//        cantidadDeVehiculos=listaVehiculos.size();
+//        
+//        
+//        carro= new carro[listaVehiculos.size()];
+//        int count=0;
+//        
+//        for(Vehiculo c: listaVehiculos){                        
+//             carro[count]= new carro(Math.round(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY));
+//             count++;             
+//        }               
+//    }
 
     
     public void paint(Graphics g){  
             dibujarZona(g);
-            dibujarTodosLosSemaforos(g, semaf);
-            dibujarTodosLosVehiculos(g, carro);
+            dibujarTodosLosSemaforos(g);
+            dibujarTodosLosVehiculos(g);
     }
     
     private void dibujarZona(Graphics g){
@@ -169,51 +175,58 @@ public final class Panel extends JPanel{
     }
     
     
-    private void dibujarTodosLosSemaforos(Graphics g, Semaforo [] semaforo) {
-        for (Semaforo semaforo1 : semaforo) {
-            if (1 == semaforo1.getEstadoLuz()) {
-                g.setColor(Color.red);
-            } else {
-                g.setColor(Color.green);
+    private void dibujarTodosLosSemaforos(Graphics g) {
+        try{
+            for(int i=0; i<listaCruces.size(); i++){
+                if(1==listaCruces.get(i).getEstadoLuz()){
+                    g.setColor(Color.red);
+                }
+                else{
+                    g.setColor(Color.green);
+                }
+               // System.out.println( "pos x: pos y:" +listaCruces.get(i).getPosX()+" : "+listaCruces.get(i).getPosY());
+            dibujaSemaforo(g, listaCruces.get(i));
             }
-            dibujaSemaforo(g, semaforo1);
-        }
+        }catch(Exception e){}
     }
         
         
     
     
-    public void dibujaSemaforo(Graphics g, Semaforo semaforo){
+    public void dibujaSemaforo(Graphics g, Cruce semaforo){
         int offset20= 1, offset10=3, offset4=7; 
         if(factor==100){
-        g.fillRect(semaforo.getPosicionX()-offset4, semaforo.getPosicionY()-offset4, 14, 14);
+            //Math.round(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY)
+        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset4, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset4), 14, 14);
         }else
          if(factor==40){
-        g.fillRect(semaforo.getPosicionX()-offset10, semaforo.getPosicionY()-offset10, 7, 7);
+        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset10, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset10), 7, 7);
         }else
           if(factor==20){
-        g.fillRect(semaforo.getPosicionX()-offset20, semaforo.getPosicionY()-offset20, 3, 3);
+        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset20, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset20), 3, 3);
         }
     }
     
-    private void dibujarTodosLosVehiculos(Graphics g, carro [] vehi){
-        for (carro vehi1 : vehi) {
-            dibujaVehiculo(g, vehi1);
+    private void dibujarTodosLosVehiculos(Graphics g){
+        try{
+            for(int i=0; i< listaVehiculos.size(); i++){
+                dibujaVehiculo(g, listaVehiculos.get(i));
+            }
         }
+        catch(Exception e){}
     }
     
 
-    public void dibujaVehiculo(Graphics g, carro vehi) {        
-         //g.drawImage(vehi.getImagen(), vehi.getActualX(), vehi.getActualY(), vehi.getDimensionX(), vehi.getDimensionY(), null);
+    public void dibujaVehiculo(Graphics g, Vehiculo vehi) {        
         if(factor==100){
           g.setColor(Color.WHITE);
-          g.fillOval(vehi.getActualX(), vehi.getActualY(), 7, 7);
+          g.fillOval(Math.round(vehi.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(vehi.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY), 7, 7);
         }else if(factor==40){
           g.setColor(Color.white);
-          g.fillOval(vehi.getActualX(), vehi.getActualY(), 5, 5);
+          g.fillOval(Math.round(vehi.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(vehi.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY), 5, 5);
         }else if(factor==20){
           g.setColor(Color.white);
-          g.fillOval(vehi.getActualX(), vehi.getActualY(), 3, 3);
+          g.fillOval(Math.round(vehi.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(vehi.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY), 3, 3);
         }        
     }
 }

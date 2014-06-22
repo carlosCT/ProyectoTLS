@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ClienteSemaforos {
 
    //public static String ip= "192.168.1.35";
-    public static String ip= "192.168.1.34";
+    public static String ip= "192.168.1.33";
     public ClienteSemaforos(){
         
     }
@@ -150,6 +150,14 @@ public class ClienteSemaforos {
             System.out.println("Creando socket");
             Socket socketEn=new Socket(host, puerto);
             System.out.println("obteniendo DataInputStream");
+            
+            
+            
+            
+            
+            
+            
+            
             
             
             DataOutputStream salida=new DataOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
