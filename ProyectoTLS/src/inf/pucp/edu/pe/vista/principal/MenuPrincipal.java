@@ -38,6 +38,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     private JButton btnTest = new JButton();
+    public static int vecesPantallaSimulacion=1;
     
     public MenuPrincipal() {
         
@@ -196,14 +197,15 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnSimulacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimulacion1ActionPerformed
             
-            if(!LeeArchivo.ter){
-                
-                JOptionPane.showMessageDialog(null, "Por favor cargue primero los datos de simulacion");
-                return;
-            }
+//            if(!LeeArchivo.ter){
+//                
+//                JOptionPane.showMessageDialog(null, "Por favor cargue primero los datos de simulacion");
+//                return;
+//            }
             MenuPrincipalSimulacion mps = null;
             mps = new MenuPrincipalSimulacion();
             mps.setVisible(true);
+             System.out.println("Ingreso una vez mas: "+MenuPrincipal.vecesPantallaSimulacion);
     }//GEN-LAST:event_btnSimulacion1ActionPerformed
 
     private void btnCargarMasiva(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarMasiva

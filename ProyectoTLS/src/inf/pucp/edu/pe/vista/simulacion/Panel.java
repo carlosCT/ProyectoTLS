@@ -9,7 +9,8 @@ package inf.pucp.edu.pe.vista.simulacion;
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.*;
-
+import static inf.pucp.edu.pe.vista.simulacion.Simulacion.lPosicionX;
+import static inf.pucp.edu.pe.vista.simulacion.Simulacion.lPosicionY;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
@@ -32,8 +33,6 @@ public final class Panel extends JPanel{
     public static int escala=20;
     public static int factor =400/escala;
     
-    public static int cantidadSemaforos;
-    public static int cantidadDeVehiculos;
     public int dimensionX=4;
     public int dimensionY=4;
     
@@ -43,12 +42,15 @@ public final class Panel extends JPanel{
     
     public byte eleccion=0;
     
+    public VariablesSimulacion vs= new VariablesSimulacion();;
+    
     Cuadra cuadra;
     
     public Panel() {           
         this.setSize(MenuPrincipalSimulacion.ancho, MenuPrincipalSimulacion.alto);
         //crearVehiculos();
         //crearSemaforos();
+        
         
     }
     
@@ -62,9 +64,9 @@ public final class Panel extends JPanel{
                 escala=400/factor;
                 try{
 
-                  listaCruces = ClienteSemaforos.solicitarCruces(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+                  listaCruces = ClienteSemaforos.solicitarCruces(vs.getPosicionRelativaX()*escala, vs.getPosicionRelativaY()*escala,vs.getPosicionRelativaX()*escala + MenuPrincipalSimulacion.ancho*escala, vs.getPosicionRelativaY()*escala + MenuPrincipalSimulacion.alto*escala);
 
-                cantidadSemaforos=listaCruces.size();
+                 vs.setCantidadDeVehiculos(listaCruces.size());  
                 Thread.sleep(333);
                 }catch(IOException e){} catch (InterruptedException ex) {
                     Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
@@ -83,11 +85,11 @@ public final class Panel extends JPanel{
                 while(Simulacion.seguir){
                     escala=400/factor;
                     try {
-                        listaVehiculos = ClienteVehiculos.solicitarVehiculos(MenuPrincipalSimulacion.posicionRelativaX*escala, MenuPrincipalSimulacion.posicionRelativaY*escala,MenuPrincipalSimulacion.posicionRelativaX*escala + MenuPrincipalSimulacion.ancho*escala, MenuPrincipalSimulacion.posicionRelativaY*escala + MenuPrincipalSimulacion.alto*escala);
+                        listaVehiculos = ClienteVehiculos.solicitarVehiculos(vs.getPosicionRelativaX()*escala, vs.getPosicionRelativaY()*escala,vs.getPosicionRelativaX()*escala + MenuPrincipalSimulacion.ancho*escala, vs.getPosicionRelativaY()*escala + MenuPrincipalSimulacion.alto*escala);
                     } catch (IOException ex) {
                         Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    cantidadDeVehiculos=listaVehiculos.size();                     
+                    vs.setCantidadDeVehiculos(listaVehiculos.size());
                          //carro[count]= new carro(Math.round(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY));                   
                 }
             }
@@ -95,6 +97,89 @@ public final class Panel extends JPanel{
         
     };
     
+    Thread actualizarInformacion= new Thread(){
+           
+      public void run(){
+          while(Simulacion.run){
+               MenuPrincipalSimulacion.lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
+            //    lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ vs.getPosicionRelativaX()*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ vs.getPosicionRelativaY()*Panel.escala);
+
+                MenuPrincipalSimulacion.lblCantidadSemaforos.setText("Cantidad de Semaforos: "+vs.getCantidadSemaforos());
+                MenuPrincipalSimulacion.lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+vs.getCantidadDeVehiculos());
+           
+              
+          }
+      }
+  
+  
+  };
+
+    public void moveUp(){
+        int posY= vs.getPosicionRelativaY();
+        int posX=vs.getPosicionRelativaX();
+        if(posY>0){
+                posY-=MenuPrincipalSimulacion.alto;
+                MenuPrincipalSimulacion.zonaActual-=MenuPrincipalSimulacion.dimensionXMapa/(Panel.escala*MenuPrincipalSimulacion.ancho);
+                }
+              //  lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ posX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ posY*Panel.escala);
+                
+                vs.setPosicionRelativaX(posX);
+                vs.setPosicionRelativaY(posY);
+    }
+    
+    public void moveLeft(){
+        int posX= vs.getPosicionRelativaX();
+        int posY= vs.getPosicionRelativaY();
+        if(posX>0){
+                posX-=MenuPrincipalSimulacion.ancho;
+                MenuPrincipalSimulacion.zonaActual-=1;
+                }
+                
+             //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ posX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ posY*Panel.escala);
+                
+                vs.setPosicionRelativaX(posX);
+                vs.setPosicionRelativaY(posY);
+    }
+
+    public void moveDown(){
+        int posX=vs.getPosicionRelativaX();
+        int posY= vs.getPosicionRelativaY();
+        if(posY<=6400){
+                posY+=MenuPrincipalSimulacion.alto;
+                MenuPrincipalSimulacion.zonaActual+=MenuPrincipalSimulacion.dimensionXMapa/(Panel.escala*MenuPrincipalSimulacion.ancho);
+                }
+                 
+             //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ posX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ posY*Panel.escala);
+               
+        
+            vs.setPosicionRelativaX(posX);
+            vs.setPosicionRelativaY(posY);
+    }
+    
+    public void moveRight(){
+         int posX=vs.getPosicionRelativaX();
+        int posY= vs.getPosicionRelativaY();
+        if(posX<=10000){
+                posX+=MenuPrincipalSimulacion.ancho;
+                MenuPrincipalSimulacion.zonaActual+=1;
+                }
+                
+           //     lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
+                lPosicionX.setText("Posicion X en el Mapa:    "+ posX*Panel.escala);
+                lPosicionY.setText("Posicion Y en el Mapa:    "+ posY*Panel.escala);
+          
+        vs.setPosicionRelativaX(posX);
+        vs.setPosicionRelativaY(posY);
+        
+    }
     
     public void paint(Graphics g){  
             dibujarZona(g);
@@ -148,13 +233,13 @@ public final class Panel extends JPanel{
         int offset20= 1, offset10=3, offset4=7; 
         if(factor==100){
             //Math.round(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY)
-        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset4, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset4), 9, 9);
+        g.fillRect(semaforo.getPosX()/escala-vs.getPosicionRelativaX()-offset4, Math.round(semaforo.getPosY()/escala-vs.getPosicionRelativaY()-offset4), 9, 9);
         }else
          if(factor==40){
-        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset10, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset10), 6, 6);
+        g.fillRect(semaforo.getPosX()/escala-vs.getPosicionRelativaX()-offset10, Math.round(semaforo.getPosY()/escala-vs.getPosicionRelativaY()-offset10), 6, 6);
         }else
           if(factor==20){
-        g.fillRect(semaforo.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX-offset20, Math.round(semaforo.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY-offset20), 3, 3);
+        g.fillRect(semaforo.getPosX()/escala-vs.getPosicionRelativaX()-offset20, Math.round(semaforo.getPosY()/escala-vs.getPosicionRelativaY()-offset20), 3, 3);
         }
     }
     
@@ -171,13 +256,13 @@ public final class Panel extends JPanel{
     public void dibujaVehiculo(Graphics g, Vehiculo vehi) {        
         if(factor==100){
           g.setColor(Color.WHITE);
-          g.fillOval(Math.round(vehi.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(vehi.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY), 7, 7);
+          g.fillOval(Math.round(vehi.getPosX()/escala-vs.getPosicionRelativaX()),Math.round(vehi.getPosY()/escala-vs.getPosicionRelativaY()), 7, 7);
         }else if(factor==40){
           g.setColor(Color.white);
-          g.fillOval(Math.round(vehi.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(vehi.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY), 5, 5);
+          g.fillOval(Math.round(vehi.getPosX()/escala-vs.getPosicionRelativaX()),Math.round(vehi.getPosY()/escala-vs.getPosicionRelativaY()), 5, 5);
         }else if(factor==20){
           g.setColor(Color.white);
-          g.fillOval(Math.round(vehi.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(vehi.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY), 3, 3);
+          g.fillOval(Math.round(vehi.getPosX()/escala-vs.getPosicionRelativaX()),Math.round(vehi.getPosY()/escala-vs.getPosicionRelativaY()), 3, 3);
         }        
     }
 }

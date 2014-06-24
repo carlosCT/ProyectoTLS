@@ -13,13 +13,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.io.IOException;
-import javax.swing.JComponent;
+import javax.swing.*;
+
 
 /**
  *
  * @author juancarlos
  */
-public class Simulacion extends javax.swing.JInternalFrame{
+public class Simulacion extends JInternalFrame implements Runnable{
 
     private JComponent Barra = ((javax.swing.plaf.basic.BasicInternalFrameUI) getUI()).getNorthPane();
     private Dimension dimBarra = null; 
@@ -31,6 +32,8 @@ public class Simulacion extends javax.swing.JInternalFrame{
     public static int velocidadSimulacion= 1;
     Graphics g;
     Color claro = new Color(217, 228, 232);
+    
+    public VariablesSimulacion vs2= new VariablesSimulacion(); 
     /**
      * Creates new form Simulacion
      */
@@ -75,36 +78,8 @@ public class Simulacion extends javax.swing.JInternalFrame{
         repaint(); 
     }
    
-  public void actualizarInformacionDeSimulacion(){
-         //  lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
-        //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-           lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
-           lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
-           
-           //lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
-  //         lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
-  }
-  
-  Thread actualizarInformacion= new Thread(){
-           
-      public void run(){
-          while(Simulacion.run){
-           
-              while(Simulacion.seguir){
-               MenuPrincipalSimulacion.lblEscala.setText("Escala del Mapa 1: "+Panel.escala);
-            //    lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
-
-                MenuPrincipalSimulacion.lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
-                MenuPrincipalSimulacion.lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
-           
-              }
-          }
-      }
   
   
-  };
  
   
   Thread actualizarPaint = new Thread(){
@@ -121,30 +96,27 @@ public class Simulacion extends javax.swing.JInternalFrame{
       p.repaint();
       p.actualizarSemaforos.start();
       p.actualizarVehiculos.start();
-      actualizarInformacion.start();
+      p.actualizarInformacion.start();
       actualizarPaint.start();
   }
   
-//  public void run(){
-//   try{
-////   p.actualizarVehiculos.start();
-  
-//     actualizarInformacion.start();
-//     p.actualizarSemaforos.start();
-//   
-//   }catch(Exception e){}
-//   
-//   
-//   while(run){
-//        try{
-//           p.repaint();
-//        }
-//        catch(Exception e){
-//              System.out.println("sleeping thread Error"); 
-//       }
-//   
-//   }
-//  }
+  public void run(){
+   
+              p.actualizarSemaforos.start();
+              p.actualizarVehiculos.start();
+              p.actualizarInformacion.start();
+              actualizarPaint.start();
+              
+      while(run){
+        try{
+              p.repaint();
+        }
+        catch(Exception e){
+              System.out.println("sleeping thread Error"); 
+       }
+   
+   }
+  }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -323,46 +295,21 @@ public class Simulacion extends javax.swing.JInternalFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUPActionPerformed
-        if(MenuPrincipalSimulacion.posicionRelativaY>0){
-                MenuPrincipalSimulacion.posicionRelativaY-=MenuPrincipalSimulacion.alto;
-                MenuPrincipalSimulacion.zonaActual-=MenuPrincipalSimulacion.dimensionXMapa/(Panel.escala*MenuPrincipalSimulacion.ancho);
-                }
-              //  lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
+        
+          p.moveUp();      
+                
     }//GEN-LAST:event_btnUPActionPerformed
 
     private void btnLEFTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLEFTActionPerformed
-        if(MenuPrincipalSimulacion.posicionRelativaX>0){
-                MenuPrincipalSimulacion.posicionRelativaX-=MenuPrincipalSimulacion.ancho;
-                MenuPrincipalSimulacion.zonaActual-=1;
-                }
-                
-             //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
+        p.moveLeft();
     }//GEN-LAST:event_btnLEFTActionPerformed
 
     private void btnDOWNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDOWNActionPerformed
-       if(MenuPrincipalSimulacion.posicionRelativaY<=6400){
-                MenuPrincipalSimulacion.posicionRelativaY+=MenuPrincipalSimulacion.alto;
-                MenuPrincipalSimulacion.zonaActual+=MenuPrincipalSimulacion.dimensionXMapa/(Panel.escala*MenuPrincipalSimulacion.ancho);
-                }
-                 
-             //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
+       p.moveDown();
     }//GEN-LAST:event_btnDOWNActionPerformed
 
     private void btnRIGHTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRIGHTActionPerformed
-          if(MenuPrincipalSimulacion.posicionRelativaX<=10000){
-                MenuPrincipalSimulacion.posicionRelativaX+=MenuPrincipalSimulacion.ancho;
-                MenuPrincipalSimulacion.zonaActual+=1;
-                }
-                
-           //     lZona.setText("Zona:     "+ MenuPrincipalSimulacion.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaX*Panel.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ MenuPrincipalSimulacion.posicionRelativaY*Panel.escala);
+          p.moveRight();
     }//GEN-LAST:event_btnRIGHTActionPerformed
 
     private void btnReducirVelocidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReducirVelocidadActionPerformed
@@ -403,8 +350,8 @@ public class Simulacion extends javax.swing.JInternalFrame{
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JLabel lPosicionX;
-    private javax.swing.JLabel lPosicionY;
+    public static javax.swing.JLabel lPosicionX;
+    public static javax.swing.JLabel lPosicionY;
     private javax.swing.JTextField txtVelocidad;
     // End of variables declaration//GEN-END:variables
 }

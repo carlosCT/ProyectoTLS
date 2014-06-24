@@ -14,6 +14,7 @@ import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.Mapa;
 import inf.pucp.edu.pe.modelo.Semaforo;
 import inf.pucp.edu.pe.modelo.Zona;
+import inf.pucp.edu.pe.vista.principal.MenuPrincipal;
 import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -42,10 +43,8 @@ public class MenuPrincipalSimulacion extends JFrame{
     
     /*parametros para cambio de zona*/
     Zona zona;
-    Zona [] zonaGeneradas;
-    //CambioDeZona cambioDeZona;
-    public static int posicionRelativaX=0;
-    public static int posicionRelativaY=0;
+    
+ 
     public static int zonaActual= 1;
     
  /*parametros de la frame*/    
@@ -260,13 +259,15 @@ public class MenuPrincipalSimulacion extends JFrame{
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
                 Simulacion.run = true;
                 Simulacion.seguir=true;
-                
-                try{
-                    ClienteSemaforos.actualizarCruces();
-                    ClienteVehiculos.actualizarVehiculos();
-                }catch(IOException ex){}
-                simu.iniciarSimulacion();
-                
+               
+                if(MenuPrincipal.vecesPantallaSimulacion==1){
+                    try{
+                        ClienteSemaforos.actualizarCruces();
+                        ClienteVehiculos.actualizarVehiculos();
+                    }catch(IOException ex){}
+                    MenuPrincipal.vecesPantallaSimulacion++;
+                }
+                new Thread(simu).start();                
                 
     }//GEN-LAST:event_btnPlayActionPerformed
 

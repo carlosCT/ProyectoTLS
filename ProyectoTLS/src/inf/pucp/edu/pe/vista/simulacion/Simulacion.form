@@ -154,11 +154,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Posicion X en el Mapa :    0"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lPosicionY">
           <Properties>
             <Property name="text" type="java.lang.String" value="Posicion Y en el Mapa :    0"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>
