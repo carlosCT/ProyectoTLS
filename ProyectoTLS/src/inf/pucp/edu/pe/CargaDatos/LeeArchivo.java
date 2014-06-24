@@ -63,7 +63,8 @@ public LeeArchivo(String s){
                 int tiempo, x, y;
                 String hora, min, seg;
 
-                while (data != null) {
+                while (data != null && data.length()>8) {
+                    
                     hora = data.substring(0, 2);
                     min = data.substring(3, 5);
                     seg = data.substring(6, 8);
@@ -80,6 +81,7 @@ public LeeArchivo(String s){
                         if (pos == -1) {
                             pos = data.indexOf("*");
                             y = Integer.parseInt(data.substring(0, pos));
+                            
 
                         }
                         y = Integer.parseInt(data.substring(0, pos));
@@ -137,8 +139,8 @@ public LeeArchivo(String s){
   if (listaDirectorio == null) {
             System.out.println("No hay ficheros en el directorio especificado");
         } else {
-            for (int x = 1; x <1000; x++)
-            //for (int x = 1; x <listaDirectorio.length; x++) //System.out.println(listaDirectorio[x]);                      
+            //for (int x = 1; x <1000; x++)
+            for (int x = 1; x <listaDirectorio.length; x++) //System.out.println(listaDirectorio[x]);                      
             {
                 try {
                     leerFile(new File(s + "/" + listaDirectorio[x]));

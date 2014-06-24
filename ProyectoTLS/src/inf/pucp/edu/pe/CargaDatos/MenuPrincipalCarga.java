@@ -241,6 +241,8 @@ LeeArchivo arch = null;
     }
          System.out.println(file);
          int n = file.lastIndexOf('\\');
+         if(n==-1)
+          n = file.lastIndexOf('/');    
          file = file.substring(0, n);
          System.out.print("---"+ file + "---");
          arch = new LeeArchivo(file);
@@ -266,7 +268,8 @@ LeeArchivo arch = null;
         jProgressBar1.setIndeterminate(true);
          this.actualizacion.start();
          this.cargahilo.start();
-        
+//         try {           
+//            arch.Cargar();}catch(IOException e){};
     
        //
        
