@@ -8,8 +8,11 @@ package inf.pucp.edu.pe.vista.principal;
 
 import inf.pucp.edu.pe.CargaDatos.LeeArchivo;
 import inf.pucp.edu.pe.CargaDatos.MenuPrincipalCarga;
+import inf.pucp.edu.pe.cliente.ClienteSemaforos;
+import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.vista.reporte.MenuPrincipalReporte;
 import inf.pucp.edu.pe.vista.seguridad.MenuPrincipalSeguridad;
+import inf.pucp.edu.pe.vista.simulacion.ConfiguracionCliente;
 import inf.pucp.edu.pe.vista.simulacion.MenuPrincipalSimulacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -44,6 +47,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
         //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setLocationRelativeTo(null);
+        setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
         setBounds(400, 100, 350, 400);
         PanelImagen p = new PanelImagen();
         p.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -197,15 +201,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnSimulacion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimulacion1ActionPerformed
             
-//            if(!LeeArchivo.ter){
-//                
-//                JOptionPane.showMessageDialog(null, "Por favor cargue primero los datos de simulacion");
-//                return;
-//            }
-            MenuPrincipalSimulacion mps = null;
-            mps = new MenuPrincipalSimulacion();
-            mps.setVisible(true);
-             System.out.println("Ingreso una vez mas: "+MenuPrincipal.vecesPantallaSimulacion);
+            if(!LeeArchivo.ter){
+                
+                JOptionPane.showMessageDialog(null, "Por favor cargue primero los datos de simulacion");
+                return;
+            }
+            
+            ConfiguracionCliente cc= new ConfiguracionCliente();
+            cc.setVisible(true);
+            if(!"".equals(ClienteSemaforos.ipS) && !"".equals(ClienteVehiculos.ipV)){
+                MenuPrincipalSimulacion mps = null;
+                mps = new MenuPrincipalSimulacion();
+                mps.setVisible(true);
+                 System.out.println("Ingreso una vez mas: "+MenuPrincipal.vecesPantallaSimulacion);
+            }
+            else{
+                
+            }
+            
     }//GEN-LAST:event_btnSimulacion1ActionPerformed
 
     private void btnCargarMasiva(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarMasiva

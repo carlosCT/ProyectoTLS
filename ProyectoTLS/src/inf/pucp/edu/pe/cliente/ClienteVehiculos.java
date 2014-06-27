@@ -18,8 +18,10 @@ import java.util.ArrayList;
  */
 public class ClienteVehiculos {
 
-    public static String ip = "127.0.0.1";
-    public static int puerto = 8001;
+    //public static String ip = "127.0.0.1";
+    public static String ipV = "";
+    //public static int puertoV = 8001;
+    public static int puertoV =0;
     
     public ClienteVehiculos(){
         
@@ -31,8 +33,8 @@ public class ClienteVehiculos {
     
     public static void cargarVehiculos(ArrayList<Vehiculo> vehiculos ) throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=puerto;
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
         String lista[];
         
             try{
@@ -53,8 +55,8 @@ public class ClienteVehiculos {
     
     public static ArrayList<Vehiculo> solicitarVehiculos(int xi, int yi, int xf, int yf) throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=puerto;
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
         String lista[];
         ArrayList<Vehiculo> listaVehiculos = new ArrayList<Vehiculo>();
         
@@ -78,8 +80,8 @@ public class ClienteVehiculos {
         
     public static void actualizarVehiculos() throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=puerto;
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
         String lista[];
         String resultado = null;
         
@@ -98,8 +100,8 @@ public class ClienteVehiculos {
     
     public static void cambiarVelocidad(int velocidad) throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=puerto;
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
         String lista[];
         String resultado = null;
                       
@@ -118,8 +120,8 @@ public class ClienteVehiculos {
     
     public static void detenerSimulacion() throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=puerto;
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
         String lista[];
         String resultado = null;
             try{

@@ -28,6 +28,7 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 /**
  *
  * @author JuanCarlos
@@ -76,6 +77,7 @@ public class MenuPrincipalSimulacion extends JFrame{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
         //ven= new VentanaDeInformacion();
+        setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
         simu= new Simulacion();
         simu.setMaximizable(true);
         this.add(simu);

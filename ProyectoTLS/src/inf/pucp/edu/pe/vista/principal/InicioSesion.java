@@ -11,13 +11,15 @@ import inf.pucp.edu.pe.controlador.ControladorSeguridad;
 import inf.pucp.edu.pe.controlador.UsuarioDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.border.EmptyBorder;
 
 
 /**
- *
+ *-
  * @author JuanCarlos
  */
 public class InicioSesion extends javax.swing.JFrame {
@@ -29,6 +31,8 @@ public class InicioSesion extends javax.swing.JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Iniciar Sesión");
         //this.setLocationRelativeTo(null);
+        
+        setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
         setBounds(400, 100, 369, 396);
         PanelImagen p = new PanelImagen();
         p.setBorder(new EmptyBorder(5, 5, 5, 5));

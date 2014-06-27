@@ -28,7 +28,7 @@ public class PanelImagenVentana extends javax.swing.JPanel {
      @Override
     public void paintComponent (Graphics g){
         Dimension tamanio = getSize();
-        ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/fondos/azul.jpg"));
+        ImageIcon imagenFondo = new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/fondos/fondoBlanco.jpg"));
         g.drawImage(imagenFondo.getImage(),0,0,tamanio.width, tamanio.height, null);
         setOpaque(false);
         super.paintComponent(g);

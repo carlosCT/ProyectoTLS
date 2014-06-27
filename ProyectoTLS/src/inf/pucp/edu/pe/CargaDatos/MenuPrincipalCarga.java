@@ -7,6 +7,8 @@
 package inf.pucp.edu.pe.CargaDatos;
 
 import inf.pucp.edu.pe.vista.principal.MenuPrincipal;
+import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -14,7 +16,10 @@ import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
+import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -32,7 +37,14 @@ LeeArchivo arch = null;
      * Creates new form MenuPrincipalCarga
      */
     public MenuPrincipalCarga() {
+        PanelImagenVentana p = new PanelImagenVentana();
+        p.setBorder(new EmptyBorder(5, 5, 5, 5));
+        p.setLayout(new BorderLayout(0, 0));
+        setContentPane(p);
+        
         initComponents();
+       
+       
     }
 
     /**
@@ -61,7 +73,12 @@ LeeArchivo arch = null;
         nombre = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("Ruta: ");
         jLabel1.setToolTipText("");
@@ -87,7 +104,6 @@ LeeArchivo arch = null;
         jProgressBar1.setToolTipText("");
         jProgressBar1.setBorderPainted(false);
         jProgressBar1.setFocusCycleRoot(true);
-        jProgressBar1.setFocusTraversalKeysEnabled(false);
         jProgressBar1.setStringPainted(true);
         jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -251,7 +267,7 @@ LeeArchivo arch = null;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btncerrar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncerrar
-        this.hide();
+      this.hide();
         
    
     }//GEN-LAST:event_btncerrar
@@ -283,6 +299,10 @@ LeeArchivo arch = null;
     private void NombreArchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NombreArchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_NombreArchActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        setVisible(false);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

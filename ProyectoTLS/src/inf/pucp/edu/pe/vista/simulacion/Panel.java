@@ -11,6 +11,7 @@ import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.*;
 import static inf.pucp.edu.pe.vista.simulacion.Simulacion.lPosicionX;
 import static inf.pucp.edu.pe.vista.simulacion.Simulacion.lPosicionY;
+import static inf.pucp.edu.pe.vista.simulacion.Simulacion.run;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
@@ -114,6 +115,15 @@ public final class Panel extends JPanel{
       }
   
   
+  };
+    
+    Thread actualizarPaint = new Thread(){
+      public void run(){
+          while(run){
+            repaint();
+          }
+          
+      }
   };
 
     public void moveUp(){

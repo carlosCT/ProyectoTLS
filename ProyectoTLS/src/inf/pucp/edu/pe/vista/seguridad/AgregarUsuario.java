@@ -72,43 +72,35 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
         btnAgregar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(51, 51, 255));
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nombres: ");
 
         jLabel4.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Apellidos: ");
 
-        jLabel3.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Usuario:");
 
         jLabel5.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Email:");
 
         jLabel7.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Dirección: ");
 
         jLabel6.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Dni: ");
 
         jLabel8.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Sexo: ");
 
         cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Usuario de Sistema", "Administrador de Sistema" }));
 
         jLabel9.setBackground(new java.awt.Color(0, 51, 204));
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Perfil:");
 
         cmbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "M", "F" }));

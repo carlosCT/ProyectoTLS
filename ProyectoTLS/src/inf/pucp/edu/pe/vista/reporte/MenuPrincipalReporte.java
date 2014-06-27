@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 import inf.pucp.edu.pe.vista.principal.PanelImagen;
 import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
+import javax.swing.ImageIcon;
 /**
  *
  * @author JuanCarlos
@@ -24,6 +25,7 @@ public class MenuPrincipalReporte extends javax.swing.JFrame {
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 //        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
         this.setLocationRelativeTo(null);
         
         //this.setLocationRelativeTo(null);
@@ -133,37 +135,37 @@ public class MenuPrincipalReporte extends javax.swing.JFrame {
 
     private void mnuVehiculosPorViaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVehiculosPorViaActionPerformed
         
-        ReporteVehiculosPorVia rvv= new ReporteVehiculosPorVia();
-        this.add(rvv);
-        rvv.setVisible(true);
+//        ReporteVehiculosPorVia rvv= new ReporteVehiculosPorVia();
+//        this.add(rvv);
+//        rvv.setVisible(true);
     }//GEN-LAST:event_mnuVehiculosPorViaActionPerformed
 
     private void mnuSemaforoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSemaforoActionPerformed
-        
-        ReporteDeInformacionDeLosSemaforos ris=new ReporteDeInformacionDeLosSemaforos();
-        this.add(ris);
-        ris.setVisible(true);
+//        
+//        ReporteDeInformacionDeLosSemaforos ris=new ReporteDeInformacionDeLosSemaforos();
+//        this.add(ris);
+//        ris.setVisible(true);
     }//GEN-LAST:event_mnuSemaforoActionPerformed
 
     private void mnuVolumenDeAutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVolumenDeAutosActionPerformed
         
-        ReporteDeVolumenDeAutos rva= new ReporteDeVolumenDeAutos();
-        this.add(rva);
-        rva.setVisible(true);
+//        ReporteDeVolumenDeAutos rva= new ReporteDeVolumenDeAutos();
+//        this.add(rva);
+//        rva.setVisible(true);
     }//GEN-LAST:event_mnuVolumenDeAutosActionPerformed
 
     private void mnuCantidadDeOlasVerdesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCantidadDeOlasVerdesActionPerformed
         
-        ReporteDeCantidadDeOlasVerdes rcov= new ReporteDeCantidadDeOlasVerdes();
-        this.add(rcov);
-        rcov.setVisible(true);
+//        ReporteDeCantidadDeOlasVerdes rcov= new ReporteDeCantidadDeOlasVerdes();
+//        this.add(rcov);
+//        rcov.setVisible(true);
     }//GEN-LAST:event_mnuCantidadDeOlasVerdesActionPerformed
 
     private void mnuVelocidadPromedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVelocidadPromedioActionPerformed
-        
-        ReporteDeVelocidadPromedioDeAutos rvpa = new ReporteDeVelocidadPromedioDeAutos();
-        this.add(rvpa);
-        rvpa.setVisible(true);
+//        
+//        ReporteDeVelocidadPromedioDeAutos rvpa = new ReporteDeVelocidadPromedioDeAutos();
+//        this.add(rvpa);
+//        rvpa.setVisible(true);
     }//GEN-LAST:event_mnuVelocidadPromedioActionPerformed
 
     

@@ -8,7 +8,6 @@ package inf.pucp.edu.pe.vista.simulacion;
 
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.cliente.ClienteVehiculos;
-import inf.pucp.edu.pe.modelo.carro;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -82,14 +81,7 @@ public class Simulacion extends JInternalFrame implements Runnable{
   
  
   
-  Thread actualizarPaint = new Thread(){
-      public void run(){
-          while(run){
-            p.repaint();
-          }
-          
-      }
-  };
+  
   
   
   public void iniciarSimulacion(){
@@ -97,7 +89,7 @@ public class Simulacion extends JInternalFrame implements Runnable{
       p.actualizarSemaforos.start();
       p.actualizarVehiculos.start();
       p.actualizarInformacion.start();
-      actualizarPaint.start();
+      p.actualizarPaint.start();
   }
   
   public void run(){
@@ -105,7 +97,7 @@ public class Simulacion extends JInternalFrame implements Runnable{
               p.actualizarSemaforos.start();
               p.actualizarVehiculos.start();
               p.actualizarInformacion.start();
-              actualizarPaint.start();
+              p.actualizarPaint.start();
               
       while(run){
         try{

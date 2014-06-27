@@ -17,7 +17,8 @@ import java.util.ArrayList;
  */
 public class ClienteSemaforos {
 
-   public static String ip = "127.0.0.1";
+   public static String ipS = "";
+   public static int puertoSemaforo=0;
     
     public ClienteSemaforos(){
         
@@ -28,9 +29,9 @@ public class ClienteSemaforos {
     
     public static ArrayList<Cruce> solicitarCruces(int xi, int yi, int xf, int yf) throws IOException{
     
-        String IP_SERVIDOR= ip;
+        String IP_SERVIDOR= ipS;
         //String IP_SERVIDOR="127.0.0.1";
-        int PUERTO_SERVIDOR=5001;
+        int PUERTO_SERVIDOR=puertoSemaforo;
         String lista[];
         ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
                       
@@ -60,8 +61,8 @@ public class ClienteSemaforos {
     
     public static void inicializarCruces() throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=5001;
+        String IP_SERVIDOR=ipS;
+        int PUERTO_SERVIDOR=puertoSemaforo;
         String lista[];
         String resultado = null;
         
@@ -86,8 +87,8 @@ public class ClienteSemaforos {
     
     public static void actualizarCruces() throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=5001;
+        String IP_SERVIDOR=ipS;
+        int PUERTO_SERVIDOR=puertoSemaforo;
         String lista[];
         String resultado = null;
         
@@ -106,8 +107,8 @@ public class ClienteSemaforos {
     
     public static void cambiarVelocidad(int velocidad) throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=5001;
+        String IP_SERVIDOR=ipS;
+        int PUERTO_SERVIDOR=puertoSemaforo;
         String lista[];
         String resultado = null;
                       
@@ -126,8 +127,8 @@ public class ClienteSemaforos {
     
     public static boolean verificarLuz(int x, int y, int dir, double vel) throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=5001;
+        String IP_SERVIDOR=ipS;
+        int PUERTO_SERVIDOR=puertoSemaforo;
         String lista[];
         String resultado = null;
                       
@@ -155,8 +156,8 @@ public class ClienteSemaforos {
     
     public static void detenerSimulacion() throws IOException{
     
-        String IP_SERVIDOR=ip;
-        int PUERTO_SERVIDOR=5001;
+        String IP_SERVIDOR=ipS;
+        int PUERTO_SERVIDOR=puertoSemaforo;
         String lista[];
         String resultado = null;
         

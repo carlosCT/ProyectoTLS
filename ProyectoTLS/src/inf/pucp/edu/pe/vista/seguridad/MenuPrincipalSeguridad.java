@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import inf.pucp.edu.pe.vista.principal.*;
 
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -28,6 +29,7 @@ public class MenuPrincipalSeguridad extends javax.swing.JFrame {
     public MenuPrincipalSeguridad() {
         
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
         //this.setDefaultCloseOperation(MenuPrincipalSeguridad.EXIT_ON_CLOSE);
         //this.setLocationRelativeTo(null);
         //setBounds(400, 100, 550, 600);
@@ -216,27 +218,27 @@ public class MenuPrincipalSeguridad extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuModificarUsuarioActionPerformed
 
     private void mnuAgregarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAgregarPerfilActionPerformed
-        AgregarPerfil ap= new AgregarPerfil();
-        this.add(ap);
-        ap.setVisible(true);
+//        AgregarPerfil ap= new AgregarPerfil();
+//        this.add(ap);
+//        ap.setVisible(true);
     }//GEN-LAST:event_mnuAgregarPerfilActionPerformed
 
     private void mnuModificarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuModificarPerfilActionPerformed
-        ModificarPerfil mp= new ModificarPerfil();
-        this.add(mp);
-        mp.setVisible(true);
+//        ModificarPerfil mp= new ModificarPerfil();
+//        this.add(mp);
+//        mp.setVisible(true);
     }//GEN-LAST:event_mnuModificarPerfilActionPerformed
 
     private void mnuEliminarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuEliminarPerfilActionPerformed
-        EliminarPerfil ep= new EliminarPerfil();
-        this.add(ep);
-        ep.setVisible(true);
+//        EliminarPerfil ep= new EliminarPerfil();
+//        this.add(ep);
+//        ep.setVisible(true);
     }//GEN-LAST:event_mnuEliminarPerfilActionPerformed
 
     private void mnuRegistroDeLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRegistroDeLogActionPerformed
-        RegistroDeLog rdl= new RegistroDeLog();
-        this.add(rdl);
-        rdl.setVisible(true);
+//        RegistroDeLog rdl= new RegistroDeLog();
+//        this.add(rdl);
+//        rdl.setVisible(true);
     }//GEN-LAST:event_mnuRegistroDeLogActionPerformed
 
     /**
