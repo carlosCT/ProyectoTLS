@@ -70,11 +70,13 @@ public class MenuPrincipalSimulacion extends JFrame{
     //public Thread hilo;
     
     public Color claro= new Color(217, 228, 232);
+    
+    
     public MenuPrincipalSimulacion(){
              
        /*caracteristicas basicas de la ventana*/ 
 
-        this.setPreferredSize(new Dimension(1040, 768)); 
+        this.setPreferredSize(new Dimension(1024, 768)); 
     
         initComponents();
         setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
@@ -127,6 +129,9 @@ public class MenuPrincipalSimulacion extends JFrame{
                 formWindowClosing(evt);
             }
         });
+
+        barraMenu.setPreferredSize(new Dimension(1024, 38)
+        );
 
         btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/pausa.png"))); // NOI18N
         btnPause.setFocusable(false);
@@ -181,9 +186,9 @@ public class MenuPrincipalSimulacion extends JFrame{
 
         jLabel1.setText("Zoom");
 
-        lblCantidadSemaforos.setText("Cantidad de Semaforos: ");
+        lblCantidadSemaforos.setText("#Semaforos: ");
 
-        lblCantidadVehiculos.setText("Cantidad de Vehiculos");
+        lblCantidadVehiculos.setText(" #Vehiculos");
 
         lblVelocidad.setText("V.Promedio: ");
 
@@ -210,13 +215,13 @@ public class MenuPrincipalSimulacion extends JFrame{
                 .addComponent(lblVelocidad)
                 .addGap(81, 81, 81)
                 .addComponent(lblEscala)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                .addGap(81, 81, 81)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReducirZoom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAumentarZoom)
-                .addGap(13, 13, 13))
+                .addContainerGap(125, Short.MAX_VALUE))
         );
         barraMenuLayout.setVerticalGroup(
             barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

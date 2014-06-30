@@ -92,15 +92,20 @@ public class Simulacion extends JInternalFrame implements Runnable{
   }
   
   public void run(){
-   
-                p.actualizarSemaforos.start();
-                p.actualizarVehiculos.start();
-                p.actualizarInformacion.start();
-                p.actualizarPaint.start();
+        try{
+                     p.actualizarSemaforos.start();
+                     p.actualizarVehiculos.start();
+                     p.actualizarInformacion.start();
+                     p.actualizarPaint.start();
+        }catch(Exception e){}
               
       while(run){
         try{
-              p.repaint();
+              p.actualizarSemaforos.join();
+              
+              p.actualizarVehiculos.join();              
+              
+              p.actualizarInformacion.join();
         }
         catch(Exception e){
               System.out.println("sleeping thread Error"); 

@@ -214,6 +214,7 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
 //            else{
 //                
 //            }
+         this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

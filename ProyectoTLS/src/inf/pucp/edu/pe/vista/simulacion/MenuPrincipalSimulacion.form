@@ -65,6 +65,11 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="barraMenu">
+      <Properties>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="new Dimension(1024, 38)&#xd;&#xa;" type="code"/>
+        </Property>
+      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -86,13 +91,13 @@
                   <Component id="lblVelocidad" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                   <Component id="lblEscala" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="128" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnReducirZoom" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnAumentarZoom" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  <Component id="btnAumentarZoom" max="-2" attributes="0"/>
+                  <EmptySpace pref="125" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -112,7 +117,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnReducirZoom" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnAumentarZoom" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnAumentarZoom" alignment="3" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblCantidadSemaforos" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="lblCantidadVehiculos" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -200,7 +205,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblCantidadSemaforos">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cantidad de Semaforos: "/>
+            <Property name="text" type="java.lang.String" value="#Semaforos: "/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -208,7 +213,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblCantidadVehiculos">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cantidad de Vehiculos"/>
+            <Property name="text" type="java.lang.String" value=" #Vehiculos"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
