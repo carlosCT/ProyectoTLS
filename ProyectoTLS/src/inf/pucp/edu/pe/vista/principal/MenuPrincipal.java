@@ -16,9 +16,11 @@ import inf.pucp.edu.pe.vista.simulacion.ConfiguracionCliente;
 import inf.pucp.edu.pe.vista.simulacion.MenuPrincipalSimulacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.beans.PropertyVetoException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -42,20 +44,19 @@ public class MenuPrincipal extends javax.swing.JFrame {
      */
     private JButton btnTest = new JButton();
     public static int vecesPantallaSimulacion=1;
+   
     
     public MenuPrincipal() {
         
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
-        setBounds(400, 100, 350, 400);
+        
         PanelImagen p = new PanelImagen();
         p.setBorder(new EmptyBorder(5, 5, 5, 5));
         p.setLayout(new BorderLayout(0, 0));
         setContentPane(p);
-        //this.setResizable(false);
-        //jPanel1.setBackground(Color.white);
-        //agregar fondo
+        setLocation(new Point(400, 100));
+        setPreferredSize(new Dimension(500, 500));  
         initComponents();
        
     }    
@@ -209,15 +210,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
             
             ConfiguracionCliente cc= new ConfiguracionCliente();
             cc.setVisible(true);
-            if(!"".equals(ClienteSemaforos.ipS) && !"".equals(ClienteVehiculos.ipV)){
-                MenuPrincipalSimulacion mps = null;
-                mps = new MenuPrincipalSimulacion();
-                mps.setVisible(true);
-                 System.out.println("Ingreso una vez mas: "+MenuPrincipal.vecesPantallaSimulacion);
-            }
-            else{
-                
-            }
             
     }//GEN-LAST:event_btnSimulacion1ActionPerformed
 

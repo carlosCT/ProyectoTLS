@@ -139,8 +139,8 @@ public LeeArchivo(String s){
   if (listaDirectorio == null) {
             System.out.println("No hay ficheros en el directorio especificado");
         } else {
-            //for (int x = 1; x <1000; x++)
-            for (int x = 1; x <listaDirectorio.length; x++) //System.out.println(listaDirectorio[x]);                      
+            for (int x = 1; x <1000; x++)
+        //    for (int x = 1; x <listaDirectorio.length; x++) //System.out.println(listaDirectorio[x]);                      
             {
                 try {
                     leerFile(new File(s + "/" + listaDirectorio[x]));

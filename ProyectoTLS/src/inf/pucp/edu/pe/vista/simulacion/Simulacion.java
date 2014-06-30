@@ -26,6 +26,7 @@ public class Simulacion extends JInternalFrame implements Runnable{
     
     
     public Panel p;
+    private static int indice=0;
     public static boolean run = false;
     public static boolean seguir= false;
     public static int velocidadSimulacion= 1;
@@ -47,7 +48,7 @@ public class Simulacion extends JInternalFrame implements Runnable{
         //se agrega el panel principal
        this.setBackground(claro);
        
-       
+       //indice++;
        p= new Panel();
        p.setBackground(claro);
        //jPanel1.setBackground(claro);
@@ -59,11 +60,9 @@ public class Simulacion extends JInternalFrame implements Runnable{
        add(p);
        p.setVisible(true);
        
-   //    jTextField1.setEditable(false);
+
        txtVelocidad.setEditable(false);
-       
-       //lblCantidadSemaforos.setText("Cantidad de Semaforos: "+Panel.cantidadSemaforos);
-       //lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+Panel.cantidadDeVehiculos );
+    
        txtVelocidad.setText(""+velocidadSimulacion);
     }
 
@@ -94,10 +93,10 @@ public class Simulacion extends JInternalFrame implements Runnable{
   
   public void run(){
    
-              p.actualizarSemaforos.start();
-              p.actualizarVehiculos.start();
-              p.actualizarInformacion.start();
-              p.actualizarPaint.start();
+                p.actualizarSemaforos.start();
+                p.actualizarVehiculos.start();
+                p.actualizarInformacion.start();
+                p.actualizarPaint.start();
               
       while(run){
         try{

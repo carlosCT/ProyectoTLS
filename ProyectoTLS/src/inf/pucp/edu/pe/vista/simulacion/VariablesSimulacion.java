@@ -13,18 +13,15 @@ package inf.pucp.edu.pe.vista.simulacion;
 public class VariablesSimulacion {
      
     //CambioDeZona cambioDeZona;
-    private int posicionRelativaX;
-    private int posicionRelativaY;
+    public int posicionRelativaX;
+    public int posicionRelativaY;
     
     
-    private int cantidadSemaforos;
-    private int cantidadDeVehiculos;
+    public int cantidadSemaforos;
+    public int cantidadDeVehiculos;
     
     public VariablesSimulacion() {
-        posicionRelativaX=0;
-        posicionRelativaY=0;
-        cantidadSemaforos=0;
-        cantidadDeVehiculos=0;      
+         
     }
 
     public int getPosicionRelativaX() {

@@ -66,24 +66,24 @@ public class MenuPrincipalSimulacion extends JFrame{
     public Thread hilo;
     
     public Simulacion simu;
+  //  private static int indice=0;
     //public Thread hilo;
     
     public Color claro= new Color(217, 228, 232);
     public MenuPrincipalSimulacion(){
              
        /*caracteristicas basicas de la ventana*/ 
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    //    this.setSize(1000, 750);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        this.setPreferredSize(new Dimension(1040, 768)); 
+    
         initComponents();
-        //ven= new VentanaDeInformacion();
         setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
-        simu= new Simulacion();
-        simu.setMaximizable(true);
+
+        simu=new Simulacion();
         this.add(simu);
         try{
-        ClienteSemaforos.inicializarCruces();
-        ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
+            ClienteSemaforos.inicializarCruces();
+            ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
         }catch(IOException ex){}
         barraMenu.setBackground(claro);
         /*********************************************/
@@ -204,13 +204,13 @@ public class MenuPrincipalSimulacion extends JFrame{
                 .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(lblCantidadSemaforos)
-                .addGap(91, 91, 91)
+                .addGap(63, 63, 63)
                 .addComponent(lblCantidadVehiculos)
-                .addGap(55, 55, 55)
+                .addGap(90, 90, 90)
                 .addComponent(lblVelocidad)
-                .addGap(67, 67, 67)
+                .addGap(81, 81, 81)
                 .addComponent(lblEscala)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(btnReducirZoom)
@@ -246,7 +246,7 @@ public class MenuPrincipalSimulacion extends JFrame{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(barraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(barraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

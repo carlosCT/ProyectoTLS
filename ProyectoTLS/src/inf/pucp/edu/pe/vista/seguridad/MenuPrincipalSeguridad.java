@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import inf.pucp.edu.pe.vista.principal.*;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.ImageIcon;
 
 /**
@@ -28,16 +29,9 @@ public class MenuPrincipalSeguridad extends javax.swing.JFrame {
             
     public MenuPrincipalSeguridad() {
         
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setPreferredSize(new Dimension(1040, 768));
         setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
-        //this.setDefaultCloseOperation(MenuPrincipalSeguridad.EXIT_ON_CLOSE);
-        //this.setLocationRelativeTo(null);
-        //setBounds(400, 100, 550, 600);
-        // p.setBorder(new EmptyBorder(5, 5, 5, 5));
-        //p.setLayout(new BorderLayout(0, 0));
-        //PanelImagenVentana p = new PanelImagenVentana();
-        //setContentPane(p);
-       // this.setBackground(Color.BLACK);
+
         this.setTitle("Menú Principal de Seguridad");
         initComponents();
         jMenuBar1.setBackground(colorMenu);

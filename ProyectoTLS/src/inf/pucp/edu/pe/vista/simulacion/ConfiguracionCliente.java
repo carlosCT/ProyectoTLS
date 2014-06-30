@@ -8,6 +8,13 @@ package inf.pucp.edu.pe.vista.simulacion;
 
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.cliente.ClienteVehiculos;
+import inf.pucp.edu.pe.vista.principal.MenuPrincipal;
+import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
+import java.awt.BorderLayout;
+import java.awt.Point;
+import java.util.ArrayList;
+import javax.swing.border.EmptyBorder;
+
 
 /**
  *
@@ -18,8 +25,20 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
     /**
      * Creates new form ConfiguracionCliente
      */
+    //public MenuPrincipalSimulacion [] mps;
+    public ArrayList<MenuPrincipalSimulacion> Lmps;
+    
+    
     public ConfiguracionCliente() {
+        PanelImagenVentana p = new PanelImagenVentana();
+        p.setBorder(new EmptyBorder(5, 5, 5, 5));
+        p.setLayout(new BorderLayout(0, 0));
+        setContentPane(p);
+        setLocation(new Point(400, 100));
         initComponents();
+         jPanel1.setOpaque(false);
+        
+        
     }
 
     /**
@@ -46,7 +65,7 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Configuración de Cliente:");
 
@@ -178,7 +197,23 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
         ClienteSemaforos.ipS=ipSemaforos;
         ClienteSemaforos.puertoSemaforo=Integer.parseInt(puertoSemaforo);
         ClienteVehiculos.ipV=ipVehiculos;
-        ClienteVehiculos.puertoV=Integer.parseInt(puertoVehiculo);        
+        ClienteVehiculos.puertoV=Integer.parseInt(puertoVehiculo);    
+        
+         //if(!"".equals(ClienteSemaforos.ipS) && !"".equals(ClienteVehiculos.ipV)){
+//                indice++;
+//                
+//                mps[indice] = new MenuPrincipalSimulacion();
+//                mps[indice].setVisible(true);
+                  
+                  Lmps= new ArrayList<MenuPrincipalSimulacion>();
+                  MenuPrincipalSimulacion mps= new MenuPrincipalSimulacion();
+                  Lmps.add(mps);
+                  Lmps.get(0).setVisible(true);
+                 System.out.println("Ingreso una vez mas: "+MenuPrincipal.vecesPantallaSimulacion);
+//            }
+//            else{
+//                
+//            }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

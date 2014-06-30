@@ -10,6 +10,7 @@ import inf.pucp.edu.pe.vista.principal.MenuPrincipal;
 import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Point;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import static java.lang.Thread.sleep;
@@ -41,6 +42,7 @@ LeeArchivo arch = null;
         p.setBorder(new EmptyBorder(5, 5, 5, 5));
         p.setLayout(new BorderLayout(0, 0));
         setContentPane(p);
+        setLocation(new Point(400, 100));
         
         initComponents();
        

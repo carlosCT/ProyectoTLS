@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.border.EmptyBorder;
 import inf.pucp.edu.pe.vista.principal.PanelImagen;
 import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
+import java.awt.Dimension;
 import javax.swing.ImageIcon;
 /**
  *
@@ -23,7 +24,7 @@ public class MenuPrincipalReporte extends javax.swing.JFrame {
      */
     public MenuPrincipalReporte() {
         
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       this.setPreferredSize(new Dimension(1040, 768));
 //        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
         this.setLocationRelativeTo(null);

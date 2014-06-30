@@ -42,8 +42,8 @@ public final class Panel extends JPanel{
     ArrayList<Vehiculo> listaVehiculos= new ArrayList<Vehiculo>();
     
     public byte eleccion=0;
+    public  VariablesSimulacion vs;
     
-    public VariablesSimulacion vs= new VariablesSimulacion();;
     
     Cuadra cuadra;
     
@@ -51,6 +51,7 @@ public final class Panel extends JPanel{
         this.setSize(MenuPrincipalSimulacion.ancho, MenuPrincipalSimulacion.alto);
         //crearVehiculos();
         //crearSemaforos();
+       vs = new VariablesSimulacion();
         
         
     }
@@ -67,11 +68,12 @@ public final class Panel extends JPanel{
 
                   listaCruces = ClienteSemaforos.solicitarCruces(vs.getPosicionRelativaX()*escala, vs.getPosicionRelativaY()*escala,vs.getPosicionRelativaX()*escala + MenuPrincipalSimulacion.ancho*escala, vs.getPosicionRelativaY()*escala + MenuPrincipalSimulacion.alto*escala);
 
-                 vs.setCantidadDeVehiculos(listaCruces.size());  
+                  
                 Thread.sleep(333);
                 }catch(IOException e){} catch (InterruptedException ex) {
                     Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
-                }  
+                }
+                vs.setCantidadSemaforos(listaCruces.size());
 
               }  
           }
@@ -91,11 +93,10 @@ public final class Panel extends JPanel{
                         Logger.getLogger(Panel.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     vs.setCantidadDeVehiculos(listaVehiculos.size());
-                         //carro[count]= new carro(Math.round(c.getPosX()/escala-MenuPrincipalSimulacion.posicionRelativaX),Math.round(c.getPosY()/escala-MenuPrincipalSimulacion.posicionRelativaY));                   
+                         
                 }
             }
         }
-        
     };
     
     Thread actualizarInformacion= new Thread(){
@@ -108,13 +109,9 @@ public final class Panel extends JPanel{
                 lPosicionY.setText("Posicion Y en el Mapa:    "+ vs.getPosicionRelativaY()*Panel.escala);
 
                 MenuPrincipalSimulacion.lblCantidadSemaforos.setText("Cantidad de Semaforos: "+vs.getCantidadSemaforos());
-                MenuPrincipalSimulacion.lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+vs.getCantidadDeVehiculos());
-           
-              
+                MenuPrincipalSimulacion.lblCantidadVehiculos.setText("Cantidad de Vehiculos: "+vs.getCantidadDeVehiculos());    
           }
-      }
-  
-  
+      } 
   };
     
     Thread actualizarPaint = new Thread(){
