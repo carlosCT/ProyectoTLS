@@ -16,21 +16,22 @@ import java.util.logging.Logger;
  */
 public class ConnectionDB {
        
-    /*Datos para conectarse a las BD propias*/
     
+     /*Datos para conectarse a la BD de la PUCP*/
+//  public String url = "jdbc:mysql://quilla.lab.inf.pucp.edu.pe:3306/";
+//  public String dbName = "inf282g2";
+//  public String driver = "com.mysql.jdbc.Driver";
+//  public String userName = "inf282g2";
+//  public String password = "cableado";
+    
+    /*Datos para conectarse a las BD propias*/
     public String url = "jdbc:mysql://localhost:3306/";
     public String dbName = "tlssw";
-    //public String driver = Class.forName("com.mysql.jdbc.Driver");
     public String driver = "com.mysql.jdbc.Driver";
     public String userName = "root";
     public String password = "";
 
-    /*Datos para conectarse a la BD de la PUCP*/
-//        public String url = "jdbc:mysql://quilla.lab.inf.pucp.edu.pe:3306/";
-//        public String dbName = "inf282g2";
-//        public String driver = "com.mysql.jdbc.Driver";
-//        public String userName = "inf282g2";
-//        public String password = "cableado";
+   
     public ConnectionDB() {
     }
 

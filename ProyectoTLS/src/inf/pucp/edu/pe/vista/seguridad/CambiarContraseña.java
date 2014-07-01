@@ -6,6 +6,8 @@
 
 package inf.pucp.edu.pe.vista.seguridad;
 
+import inf.pucp.edu.pe.controlador.ControladorSeguridad;
+import inf.pucp.edu.pe.controlador.UsuarioDAO;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -13,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 import inf.pucp.edu.pe.vista.principal.*;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,6 +39,7 @@ public class CambiarContraseña extends javax.swing.JInternalFrame {
         p.setLayout(new BorderLayout(0, 0));
         setContentPane(p);
         initComponents();
+        setLocation(100, 100);
        // jPanel1.setBackground(colorRosa);
         //jPanel1.setSize(this.getWidth(), this.getHeight());
         this.setTitle("Cambiar Contraseña");
@@ -56,13 +60,13 @@ public class CambiarContraseña extends javax.swing.JInternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
+        txtUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
+        passNew = new javax.swing.JPasswordField();
+        passActual = new javax.swing.JPasswordField();
+        passNew2 = new javax.swing.JPasswordField();
         jButton4 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
@@ -89,7 +93,7 @@ public class CambiarContraseña extends javax.swing.JInternalFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
@@ -97,9 +101,9 @@ public class CambiarContraseña extends javax.swing.JInternalFrame {
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
-                            .addComponent(jPasswordField3)
-                            .addComponent(jTextField1))))
+                            .addComponent(passNew)
+                            .addComponent(passActual)
+                            .addComponent(passNew2, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -107,26 +111,36 @@ public class CambiarContraseña extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(jLabel3)
+                    .addComponent(passActual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(passNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addContainerGap(43, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addComponent(passNew2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         jButton4.setText("Cancelar");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Guardar Cambios");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,6 +171,44 @@ public class CambiarContraseña extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int estado=0;
+        ControladorSeguridad cs= new ControladorSeguridad();
+        UsuarioDAO userDao= new UsuarioDAO();
+        //primero se verifica que la contrasena actual sea correcta
+        char[] cadena= passActual.getPassword();
+        char[] cadena2= passNew.getPassword();
+        char[] cadena3= passNew2.getPassword();
+        
+        String passwordString= new String(cadena);
+        String changePassword1= new String(cadena2);
+        String changePassword2= new String(cadena3);
+        String usuario = txtUsuario.getText();
+        
+        if(changePassword1.equalsIgnoreCase(changePassword2)){
+            String inPasswordNow= cs.codificar(passwordString);
+            //si es la contrasena
+            estado=userDao.validatePassword(usuario, inPasswordNow);
+            if(estado==1){
+                 String passwordCodificado= cs.codificar(changePassword1);
+                 userDao.ChangePassword(usuario, passwordCodificado);
+                 JOptionPane.showMessageDialog(null, "contraseña actualizada con éxito");
+            }
+            else{ JOptionPane.showMessageDialog(null, "la contraseña actual es incorrecta");}
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "volver a escribir la contraseña nueva");
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        this.dispose();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
@@ -166,9 +218,9 @@ public class CambiarContraseña extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JPasswordField passActual;
+    private javax.swing.JPasswordField passNew;
+    private javax.swing.JPasswordField passNew2;
+    private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

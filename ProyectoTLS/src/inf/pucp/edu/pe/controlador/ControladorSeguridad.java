@@ -78,14 +78,14 @@ public class ControladorSeguridad {
                result=1; 
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            System.out.println("No hay conexion con BD");
         }finally{
              try {
                 if (conn != null) {
                     conn.close();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
+               System.out.println("Conectar al servidor");
             }
         }
 

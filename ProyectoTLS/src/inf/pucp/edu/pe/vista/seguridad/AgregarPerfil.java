@@ -28,6 +28,7 @@ public class AgregarPerfil extends javax.swing.JInternalFrame {
         setContentPane(p);
        
         initComponents();
+         setLocation(100, 100);
         
         this.setTitle("Agregar Perfil");
         jPanel1.setOpaque(false);

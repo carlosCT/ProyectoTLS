@@ -14,6 +14,8 @@ import javax.swing.JInternalFrame;
 import javax.swing.border.EmptyBorder;
 import inf.pucp.edu.pe.vista.principal.PanelImagen;
 import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
+import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,15 +27,15 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
      * Creates new form AgregarUsuario
      */
     public AgregarUsuario() {
-        //620, 345
-        setBounds(400, 100, 621, 345);
+    
         PanelImagenVentana p = new PanelImagenVentana();
         p.setBorder(new EmptyBorder(5, 5, 5, 5));
         p.setLayout(new BorderLayout(0, 0));
         setContentPane(p);
        
         initComponents();
-        
+        setPreferredSize(new Dimension(500, 237));
+        setLocation(100, 100);
         this.setTitle("Agregar Usuario");
         jPanel1.setOpaque(false);
         this.setResizable(true);
@@ -186,6 +188,11 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,9 +213,9 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap(44, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAgregar)
                     .addComponent(btnCancelar))
@@ -220,7 +227,7 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        ControladorSeguridad encripta=new ControladorSeguridad();
+       ControladorSeguridad encripta=new ControladorSeguridad();
        
        String password=encripta.codificar(txtUsuario.getText());
        
@@ -228,12 +235,29 @@ public class AgregarUsuario extends javax.swing.JInternalFrame {
        UsuarioDAO userDAO=new UsuarioDAO();
        
        int agregar=userDAO.addUser(u);
-       System.out.println(agregar);
+       // System.out.println(agregar);
+       if(agregar==1){
+        JOptionPane.showMessageDialog(null, "Se agrego con exito");
+       }
+       else{ JOptionPane.showMessageDialog(null, "usuario existente");}
+        clearForm();
+      
        
-       this.dispose();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+       this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void clearForm(){
+        txtDni.setText("");
+        txtUsuario.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtEmail.setText("");
+        txtDireccion.setText("");
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;

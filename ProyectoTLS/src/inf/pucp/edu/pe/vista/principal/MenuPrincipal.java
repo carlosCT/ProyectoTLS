@@ -91,7 +91,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        mnuCerrarSesion = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -131,7 +131,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/nube2.jpg"))); // NOI18N
         jButton1.setText("CARGA DATOS");
-        jButton1.setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         jButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -143,8 +142,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
         jMenu1.setText("Sistema");
 
-        jMenuItem1.setText("Cerrar sesion");
-        jMenu1.add(jMenuItem1);
+        mnuCerrarSesion.setText("Cerrar sesion");
+        mnuCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCerrarSesionActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuCerrarSesion);
 
         jMenuBar1.add(jMenu1);
         jMenuBar1.add(jMenu2);
@@ -219,6 +223,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnCargarMasiva
 
+    private void mnuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCerrarSesionActionPerformed
+        this.dispose();
+        InicioSesion is= new InicioSesion();
+        is.setVisible(true);
+    }//GEN-LAST:event_mnuCerrarSesionActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -231,6 +241,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem mnuCerrarSesion;
     // End of variables declaration//GEN-END:variables
 }

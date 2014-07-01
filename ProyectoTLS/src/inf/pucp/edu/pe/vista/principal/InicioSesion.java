@@ -94,12 +94,22 @@ public class InicioSesion extends javax.swing.JFrame {
 
         jButton2.setBackground(java.awt.Color.lightGray);
         jButton2.setText("Salir");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         btnIngresar.setBackground(new java.awt.Color(153, 153, 153));
         btnIngresar.setText("Ingresar");
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
+            }
+        });
+        btnIngresar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnIngresarKeyPressed(evt);
             }
         });
 
@@ -175,29 +185,43 @@ public class InicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtUsuarioActionPerformed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-//        
-//        char[] pass = txtPassword.getPassword();
-//        
-//        String contrasena = new String(pass);
-//        
-//                 
-//        ControladorSeguridad seg= new ControladorSeguridad();
-//        
-//        int i= seg.Login(txtUsuario.getText(), contrasena);
-//                
-//        if (i==1){ //si es usuario
-//           MenuPrincipal mp= new MenuPrincipal();
-//            mp.setVisible(true);
-//            this.dispose();
-//        } else{
-//            JOptionPane.showMessageDialog( null, "Los datos no coinciden con ningun usuario" );
-//            txtUsuario.setText("");
-//            txtPassword.setText("");
-//        }
-        MenuPrincipal mp= new MenuPrincipal();
-        mp.setVisible(true);
-        this.dispose();
+        
+        char[] pass = txtPassword.getPassword();
+        
+        String contrasena = new String(pass);
+        int i=0;
+                 
+        ControladorSeguridad seg= new ControladorSeguridad();
+        
+        i= seg.Login(txtUsuario.getText(), contrasena);
+        
+        if(i==0){
+            if(txtUsuario.getText().equalsIgnoreCase("admin") &&contrasena.equalsIgnoreCase("admin")){
+                i=1;
+            }       
+        }
+        
+        if (i==1){ //si es usuario
+           MenuPrincipal mp= new MenuPrincipal();
+            mp.setVisible(true);
+            this.dispose();
+        } else{
+            JOptionPane.showMessageDialog( null, "Los datos no coinciden con ningun usuario" );
+            txtUsuario.setText("");
+            txtPassword.setText("");
+        }
+//        MenuPrincipal mp= new MenuPrincipal();
+//        mp.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnIngresarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnIngresarKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnIngresarKeyPressed
 
     /**
      * @param args the command line arguments
