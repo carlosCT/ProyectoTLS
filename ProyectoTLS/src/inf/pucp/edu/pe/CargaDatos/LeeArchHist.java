@@ -10,6 +10,7 @@ import static inf.pucp.edu.pe.CargaDatos.LeeArchivo.autos;
 import static inf.pucp.edu.pe.CargaDatos.LeeArchivo.ter;
 import inf.pucp.edu.pe.modelo.CoordenadaHist;
 import inf.pucp.edu.pe.modelo.Coordernada;
+import inf.pucp.edu.pe.modelo.DiaMes;
 import inf.pucp.edu.pe.modelo.Ruta;
 import inf.pucp.edu.pe.modelo.Vehiculo;
 import inf.pucp.edu.pe.modelo.VehiculoH;
@@ -31,6 +32,10 @@ import java.util.logging.Logger;
 
 public class LeeArchHist {
       public static ArrayList<VehiculoH> autosH = new ArrayList<>();
+
+    public static ArrayList<DiaMes> datosCargados() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     public  String s;//"/Users/Alejandro/Documents/PUCP/2014-1/dp1/Archivos2";
     public String archact;
     
