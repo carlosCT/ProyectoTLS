@@ -21,30 +21,23 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <Component id="jPanel5" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel6" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" pref="102" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="19" max="-2" attributes="0"/>
-              <EmptySpace pref="332" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="336" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="1" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace min="0" pref="596" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="600" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel2" alignment="1" max="32767" attributes="0"/>
                   <Component id="jPanel6" alignment="1" max="32767" attributes="0"/>
                   <Component id="jPanel5" alignment="1" max="32767" attributes="0"/>
               </Group>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,9 +129,9 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="lPosicionX" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="63" max="32767" attributes="0"/>
-                  <Component id="lPosicionY" min="-2" max="-2" attributes="0"/>
+                  <Component id="lPosicionX2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="88" max="32767" attributes="0"/>
+                  <Component id="lPosicionY2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -148,8 +141,8 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lPosicionX" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lPosicionY" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lPosicionX2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lPosicionY2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -157,7 +150,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lPosicionX">
+        <Component class="javax.swing.JLabel" name="lPosicionX2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Posicion X en el Mapa :    0"/>
           </Properties>
@@ -165,7 +158,7 @@
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lPosicionY">
+        <Component class="javax.swing.JLabel" name="lPosicionY2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Posicion Y en el Mapa :    0"/>
           </Properties>
@@ -194,14 +187,14 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="btnLEFT2" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="btnLEFT" min="-2" pref="22" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnUP2" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="btnUP" min="-2" pref="28" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="btnDOWN2" min="-2" pref="28" max="-2" attributes="0"/>
+                          <Component id="btnDOWN" min="-2" pref="28" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="btnRIGHT2" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="btnRIGHT" min="-2" pref="24" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -211,13 +204,13 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="1" attributes="0">
               <Group type="102" attributes="0">
-                  <Component id="btnUP2" min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="btnUP" min="-2" pref="22" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnRIGHT2" min="-2" pref="27" max="-2" attributes="0"/>
+                      <Component id="btnRIGHT" min="-2" pref="27" max="-2" attributes="0"/>
                       <Group type="103" alignment="1" groupAlignment="0" attributes="0">
-                          <Component id="btnLEFT2" min="-2" pref="27" max="-2" attributes="0"/>
-                          <Component id="btnDOWN2" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="btnLEFT" min="-2" pref="27" max="-2" attributes="0"/>
+                          <Component id="btnDOWN" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -225,55 +218,47 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnUP2">
+        <Component class="javax.swing.JButton" name="btnUP">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/inf/pucp/edu/pe/Iconos/up.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUP2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUPActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnLEFT2">
+        <Component class="javax.swing.JButton" name="btnLEFT">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/inf/pucp/edu/pe/Iconos/left.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLEFT2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLEFTActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnDOWN2">
+        <Component class="javax.swing.JButton" name="btnDOWN">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/inf/pucp/edu/pe/Iconos/down.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDOWN2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDOWNActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnRIGHT2">
+        <Component class="javax.swing.JButton" name="btnRIGHT">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/inf/pucp/edu/pe/Iconos/right.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRIGHT2ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRIGHTActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jButton1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>
