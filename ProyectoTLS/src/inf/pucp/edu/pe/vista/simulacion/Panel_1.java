@@ -42,7 +42,7 @@ public final class Panel_1 extends JPanel{
     ArrayList<Vehiculo> listaVehiculos= new ArrayList<Vehiculo>();
     
     public byte eleccion=0;
-    public  VariablesSimulacion vs;
+    public  VariablesSimulacion_1 vs;
     
     
     Cuadra cuadra;
@@ -51,7 +51,7 @@ public final class Panel_1 extends JPanel{
         this.setSize(MenuPrincipalSimulacion_1.ancho, MenuPrincipalSimulacion_1.alto);
         //crearVehiculos();
         //crearSemaforos();
-       vs = new VariablesSimulacion();
+       vs = new VariablesSimulacion_1();
         
         
     }
@@ -131,8 +131,8 @@ public final class Panel_1 extends JPanel{
                 MenuPrincipalSimulacion_1.zonaActual-=MenuPrincipalSimulacion_1.dimensionXMapa/(Panel_1.escala*MenuPrincipalSimulacion_1.ancho);
                 }
               //  lZona.setText("Zona:     "+ MenuPrincipalSimulacion_1.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ posX*Panel_1.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ posY*Panel_1.escala);
+                Simulacion_1.lPosicionX2.setText("Posicion X en el Mapa:    "+ posX*Panel_1.escala);
+                Simulacion_1.lPosicionY2.setText("Posicion Y en el Mapa:    "+ posY*Panel_1.escala);
                 
                 vs.setPosicionRelativaX(posX);
                 vs.setPosicionRelativaY(posY);
@@ -147,8 +147,8 @@ public final class Panel_1 extends JPanel{
                 }
                 
              //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion_1.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ posX*Panel_1.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ posY*Panel_1.escala);
+                Simulacion_1.lPosicionX2.setText("Posicion X en el Mapa:    "+ posX*Panel_1.escala);
+                Simulacion_1.lPosicionY2.setText("Posicion Y en el Mapa:    "+ posY*Panel_1.escala);
                 
                 vs.setPosicionRelativaX(posX);
                 vs.setPosicionRelativaY(posY);
@@ -163,8 +163,8 @@ public final class Panel_1 extends JPanel{
                 }
                  
              //   lZona.setText("Zona:     "+ MenuPrincipalSimulacion_1.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ posX*Panel_1.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ posY*Panel_1.escala);
+                Simulacion_1.lPosicionX2.setText("Posicion X en el Mapa:    "+ posX*Panel_1.escala);
+                Simulacion_1.lPosicionY2.setText("Posicion Y en el Mapa:    "+ posY*Panel_1.escala);
                
         
             vs.setPosicionRelativaX(posX);
@@ -180,8 +180,8 @@ public final class Panel_1 extends JPanel{
                 }
                 
            //     lZona.setText("Zona:     "+ MenuPrincipalSimulacion_1.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ posX*Panel_1.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ posY*Panel_1.escala);
+                Simulacion_1.lPosicionX2.setText("Posicion X en el Mapa:    "+ posX*Panel_1.escala);
+                Simulacion_1.lPosicionY2.setText("Posicion Y en el Mapa:    "+ posY*Panel_1.escala);
           
         vs.setPosicionRelativaX(posX);
         vs.setPosicionRelativaY(posY);
