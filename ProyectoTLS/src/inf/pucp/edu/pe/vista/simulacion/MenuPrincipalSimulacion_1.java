@@ -8,13 +8,11 @@ package inf.pucp.edu.pe.vista.simulacion;
 
 
 
-import inf.pucp.edu.pe.CargaDatos.LeeArchivo;
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.Mapa;
 import inf.pucp.edu.pe.modelo.Semaforo;
 import inf.pucp.edu.pe.modelo.Zona;
-import inf.pucp.edu.pe.vista.principal.MenuPrincipal;
 import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -28,7 +26,6 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 /**
  *
  * @author JuanCarlos
@@ -44,8 +41,10 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
     
     /*parametros para cambio de zona*/
     Zona zona;
-    
- 
+    Zona [] zonaGeneradas;
+    //CambioDeZona cambioDeZona;
+    public static int posicionRelativaX=0;
+    public static int posicionRelativaY=0;
     public static int zonaActual= 1;
     
  /*parametros de la frame*/    
@@ -66,27 +65,21 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
     public Thread hilo;
     
     public Simulacion_1 simu;
-  //  private static int indice=0;
     //public Thread hilo;
     
     public Color claro= new Color(217, 228, 232);
-    
-    
     public MenuPrincipalSimulacion_1(){
              
        /*caracteristicas basicas de la ventana*/ 
-
-        this.setPreferredSize(new Dimension(1024, 768)); 
-    
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initComponents();
-        setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
-
-        simu=new Simulacion_1();
+        setPreferredSize(new Dimension(1024, 768));
+        //ven= new VentanaDeInformacion();
+        simu= new Simulacion_1();
+        simu.setMaximizable(true);
         this.add(simu);
-        try{
-            ClienteSemaforos.inicializarCruces();
-            ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
-        }catch(IOException ex){}
+     
         barraMenu.setBackground(claro);
         /*********************************************/
         
@@ -110,10 +103,9 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
         btnReducirZoom = new javax.swing.JButton();
         btnAumentarZoom = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        lblCantidadSemaforos = new javax.swing.JLabel();
-        lblCantidadVehiculos = new javax.swing.JLabel();
-        lblVelocidad = new javax.swing.JLabel();
-        lblEscala = new javax.swing.JLabel();
+        lblCantidadSemaforos1 = new javax.swing.JLabel();
+        lblCantidadVehiculos1 = new javax.swing.JLabel();
+        lblEscala1 = new javax.swing.JLabel();
 
         jMenu5.setText("File");
         jMenuBar2.add(jMenu5);
@@ -124,14 +116,6 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
-                formWindowClosing(evt);
-            }
-        });
-
-        barraMenu.setPreferredSize(new Dimension(1024, 38)
-        );
 
         btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/pausa.png"))); // NOI18N
         btnPause.setFocusable(false);
@@ -186,13 +170,11 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
 
         jLabel1.setText("Zoom");
 
-        lblCantidadSemaforos.setText("#Semaforos: ");
+        lblCantidadSemaforos1.setText("#Semaforos : ");
 
-        lblCantidadVehiculos.setText(" #Vehiculos");
+        lblCantidadVehiculos1.setText("#Vehiculos :");
 
-        lblVelocidad.setText("V.Promedio: ");
-
-        lblEscala.setText("Escala: ");
+        lblEscala1.setText("Escala: ");
 
         javax.swing.GroupLayout barraMenuLayout = new javax.swing.GroupLayout(barraMenu);
         barraMenu.setLayout(barraMenuLayout);
@@ -207,21 +189,19 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
                 .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
-                .addComponent(lblCantidadSemaforos)
-                .addGap(63, 63, 63)
-                .addComponent(lblCantidadVehiculos)
-                .addGap(90, 90, 90)
-                .addComponent(lblVelocidad)
+                .addGap(29, 29, 29)
+                .addComponent(lblCantidadSemaforos1)
                 .addGap(81, 81, 81)
-                .addComponent(lblEscala)
-                .addGap(81, 81, 81)
+                .addComponent(lblCantidadVehiculos1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addComponent(lblEscala1)
+                .addGap(130, 130, 130)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnReducirZoom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAumentarZoom)
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGap(13, 13, 13))
         );
         barraMenuLayout.setVerticalGroup(
             barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,10 +219,9 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
                             .addComponent(btnReducirZoom)
                             .addComponent(btnAumentarZoom)
                             .addComponent(jLabel1)
-                            .addComponent(lblCantidadSemaforos)
-                            .addComponent(lblCantidadVehiculos)
-                            .addComponent(lblVelocidad)
-                            .addComponent(lblEscala))
+                            .addComponent(lblCantidadSemaforos1)
+                            .addComponent(lblCantidadVehiculos1)
+                            .addComponent(lblEscala1))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -251,13 +230,13 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(barraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(barraMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(barraMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 285, Short.MAX_VALUE))
+                .addGap(0, 511, Short.MAX_VALUE))
         );
 
         pack();
@@ -266,16 +245,13 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
                 Simulacion_1.run = true;
                 Simulacion_1.seguir=true;
-               
-                if(MenuPrincipal.vecesPantallaSimulacion==1){
-                    try{
-                        ClienteSemaforos.actualizarCruces();
-                        ClienteVehiculos.actualizarVehiculos();
-                    }catch(IOException ex){}
-                    MenuPrincipal.vecesPantallaSimulacion++;
-                }
-                new Thread(simu).start();                
                 
+//                try{
+////                ClienteSemaforos.inicializarCruces();
+////                ClienteSemaforos.actualizarCruces();
+//                }catch(IOException ex){}
+                hilo= new Thread(simu);
+                hilo.start();
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
@@ -304,9 +280,9 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
         if(variacionEscala>1){
             variacionEscala--;
         
-            if(variacionEscala==1)Panel.factor=20;
-            else if(variacionEscala==2)Panel.factor=40;
-            else if(variacionEscala==3)Panel.factor=100;
+            if(variacionEscala==1)Panel_1.factor=20;
+            else if(variacionEscala==2)Panel_1.factor=40;
+            else if(variacionEscala==3)Panel_1.factor=100;
             
         }
     }//GEN-LAST:event_btnReducirZoomActionPerformed
@@ -315,23 +291,12 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
         if(variacionEscala<3){
             variacionEscala++;
         
-             if(variacionEscala==1)Panel.factor=20;
-             else if(variacionEscala==2)Panel.factor=40;
-             else if(variacionEscala==3)Panel.factor=100;
+             if(variacionEscala==1)Panel_1.factor=20;
+             else if(variacionEscala==2)Panel_1.factor=40;
+             else if(variacionEscala==3)Panel_1.factor=100;
         
         }
     }//GEN-LAST:event_btnAumentarZoomActionPerformed
-
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        
-        try{
-            
-            ClienteSemaforos.detenerSimulacion();
-            ClienteVehiculos.detenerSimulacion();
-            
-        }catch(IOException ex){}
-        
-    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments
@@ -363,8 +328,8 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                    
-                    new MenuPrincipalSimulacion_1().setVisible(true);
+            
+                    new MenuPrincipalSimulacion().setVisible(true);
                
             }
         });
@@ -383,10 +348,9 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
-    public static javax.swing.JLabel lblCantidadSemaforos;
-    public static javax.swing.JLabel lblCantidadVehiculos;
-    public static javax.swing.JLabel lblEscala;
-    public static javax.swing.JLabel lblVelocidad;
+    public static javax.swing.JLabel lblCantidadSemaforos1;
+    public static javax.swing.JLabel lblCantidadVehiculos1;
+    public static javax.swing.JLabel lblEscala1;
     // End of variables declaration//GEN-END:variables
 
 

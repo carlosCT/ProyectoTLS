@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JMenuBar" name="jMenuBar2">
 
@@ -33,9 +33,6 @@
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
-  <Events>
-    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
-  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -51,25 +48,20 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="barraMenu" alignment="0" min="-2" max="-2" attributes="0"/>
+          <Component id="barraMenu" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <Component id="barraMenu" min="-2" pref="27" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="285" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="511" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="barraMenu">
-      <Properties>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="new Dimension(1024, 38)&#xd;&#xa;" type="code"/>
-        </Property>
-      </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -83,21 +75,19 @@
                   <Component id="btnPause" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnReanudar" min="-2" pref="26" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
-                  <Component id="lblCantidadSemaforos" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
-                  <Component id="lblCantidadVehiculos" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="90" max="-2" attributes="0"/>
-                  <Component id="lblVelocidad" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                  <Component id="lblCantidadSemaforos1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
-                  <Component id="lblEscala" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+                  <Component id="lblCantidadVehiculos1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="148" max="32767" attributes="0"/>
+                  <Component id="lblEscala1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnReducirZoom" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnAumentarZoom" max="-2" attributes="0"/>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="btnAumentarZoom" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -117,12 +107,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="btnReducirZoom" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnAumentarZoom" alignment="3" max="-2" attributes="0"/>
+                              <Component id="btnAumentarZoom" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCantidadSemaforos" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblCantidadVehiculos" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblVelocidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblEscala" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCantidadSemaforos1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblCantidadVehiculos1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="lblEscala1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
@@ -203,31 +192,23 @@
             <Property name="text" type="java.lang.String" value="Zoom"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblCantidadSemaforos">
+        <Component class="javax.swing.JLabel" name="lblCantidadSemaforos1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="#Semaforos: "/>
+            <Property name="text" type="java.lang.String" value="#Semaforos : "/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblCantidadVehiculos">
+        <Component class="javax.swing.JLabel" name="lblCantidadVehiculos1">
           <Properties>
-            <Property name="text" type="java.lang.String" value=" #Vehiculos"/>
+            <Property name="text" type="java.lang.String" value="#Vehiculos :"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblVelocidad">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="V.Promedio: "/>
-          </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lblEscala">
+        <Component class="javax.swing.JLabel" name="lblEscala1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Escala: "/>
           </Properties>

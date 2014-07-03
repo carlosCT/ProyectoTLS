@@ -26,8 +26,8 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
      * Creates new form ConfiguracionCliente
      */
     //public MenuPrincipalSimulacion [] mps;
-    public ArrayList<MenuPrincipalSimulacion> Lmps;
-    public MenuPrincipalSimulacion mps, mps2;
+//    public ArrayList<MenuPrincipalSimulacion> Lmps;
+//    public MenuPrincipalSimulacion mps, mps2;
     public int nVentanas=1;
     
     
@@ -40,12 +40,12 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
         initComponents();
          jPanel1.setOpaque(false);
         
-          mps= new MenuPrincipalSimulacion();
-          mps2= new MenuPrincipalSimulacion();
-          Lmps= new ArrayList<MenuPrincipalSimulacion>();
-                
-          Lmps.add(mps);
-          Lmps.add(mps2);
+          //mps= new MenuPrincipalSimulacion();
+          //mps2= new MenuPrincipalSimulacion();
+       //   Lmps= new ArrayList<MenuPrincipalSimulacion>();
+//                
+//          Lmps.add(mps);
+          
     }
 
     /**
@@ -211,14 +211,10 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
 //                
 //                mps[indice] = new MenuPrincipalSimulacion();
 //                mps[indice].setVisible(true);
-                  
-                  if(nVentanas==1){
-                    Lmps.get(0).setVisible(true);
-                  nVentanas++;
-                  }
-                  else{
-                    Lmps.get(1).setVisible(true);
-                  }
+                  MenuPrincipalSimulacion mps= new MenuPrincipalSimulacion();
+                  mps.setVisible(true);
+                 
+                
                  System.out.println("Ingreso una vez mas: "+MenuPrincipal.vecesPantallaSimulacion);
 //            }
 //            else{

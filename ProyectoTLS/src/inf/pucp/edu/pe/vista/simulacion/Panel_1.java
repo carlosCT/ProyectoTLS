@@ -103,13 +103,13 @@ public final class Panel_1 extends JPanel{
            
       public void run(){
           while(Simulacion.run){
-               MenuPrincipalSimulacion_1.lblEscala.setText("Escala del Mapa 1: "+Panel_1.escala);
+               MenuPrincipalSimulacion_1.lblEscala1.setText("Escala del Mapa 1: "+Panel_1.escala);
             //    lZona.setText("Zona:     "+ MenuPrincipalSimulacion_1.zonaActual);
-                lPosicionX.setText("Posicion X en el Mapa:    "+ vs.getPosicionRelativaX()*Panel_1.escala);
-                lPosicionY.setText("Posicion Y en el Mapa:    "+ vs.getPosicionRelativaY()*Panel_1.escala);
+                Simulacion_1.lPosicionX2.setText("Posicion X en el Mapa:    "+ vs.getPosicionRelativaX()*Panel_1.escala);
+                Simulacion_1.lPosicionY2.setText("Posicion Y en el Mapa:    "+ vs.getPosicionRelativaY()*Panel_1.escala);
 
-                MenuPrincipalSimulacion_1.lblCantidadSemaforos.setText("#Semaforos: "+vs.getCantidadSemaforos());
-                MenuPrincipalSimulacion_1.lblCantidadVehiculos.setText("#Vehiculos: "+vs.getCantidadDeVehiculos());    
+                MenuPrincipalSimulacion_1.lblCantidadSemaforos1.setText("#Semaforos: "+vs.getCantidadSemaforos());
+                MenuPrincipalSimulacion_1.lblCantidadVehiculos1.setText("#Vehiculos: "+vs.getCantidadDeVehiculos());    
           }
       } 
   };
