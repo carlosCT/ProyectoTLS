@@ -8,6 +8,7 @@ package inf.pucp.edu.pe.vista.simulacion;
 
 
 
+import inf.pucp.edu.pe.CargaDatos.LeeArchivo;
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.Mapa;
@@ -73,6 +74,13 @@ public class MenuPrincipalSimulacion extends JFrame{
        /*caracteristicas basicas de la ventana*/ 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        try{
+                ClienteSemaforos.inicializarCruces();
+                ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
+        }catch(IOException ex){}
+        
+        
         initComponents();
         setPreferredSize(new Dimension(1024, 768));
         //ven= new VentanaDeInformacion();
@@ -256,7 +264,7 @@ public class MenuPrincipalSimulacion extends JFrame{
                 Simulacion.seguir=true;
                 
                 try{
-                ClienteSemaforos.inicializarCruces();
+                ClienteVehiculos.actualizarVehiculos();
                 ClienteSemaforos.actualizarCruces();
                 }catch(IOException ex){}
                 hilo= new Thread(simu);
