@@ -16,6 +16,7 @@ import java.io.IOException;
 import static java.lang.Thread.sleep;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -43,7 +44,7 @@ LeeArchivo arch = null;
         p.setLayout(new BorderLayout(0, 0));
         setContentPane(p);
         setLocation(new Point(400, 100));
-        
+        setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
         initComponents();
        
        

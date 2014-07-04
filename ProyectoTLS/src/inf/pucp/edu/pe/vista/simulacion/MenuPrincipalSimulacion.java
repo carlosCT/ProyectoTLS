@@ -27,6 +27,7 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 /**
  *
  * @author JuanCarlos
@@ -72,20 +73,22 @@ public class MenuPrincipalSimulacion extends JFrame{
     public MenuPrincipalSimulacion(){
              
        /*caracteristicas basicas de la ventana*/ 
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         try{
                 ClienteSemaforos.inicializarCruces();
                 ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
         }catch(IOException ex){}
-        
-        
+         
+     
+        this.setPreferredSize(new Dimension(1024, 768));
         initComponents();
-        setPreferredSize(new Dimension(1024, 768));
+        setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
+        
         //ven= new VentanaDeInformacion();
         simu= new Simulacion();
-        simu.setMaximizable(true);
+       // simu.setMaximizable(true);
         this.add(simu);
      
         barraMenu.setBackground(claro);
@@ -115,6 +118,7 @@ public class MenuPrincipalSimulacion extends JFrame{
         lblCantidadVehiculos = new javax.swing.JLabel();
         lblEscala = new javax.swing.JLabel();
         btnNewWindows = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jMenu5.setText("File");
         jMenuBar2.add(jMenu5);
@@ -125,6 +129,8 @@ public class MenuPrincipalSimulacion extends JFrame{
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new Dimension(1024, 768)
+        );
 
         btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/pausa.png"))); // NOI18N
         btnPause.setFocusable(false);
@@ -156,7 +162,7 @@ public class MenuPrincipalSimulacion extends JFrame{
             }
         });
 
-        btnReanudar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/reanudar.jpg"))); // NOI18N
+        btnReanudar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/reanudar.png"))); // NOI18N
         btnReanudar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReanudarActionPerformed(evt);
@@ -183,14 +189,16 @@ public class MenuPrincipalSimulacion extends JFrame{
 
         lblCantidadVehiculos.setText("#Vehiculos :");
 
-        lblEscala.setText("Escala: ");
+        lblEscala.setText("Escala : ");
 
-        btnNewWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/New Window.png"))); // NOI18N
+        btnNewWindows.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/nuevaVentana1.png"))); // NOI18N
         btnNewWindows.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNewWindowsActionPerformed(evt);
             }
         });
+
+        jLabel2.setText("V.Promedio :");
 
         javax.swing.GroupLayout barraMenuLayout = new javax.swing.GroupLayout(barraMenu);
         barraMenu.setLayout(barraMenuLayout);
@@ -204,22 +212,24 @@ public class MenuPrincipalSimulacion extends JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblCantidadSemaforos)
                 .addGap(81, 81, 81)
                 .addComponent(lblCantidadVehiculos)
                 .addGap(88, 88, 88)
                 .addComponent(lblEscala)
-                .addGap(59, 59, 59)
+                .addGap(52, 52, 52)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnReducirZoom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnAumentarZoom)
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(btnNewWindows, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addContainerGap())
         );
         barraMenuLayout.setVerticalGroup(
             barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,7 +244,8 @@ public class MenuPrincipalSimulacion extends JFrame{
                         .addComponent(jLabel1)
                         .addComponent(lblCantidadSemaforos)
                         .addComponent(lblCantidadVehiculos)
-                        .addComponent(lblEscala)))
+                        .addComponent(lblEscala)
+                        .addComponent(jLabel2)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(barraMenuLayout.createSequentialGroup()
                 .addGroup(barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,6 +379,7 @@ public class MenuPrincipalSimulacion extends JFrame{
     private javax.swing.JButton btnStop;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;

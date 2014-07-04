@@ -26,6 +26,7 @@ import java.beans.PropertyVetoException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 /**
  *
  * @author JuanCarlos
@@ -71,13 +72,14 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
     public MenuPrincipalSimulacion_1(){
              
        /*caracteristicas basicas de la ventana*/ 
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+       // this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        initComponents();
         setPreferredSize(new Dimension(1024, 768));
+        initComponents();
+         setIconImage(new ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/semaforoIcono.jpg")).getImage());
         //ven= new VentanaDeInformacion();
         simu= new Simulacion_1();
-        simu.setMaximizable(true);
+        //simu.setMaximizable(true);
         this.add(simu);
      
         barraMenu.setBackground(claro);
@@ -106,6 +108,7 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
         lblCantidadSemaforos1 = new javax.swing.JLabel();
         lblCantidadVehiculos1 = new javax.swing.JLabel();
         lblEscala1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         jMenu5.setText("File");
         jMenuBar2.add(jMenu5);
@@ -116,6 +119,8 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new Dimension(1024, 768)
+        );
 
         btnPause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/pausa.png"))); // NOI18N
         btnPause.setFocusable(false);
@@ -147,7 +152,7 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
             }
         });
 
-        btnReanudar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/reanudar.jpg"))); // NOI18N
+        btnReanudar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/inf/pucp/edu/pe/Iconos/reanudar.png"))); // NOI18N
         btnReanudar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnReanudarActionPerformed(evt);
@@ -174,7 +179,9 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
 
         lblCantidadVehiculos1.setText("#Vehiculos :");
 
-        lblEscala1.setText("Escala: ");
+        lblEscala1.setText("Escala : ");
+
+        jLabel2.setText("V.Promedio :");
 
         javax.swing.GroupLayout barraMenuLayout = new javax.swing.GroupLayout(barraMenu);
         barraMenu.setLayout(barraMenuLayout);
@@ -188,14 +195,16 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(lblCantidadSemaforos1)
                 .addGap(81, 81, 81)
                 .addComponent(lblCantidadVehiculos1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addGap(79, 79, 79)
                 .addComponent(lblEscala1)
-                .addGap(130, 130, 130)
+                .addGap(67, 67, 67)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(btnReducirZoom)
@@ -207,23 +216,19 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
             barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(barraMenuLayout.createSequentialGroup()
                 .addGroup(barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnReducirZoom)
+                        .addComponent(btnAumentarZoom)
+                        .addComponent(jLabel1)
+                        .addComponent(lblCantidadSemaforos1)
+                        .addComponent(lblCantidadVehiculos1)
+                        .addComponent(lblEscala1)
+                        .addComponent(jLabel2))
                     .addComponent(btnPause, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPlay, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnStop, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReanudar, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(barraMenuLayout.createSequentialGroup()
-                .addGroup(barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnReanudar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(barraMenuLayout.createSequentialGroup()
-                        .addGroup(barraMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnReducirZoom)
-                            .addComponent(btnAumentarZoom)
-                            .addComponent(jLabel1)
-                            .addComponent(lblCantidadSemaforos1)
-                            .addComponent(lblCantidadVehiculos1)
-                            .addComponent(lblEscala1))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -345,6 +350,7 @@ public class MenuPrincipalSimulacion_1 extends JFrame{
     private javax.swing.JButton btnStop;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenu jMenu6;
     private javax.swing.JMenuBar jMenuBar2;
