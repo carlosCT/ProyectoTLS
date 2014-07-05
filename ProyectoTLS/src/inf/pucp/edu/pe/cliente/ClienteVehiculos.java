@@ -157,6 +157,66 @@ public class ClienteVehiculos {
             
     }
     
+    public static String solicitarTiempo() throws IOException{
+    
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
+        String lista[];
+        String resultado = null;
+            try{
+                
+                String valor="solicitudTiempo";                                                             
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+            
+           return resultado;
+    }
+    
+     public static String solicitarVehiculosCiudad() throws IOException{
+    
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
+        String lista[];
+        String resultado = null;
+            try{
+                
+                String valor="solicitudVehCiudad";                                                             
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+            
+           return resultado;
+    }
+     
+     public static String solicitarVelocidadPromedio() throws IOException{
+    
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
+        String lista[];
+        String resultado = null;
+            try{
+                
+                String valor="solicitudVelProm";                                                             
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+            
+           return resultado;
+    }
+    
      private static String realizar_operacion(String host, int puerto, String valor) {
         String respuesta=null;
         try{
