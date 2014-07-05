@@ -54,7 +54,7 @@ public class ClienteSemaforos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
         
         return listaCruces;
     }

@@ -284,7 +284,7 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
             ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
             ClienteSemaforos.setTiempoSimulacion(Integer.parseInt(txtTiempoSimulacion.getText()));
             ClienteVehiculos.setTiempoSimulacion(Integer.parseInt(txtTiempoSimulacion.getText()));
-            
+            LeeArchivo.autos = null;
             
         }catch(IOException e){}
         
