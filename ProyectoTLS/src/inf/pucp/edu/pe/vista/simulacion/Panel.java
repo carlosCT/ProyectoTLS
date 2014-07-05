@@ -108,8 +108,8 @@ public final class Panel extends JPanel{
                 lPosicionX.setText("Posicion X en el Mapa:    "+ vs.getPosicionRelativaX()*Panel.escala);
                 lPosicionY.setText("Posicion Y en el Mapa:    "+ vs.getPosicionRelativaY()*Panel.escala);
 
-                MenuPrincipalSimulacion.lblCantidadSemaforos.setText("#Semaforos: "+vs.getCantidadSemaforos());
-                MenuPrincipalSimulacion.lblCantidadVehiculos.setText("#Vehiculos: "+vs.getCantidadDeVehiculos());    
+                Simulacion.lblCantidadSemaforos.setText("#Semaforos: "+vs.getCantidadSemaforos());
+                Simulacion.lblCantidadVehiculos.setText("#Vehiculos: "+vs.getCantidadDeVehiculos());    
           }
       } 
   };

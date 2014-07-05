@@ -20,6 +20,9 @@ public class VariablesSimulacion {
     public int cantidadSemaforos;
     public int cantidadDeVehiculos;
     
+    public int totalSemaforos;
+    public int totalVehiculos;
+    
     public VariablesSimulacion() {
          
     }
@@ -54,6 +57,22 @@ public class VariablesSimulacion {
 
     public void setCantidadDeVehiculos(int cantidadDeVehiculos) {
         this.cantidadDeVehiculos = cantidadDeVehiculos;
+    }
+
+    public int getTotalSemaforos() {
+        return totalSemaforos;
+    }
+
+    public void setTotalSemaforos(int totalSemaforos) {
+        this.totalSemaforos = totalSemaforos;
+    }
+
+    public int getTotalVehiculos() {
+        return totalVehiculos;
+    }
+
+    public void setTotalVehiculos(int totalVehiculos) {
+        this.totalVehiculos = totalVehiculos;
     }
     
     
