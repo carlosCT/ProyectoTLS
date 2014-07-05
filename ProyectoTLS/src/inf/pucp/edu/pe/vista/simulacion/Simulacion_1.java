@@ -39,6 +39,7 @@ public class Simulacion_1 extends JInternalFrame implements Runnable{
      */
     public Simulacion_1() {
        initComponents();
+       this.setPreferredSize(new Dimension(1024, 768));
        ocultarBarraTitulo();
        setSize(MenuPrincipalSimulacion_1.ancho+MenuPrincipalSimulacion_1.defectoAncho+350, MenuPrincipalSimulacion_1.alto+MenuPrincipalSimulacion_1.defectoAlto+50);
       // setTitle("Simulacion");
