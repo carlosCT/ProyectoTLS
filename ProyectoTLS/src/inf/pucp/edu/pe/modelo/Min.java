@@ -14,6 +14,10 @@ public class Min {
     private int min;
     private ArrayList<Seg> seg;
 
+    public Min() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getMin() {
         return min;
     }

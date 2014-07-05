@@ -14,6 +14,10 @@ public class Seg {
     private int seg;
     private ArrayList<Integer> coordenadas;
 
+    public Seg() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public int getSeg() {
         return seg;
     }

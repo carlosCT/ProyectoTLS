@@ -8,10 +8,14 @@ package inf.pucp.edu.pe.CargaDatos;
 
 import static inf.pucp.edu.pe.CargaDatos.LeeArchivo.autos;
 
+import inf.pucp.edu.pe.controlador.ControladorPatron;
 import inf.pucp.edu.pe.modelo.CoordenadaHist;
 import inf.pucp.edu.pe.modelo.Coordernada;
 import inf.pucp.edu.pe.modelo.DiaMes;
+import inf.pucp.edu.pe.modelo.Hora;
+import inf.pucp.edu.pe.modelo.Min;
 import inf.pucp.edu.pe.modelo.Ruta;
+import inf.pucp.edu.pe.modelo.Seg;
 import inf.pucp.edu.pe.modelo.Vehiculo;
 import inf.pucp.edu.pe.modelo.VehiculoH;
 import java.io.BufferedReader;
@@ -33,9 +37,7 @@ import java.util.logging.Logger;
 public class LeeArchHist {
       public static ArrayList<VehiculoH> autosH = new ArrayList<>();
 
-    public static ArrayList<DiaMes> datosCargados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+public ArrayList<DiaMes> diaMes= null;
     public  String s;//"/Users/Alejandro/Documents/PUCP/2014-1/dp1/ArchivosHistoricos";
     public String archact;
     
@@ -155,6 +157,61 @@ ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
      
     }
     
-    
+    public void CambiaEstructura(){
+        ArrayList<Integer> nodos = new ArrayList<Integer>();
+        ArrayList<Seg> segs = new ArrayList<Seg>();
+
+        for (int i = 0; i < 60; i++){
+            Seg s=new Seg();
+            s.setSeg(i+1);
+            s.setCoordenadas(nodos);
+        }
+        
+        ArrayList<Min> mins = new ArrayList<Min>();
+        
+        for (int j=0; j<60; j++){
+            Min m= new Min();
+            m.setMin(j+1);
+            m.setSeg(segs);
+        }
+        
+        ArrayList<Hora> horas = new ArrayList<Hora>();
+     
+        for(int k=0; k<24; k++){
+            Hora h = new Hora();
+            h.setHora(k+1);
+            h.setMin(mins);
+        }
+        
+         diaMes = new ArrayList<DiaMes>();
+        
+        for (int mes=0; mes<12; mes++){
+            for (int d=0; d<30; d++){
+                DiaMes dM= new DiaMes();
+                dM.setDia(d+1);
+                dM.setMes(mes+1);
+                dM.setHoras(horas);
+            }
+        }
+        
+        
+        int dia,mes,hora,min,seg,x,y;
+       for(int i=0;i<autosH.size();i++){
+           mes=Integer.parseInt(autosH.get(i).fecha.substring(5,6));
+           dia=Integer.parseInt(autosH.get(i).fecha.substring(7,8));
+           for(int j=0; j<autosH.get(i).coord.size();j++){
+               hora=autosH.get(i).coord.get(j).hora/3600;
+               min=(autosH.get(i).coord.get(j).hora % 3600)/60;
+               seg=autosH.get(i).coord.get(j).hora-(min*60);
+               x=autosH.get(i).coord.get(j).x;
+               y=autosH.get(i).coord.get(j).y;
+               diaMes.get(mes*30+dia -1).getHoras().get(hora).getMin().get(min).getSeg().get(seg).getCoordenadas().add(x);
+               diaMes.get(mes*30+dia -1).getHoras().get(hora).getMin().get(min).getSeg().get(seg).getCoordenadas().add(y);
+               
+           }
+           
+     }
+       ControladorPatron cp = new ControladorPatron(diaMes);
+    }
     
 }

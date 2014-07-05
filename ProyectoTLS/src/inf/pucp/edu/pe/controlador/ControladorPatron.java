@@ -21,10 +21,17 @@ import java.util.Calendar;
  * @author fatima
  */
 public class ControladorPatron {
+    
+    public ArrayList<DiaMes> infoGps;
+    
+    public ControladorPatron(ArrayList<DiaMes> infoGps){
+        this.infoGps=infoGps;
+    }
+    
 
     public ArrayList<InfoCuad> listaCuadrantesPat() {
 
-        ArrayList<DiaMes> infoGps = null;//LeeArchHist.datosCargados();
+        //ArrayList<DiaMes> infoGps = null;//LeeArchHist.datosCargados();
 
         ArrayList<InfoCuad> listaCuadrantes = new ArrayList<InfoCuad>();
 
