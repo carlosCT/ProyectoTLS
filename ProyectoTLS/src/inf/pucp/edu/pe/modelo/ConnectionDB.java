@@ -18,18 +18,18 @@ public class ConnectionDB {
        
     
      /*Datos para conectarse a la BD de la PUCP*/
-//  public String url = "jdbc:mysql://quilla.lab.inf.pucp.edu.pe:3306/";
-//  public String dbName = "inf282g2";
-//  public String driver = "com.mysql.jdbc.Driver";
-//  public String userName = "inf282g2";
-//  public String password = "cableado";
+  public String url = "jdbc:mysql://200.16.7.70:3306/";
+  public String dbName = "inf226c";
+  public String driver = "com.mysql.jdbc.Driver";
+  public String userName = "inf226c";
+  public String password = "pas.grupoc";
     
-    /*Datos para conectarse a las BD propias*/
-    public String url = "jdbc:mysql://localhost:3306/";
-    public String dbName = "tlssw";
-    public String driver = "com.mysql.jdbc.Driver";
-    public String userName = "root";
-    public String password = "";
+//    /*Datos para conectarse a las BD propias*/
+//    public String url = "jdbc:mysql://localhost:3306/";
+//    public String dbName = "tlssw";
+//    public String driver = "com.mysql.jdbc.Driver";
+//    public String userName = "root";
+//    public String password = "";
 
    
     public ConnectionDB() {

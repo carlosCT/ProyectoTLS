@@ -5,9 +5,16 @@
 package inf.pucp.edu.pe.controlador;
 
 import inf.pucp.edu.pe.CargaDatos.LeeArchHist;
+import inf.pucp.edu.pe.modelo.ConnectionDB;
 import inf.pucp.edu.pe.modelo.DiaMes;
 import inf.pucp.edu.pe.modelo.InfoCuad;
+import inf.pucp.edu.pe.modelo.Patron;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -75,5 +82,182 @@ public class ControladorPatron {
         }
 
         return listaCuadrantes;
+    }
+    
+    Patron obtenerPatron(String diaSemana, int mes, int hora) {
+
+        Patron p = new Patron();
+
+        int result = 0;
+        ConnectionDB objConn = new ConnectionDB();
+        Connection conn = null;
+
+        try {
+            conn = objConn.open();
+        } catch (SQLException ex) {
+        }
+
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            String SqlString = null;
+
+            SqlString = "SELECT p.idPatron,p.Dia, p.Anho FROM patron p WHERE p.DiaSemana='" + diaSemana + "' AND p.Mes='" + mes + "' AND p.Hora='" + hora + "'";
+            pstmt = conn.prepareStatement(SqlString);
+            rs = pstmt.executeQuery();
+
+            int id = 0;
+            int anho = 0;
+            int dia = 0;
+
+            while (rs.next()) {
+                id = rs.getInt("idPatron");
+                dia = rs.getInt("Dia");
+                anho = rs.getInt("Anho");
+            }
+            rs = null;
+            SqlString = null;
+            SqlString = "SELECT s.TiempoV, s.TiempoR FROM semXPatron s WHERE s.IdPatron='" + id + "'";
+
+            pstmt = conn.prepareStatement(SqlString);
+            rs = pstmt.executeQuery();
+            int verde = 0;
+            int rojo = 0;
+
+            ArrayList<Integer> tiempos = new ArrayList<Integer>();
+
+            while (rs.next()) {
+                verde = rs.getInt("TiempoV");
+                rojo = rs.getInt("TiempoR");
+                tiempos.add(verde);
+                tiempos.add(rojo);
+            }
+
+            p.setAnho(anho);
+            p.setDia(dia);
+            p.setDiaSemana(diaSemana);
+            p.setHora(hora);
+            p.setMes(mes);
+            p.setConfSemaf(tiempos);
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return p;
+
+    }
+
+    int guardarPatron(Patron p) {
+        int result = 0;
+
+        ConnectionDB objConn = new ConnectionDB();
+        Connection conn = null;
+
+        try {
+            conn = objConn.open();
+        } catch (SQLException ex) {
+            //  Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null,ex);
+        }
+
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            String SqlString = null;
+            SqlString = "INSERT INTO patron(Dia, Mes, Anho, DiaSemana, Hora) "
+                    + "VALUES(?,?,?,?,?)";
+            pstmt = conn.prepareStatement(SqlString);
+            pstmt.setInt(1, p.getDia());
+            pstmt.setInt(2, p.getMes());
+            pstmt.setInt(3, p.getAnho());
+            pstmt.setString(4, p.getDiaSemana());
+            pstmt.setInt(5, p.getHora());
+            result = pstmt.executeUpdate();
+            pstmt.close();
+            if (result == 0) {
+                throw new Exception();
+            }
+            int lastid = 0;
+            
+            SqlString="SELECT MAX(idPatron) from patron";
+            pstmt=conn.prepareStatement(SqlString);
+            rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                lastid = rs.getInt("MAX(idPatron)");
+            }
+            int tam = (p.getConfSemaf().size()) / 2;
+
+            for (int i = 0; i < tam; i++) {
+                int j = i * 2;
+
+                SqlString = "INSERT INTO semXPatron(IdPatron, TiempoV,TiempoR) "
+                        + "VALUES(?,?,?)";
+                pstmt = conn.prepareStatement(SqlString);
+                //rs=pstmt.executeQuery();
+                pstmt.setInt(1, lastid);
+                pstmt.setInt(2, p.getConfSemaf().get(j));
+                pstmt.setInt(3, p.getConfSemaf().get(j + 1));
+                result = pstmt.executeUpdate();
+            }
+
+            
+            pstmt.close();
+
+            if (result == 0) {
+                throw new Exception();
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    String generaDiaSemana(int dia, int mes, int anho) {
+
+        Calendar fecha = Calendar.getInstance();
+        fecha.set(anho, mes, dia);
+        int d = fecha.get(Calendar.DAY_OF_WEEK);
+
+        String r = "";
+        switch (d) {
+            case 0:
+                r = "domingo";
+            case 1:
+                r = "lunes";
+            case 2:
+                r = "martes";
+            case 3:
+                r = "miercoles";
+            case 4:
+                r = "jueves";
+            case 5:
+                r = "viernes";
+            case 6:
+                r = "sabado";
+        }
+
+        return r;
     }
 }

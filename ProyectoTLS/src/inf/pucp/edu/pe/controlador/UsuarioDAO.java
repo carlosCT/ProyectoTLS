@@ -41,7 +41,7 @@ public class UsuarioDAO {
         
         try{
             String SqlString=null;
-            SqlString="INSERT INTO usuario(DNI, Nombre, Apellido, Email, Direccion, Usuario, Sexo, Contrasena, EstadoBloqueo, Perfil) "
+            SqlString="INSERT INTO Usuario(DNI, Nombre, Apellido, Email, Direccion, Usuario, Sexo, Contrasena, EstadoBloqueo, Perfil) "
                     + "VALUES(?,?,?,?,?,?,?,?,?,?)";
             pstmt=conn.prepareStatement(SqlString);
             pstmt.setString(1, usr.getDni());
@@ -89,7 +89,7 @@ public class UsuarioDAO {
             //obtenemos la conexion
             conn=new DBConfig().getConnection();
             
-            pstmt=conn.prepareStatement("update usuario set Nombre=?, Apellido=?, Email=?, Direccion=?, usuario=?"+
+            pstmt=conn.prepareStatement("update Usuario set Nombre=?, Apellido=?, Email=?, Direccion=?, usuario=?"+
                      "Sexo=?, Perfil=? WHERE DNI=?" );
             
           
@@ -178,7 +178,7 @@ public class UsuarioDAO {
     
             conn= new DBConfig().getConnection();
             
-            pstmt= conn.prepareStatement("update usuario set EstadoBloqueo=? WHERE DNI=?");
+            pstmt= conn.prepareStatement("update Usuario set EstadoBloqueo=? WHERE DNI=?");
            pstmt.setInt(1, 0);
            pstmt.setString(2, user.getDni());
            

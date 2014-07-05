@@ -61,7 +61,7 @@ public class ControladorSeguridad {
         try {
             String SqlString = null;
 
-            SqlString = "SELECT u.Usuario, u.Contrasena FROM usuario u WHERE u.Usuario=\'" + usuario + "\'";
+            SqlString = "SELECT u.Usuario, u.Contrasena FROM Usuario u WHERE u.Usuario=\'" + usuario + "\'";
 
             pstmt = conn.prepareStatement(SqlString);
             rs = pstmt.executeQuery();

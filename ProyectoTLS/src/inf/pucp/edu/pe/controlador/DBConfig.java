@@ -23,8 +23,8 @@ public class DBConfig {
     
     public DBConfig() throws SQLException{
         conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/" + "tlssw", //inf282g9,
-                    "root", "");
+                    "jdbc:mysql://200.16.7.70:3306/" + "inf226c", //inf282g9,
+                    "inf226c", "pas.grupoc");
         
     }
     
