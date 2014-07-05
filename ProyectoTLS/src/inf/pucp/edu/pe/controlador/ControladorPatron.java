@@ -23,14 +23,16 @@ import java.util.Calendar;
 public class ControladorPatron {
     
     public ArrayList<DiaMes> infoGps;
+    public ArrayList<InfoCuad> listaCua;
     
     public ControladorPatron(ArrayList<DiaMes> infoGps){
         this.infoGps=infoGps;
     }
     
 
-    public ArrayList<InfoCuad> listaCuadrantesPat() {
-
+   // public ArrayList<InfoCuad> listaCuadrantesPat() {
+    public void listaCuadrantesPat(){
+System.out.println("entro al metodo listaCuadrantesPat ");
         //ArrayList<DiaMes> infoGps = null;//LeeArchHist.datosCargados();
 
         ArrayList<InfoCuad> listaCuadrantes = new ArrayList<InfoCuad>();
@@ -87,8 +89,9 @@ public class ControladorPatron {
                 }
             }
         }
-
-        return listaCuadrantes;
+        System.out.println("-----------YA SALIOOOOO----------");
+        System.out.println(listaCuadrantes.size());
+        this.listaCua= listaCuadrantes;
     }
     
     Patron obtenerPatron(String diaSemana, int mes, int hora) {

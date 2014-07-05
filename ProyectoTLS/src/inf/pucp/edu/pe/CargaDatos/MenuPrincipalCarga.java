@@ -341,7 +341,7 @@ LeeArchHist archHi=null;
     }//GEN-LAST:event_jRadioSimActionPerformed
 
     private void jPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPatronesActionPerformed
-       
+       archHi.CambiaEstructura();
     }//GEN-LAST:event_jPatronesActionPerformed
 
     /**
@@ -405,8 +405,9 @@ LeeArchHist archHi=null;
         jProgressBar1.setIndeterminate(false);
         jProgressBar1.setString("100%"); 
         jProgressBar1.setValue(100);
-        nombre.setText("Carga Finalizada con Exito");
+        
         flag=true;
+        nombre.setText("Carga Finalizada con Exito");
         }
     };
     
@@ -420,8 +421,9 @@ LeeArchHist archHi=null;
         jProgressBar1.setIndeterminate(false);
         jProgressBar1.setString("100%"); 
         jProgressBar1.setValue(100);
-        nombre.setText("Carga Finalizada con Exito");
+        
         flag=true;
+        nombre.setText("Carga Finalizada con Exito");
         }
     };   
     

@@ -161,36 +161,35 @@ ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
         ArrayList<Integer> nodos = new ArrayList<Integer>();
         ArrayList<Seg> segs = new ArrayList<Seg>();
 
-        for (int i = 0; i < 60; i++){
-            Seg s=new Seg();
-            s.setSeg(i+1);
-            s.setCoordenadas(nodos);
+        for (int i = 0; i < 61; i++){
+            Seg s=new Seg(i,nodos);
+            segs.add(s);
+
         }
         
         ArrayList<Min> mins = new ArrayList<Min>();
         
-        for (int j=0; j<60; j++){
-            Min m= new Min();
-            m.setMin(j+1);
-            m.setSeg(segs);
+        for (int j=0; j<61; j++){
+            Min m= new Min(j,segs);
+            mins.add(m);
+    
         }
         
         ArrayList<Hora> horas = new ArrayList<Hora>();
      
-        for(int k=0; k<24; k++){
-            Hora h = new Hora();
-            h.setHora(k+1);
-            h.setMin(mins);
+        for(int k=0; k<25; k++){
+            Hora h = new Hora(k,mins);
+            horas.add(h);
+    
         }
         
          diaMes = new ArrayList<DiaMes>();
         
         for (int mes=0; mes<12; mes++){
-            for (int d=0; d<30; d++){
-                DiaMes dM= new DiaMes();
-                dM.setDia(d+1);
-                dM.setMes(mes+1);
-                dM.setHoras(horas);
+            for (int d=0; d<32; d++){
+                DiaMes dM= new DiaMes(d,mes,horas);
+                diaMes.add(dM);
+ 
             }
         }
         
@@ -202,16 +201,19 @@ ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
            for(int j=0; j<autosH.get(i).coord.size();j++){
                hora=autosH.get(i).coord.get(j).hora/3600;
                min=(autosH.get(i).coord.get(j).hora % 3600)/60;
-               seg=autosH.get(i).coord.get(j).hora-(min*60);
+               seg=autosH.get(i).coord.get(j).hora -hora*3600 - min*60;
                x=autosH.get(i).coord.get(j).x;
                y=autosH.get(i).coord.get(j).y;
-               diaMes.get(mes*30+dia -1).getHoras().get(hora).getMin().get(min).getSeg().get(seg).getCoordenadas().add(x);
-               diaMes.get(mes*30+dia -1).getHoras().get(hora).getMin().get(min).getSeg().get(seg).getCoordenadas().add(y);
-               
+               int sa=mes*30+dia -1;             
+              diaMes.get(sa).getHoras().get(hora).getMin().get(min).getSeg().get(seg).getCoordenadas().add(x);
+               diaMes.get(sa).getHoras().get(hora).getMin().get(min).getSeg().get(seg).getCoordenadas().add(y);
+               System.out.println(autosH.get(i).id);
            }
            
      }
+       System.out.println("Salio del for, envia a Carga Patron");
        ControladorPatron cp = new ControladorPatron(diaMes);
+       cp.listaCuadrantesPat();
     }
     
 }

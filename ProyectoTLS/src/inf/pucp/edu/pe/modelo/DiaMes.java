@@ -16,7 +16,6 @@ public class DiaMes {
     private ArrayList<Hora> horas;
 
     public DiaMes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getDia() {
