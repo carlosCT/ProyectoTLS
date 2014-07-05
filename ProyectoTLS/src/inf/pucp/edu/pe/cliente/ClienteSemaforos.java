@@ -43,7 +43,7 @@ public class ClienteSemaforos {
                 lista = valor.split(" ");
                                                                 
                 listaCruces = pedirCruces(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
-                System.out.println("Numero de cruces: " + listaCruces.size());
+                //System.out.println("Numero de cruces: " + listaCruces.size());
                 
 //                for(Cruce c : listaCruces){
 //                    
@@ -81,7 +81,7 @@ public class ClienteSemaforos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
     }
     
@@ -101,7 +101,7 @@ public class ClienteSemaforos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
     }
     
@@ -121,7 +121,7 @@ public class ClienteSemaforos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
         
     }
     
@@ -141,7 +141,7 @@ public class ClienteSemaforos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
         
     }
     
@@ -196,7 +196,7 @@ public class ClienteSemaforos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
     }
     
@@ -224,36 +224,33 @@ public class ClienteSemaforos {
         ArrayList<Cruce> listaCruces = new ArrayList<Cruce>();
         
         try{
-            System.out.println("Creando socket");
+            //System.out.println("Creando socket");
             Socket socketEn=new Socket(host, puerto);
-            System.out.println("obteniendo DataInputStream");
+            //System.out.println("obteniendo DataInputStream");
             
             
             DataOutputStream salida=new DataOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
             DataInputStream entrada=new DataInputStream(new BufferedInputStream(socketEn.getInputStream()));
             
             salida.writeUTF(valor);
-            System.out.println("Listo para enviar valor String");
+            //System.out.println("Listo para enviar valor String");
             salida.flush();
-            System.out.println("Esperando respuesta");
+            //System.out.println("Esperando respuesta");
             
-            System.out.println("se obtuvo DataInputStream");
+            //System.out.println("se obtuvo DataInputStream");
             ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(socketEn.getInputStream()));
             ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
             
-            System.out.println("se obtuvo objectStreams");
+            //System.out.println("se obtuvo objectStreams");
             
             
             
-            System.out.println("Se obtuvo objectInputStream del Socket");
+            //System.out.println("Se obtuvo objectInputStream del Socket");
             listaCruces = (ArrayList<Cruce>)is.readObject();
-            System.out.println("Se leyo arreglo de Cruces");
-            System.out.println( listaCruces.get(0).getEstadoLuz());
-            System.out.println( listaCruces.get(1).getEstadoLuz());
-            
-            
-           
-            
+            //System.out.println("Se leyo arreglo de Cruces");
+            //System.out.println( listaCruces.get(0).getEstadoLuz());
+            //System.out.println( listaCruces.get(1).getEstadoLuz());
+                        
             try{
                 socketEn.close();
             }catch(Exception ex){}

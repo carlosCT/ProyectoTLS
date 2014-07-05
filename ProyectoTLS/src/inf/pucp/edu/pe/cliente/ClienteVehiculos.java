@@ -43,13 +43,13 @@ public class ClienteVehiculos {
                 lista = valor.split(" ");
                                                                 
                 enviarVehiculos(IP_SERVIDOR, PUERTO_SERVIDOR, valor, vehiculos);
-                System.out.println("Se enviaron los vehiculos");
+                //System.out.println("Se enviaron los vehiculos");
                                 
             }catch(Exception e){
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
     }
     
@@ -66,13 +66,13 @@ public class ClienteVehiculos {
                 lista = valor.split(" ");
                                                                 
                 listaVehiculos = pedirVehiculos(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
-                System.out.println("Numero de vehiculos: " + listaVehiculos.size());
+                //System.out.println("Numero de vehiculos: " + listaVehiculos.size());
                                 
             }catch(Exception e){
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
         
         return listaVehiculos;
     }
@@ -94,7 +94,7 @@ public class ClienteVehiculos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
     }
     
@@ -114,7 +114,7 @@ public class ClienteVehiculos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
     }
     
@@ -134,7 +134,7 @@ public class ClienteVehiculos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
         
     }
     
@@ -153,7 +153,7 @@ public class ClienteVehiculos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
     }
     
@@ -172,7 +172,7 @@ public class ClienteVehiculos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
            return resultado;
     }
@@ -192,7 +192,7 @@ public class ClienteVehiculos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
            return resultado;
     }
@@ -212,7 +212,7 @@ public class ClienteVehiculos {
                 System.err.println(e);
             }
             
-            System.out.print("Fin Cliente");
+            //System.out.print("Fin Cliente");
             
            return resultado;
     }
@@ -241,27 +241,27 @@ public class ClienteVehiculos {
         ArrayList<Vehiculo> listaVehiculos = new ArrayList<Vehiculo>();
         
         try{
-            System.out.println("Creando socket");
+            //System.out.println("Creando socket");
             Socket socketEn=new Socket(host, puerto);
-            System.out.println("obteniendo DataInputStream");
+            //System.out.println("obteniendo DataInputStream");
             
             DataOutputStream salida=new DataOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
             DataInputStream entrada=new DataInputStream(new BufferedInputStream(socketEn.getInputStream()));
             
             salida.writeUTF(valor);
-            System.out.println("Listo para enviar valor String");
+            //System.out.println("Listo para enviar valor String");
             salida.flush();
-            System.out.println("Esperando respuesta");
+            //System.out.println("Esperando respuesta");
             
-            System.out.println("se obtuvo DataInputStream");
+            //System.out.println("se obtuvo DataInputStream");
             ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(socketEn.getInputStream()));
             ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
             
-            System.out.println("se obtuvo objectStreams");
+            //System.out.println("se obtuvo objectStreams");
             
-            System.out.println("Se obtuvo objectInputStream del Socket");
+            //System.out.println("Se obtuvo objectInputStream del Socket");
             listaVehiculos = (ArrayList<Vehiculo>)is.readObject();
-            System.out.println("Se leyo arreglo de Vehiculos");
+            //System.out.println("Se leyo arreglo de Vehiculos");
             
             try{
                 socketEn.close();
@@ -276,26 +276,26 @@ public class ClienteVehiculos {
         String respuesta=null;
         
         try{
-            System.out.println("Creando socket");
+            //System.out.println("Creando socket");
             Socket socketEn=new Socket(host, puerto);
-            System.out.println("obteniendo DataInputStream");
+            //System.out.println("obteniendo DataInputStream");
             
             DataOutputStream salida=new DataOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
             DataInputStream entrada=new DataInputStream(new BufferedInputStream(socketEn.getInputStream()));
             
             salida.writeUTF(valor);
-            System.out.println("Listo para enviar valor String");
+            //System.out.println("Listo para enviar valor String");
             salida.flush();
-            System.out.println("Esperando respuesta");
+            //System.out.println("Esperando respuesta");
             
-            System.out.println("Obteniendo ObjectOutputStream");
+            //System.out.println("Obteniendo ObjectOutputStream");
             //ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(socketEn.getInputStream()));
             ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(socketEn.getOutputStream()));
-            System.out.println("Se obtuvo ObjectOutputStream");
+            //System.out.println("Se obtuvo ObjectOutputStream");
             os.writeObject(listaVehiculos);
-            System.out.println("Se escribio la lista de vehiculos");
+            //System.out.println("Se escribio la lista de vehiculos");
             os.flush();
-            System.out.println("Se envio la lista de vehiculos");
+            //System.out.println("Se envio la lista de vehiculos");
             
             try{
                 socketEn.close();
