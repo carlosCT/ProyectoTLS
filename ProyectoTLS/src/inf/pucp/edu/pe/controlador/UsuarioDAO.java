@@ -133,7 +133,7 @@ public class UsuarioDAO {
             conn= new DBConfig().getConnection();
            //paso3: Preparamos la sentencia
            pstmt=conn.prepareStatement(
-                   "SELECT * FROM usuario");
+                   "SELECT * FROM Usuario");
         
            rs=pstmt.executeQuery();
            //paso 4 y medio:Evaluamos los resultados
@@ -206,7 +206,7 @@ public class UsuarioDAO {
             //obtenemos la conexion
             conn=new DBConfig().getConnection();
             
-            pstmt=conn.prepareStatement("update usuario set Contrasena=? WHERE DNI=?" );
+            pstmt=conn.prepareStatement("update Usuario set Contrasena=? WHERE DNI=?" );
             
           
             pstmt.setString(1, password);
@@ -242,7 +242,7 @@ public class UsuarioDAO {
             conn= new DBConfig().getConnection();
            //paso3: Preparamos la sentencia
            pstmt=conn.prepareStatement(
-                   "SELECT * FROM usuario WHERE DNI=?");
+                   "SELECT * FROM Usuario WHERE DNI=?");
            pstmt.setString(1, usuario);     
            rs=pstmt.executeQuery();
            //paso 4 y medio:Evaluamos los resultados
