@@ -7,7 +7,7 @@
 package inf.pucp.edu.pe.CargaDatos;
 
 import static inf.pucp.edu.pe.CargaDatos.LeeArchivo.autos;
-import static inf.pucp.edu.pe.CargaDatos.LeeArchivo.ter;
+
 import inf.pucp.edu.pe.modelo.CoordenadaHist;
 import inf.pucp.edu.pe.modelo.Coordernada;
 import inf.pucp.edu.pe.modelo.DiaMes;
@@ -36,7 +36,7 @@ public class LeeArchHist {
     public static ArrayList<DiaMes> datosCargados() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    public  String s;//"/Users/Alejandro/Documents/PUCP/2014-1/dp1/Archivos2";
+    public  String s;//"/Users/Alejandro/Documents/PUCP/2014-1/dp1/ArchivosHistoricos";
     public String archact;
     
     public static boolean ter= false;  
@@ -51,12 +51,12 @@ public  void leerFile(File f) throws IOException {
          String fecha=null;
 ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
         if (f.getName().length() > 11) {
-            //String name =f.getName();
-            archact=f.getName().substring(4, 10);
+            String name =f.getName().substring(4, 19);;
+            archact=f.getName().substring(4, 19);
             
             // System.out.println(archact);
             id = f.getName().substring(4, 10);
-             fecha = f.getName().substring(10, 18);
+             fecha = f.getName().substring(11, 19);
             FileReader entrada = null;
             try {
                 entrada = new FileReader(f);
@@ -71,7 +71,7 @@ ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
                 int tiempo, x, y;
                 String hora, min, seg;
 
-                while (data != null && data.length()>8) {
+                while (data != null && data.length()>5) {
                     
                     hora = data.substring(0, 2);
                     min = data.substring(3, 5);
@@ -84,14 +84,16 @@ ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
                         int pos = data.indexOf(",");
                         x = Integer.parseInt(data.substring(0, pos));
                         data = data.substring(pos + 1);
-                         pos = data.indexOf("*");
-                        y = Integer.parseInt(data.substring(0,pos));
-                    CoordenadaHist cor = new CoordenadaHist(tiempo , x,y);
+                        y=Integer.parseInt(data);
+                    
+                    CoordenadaHist cor = new CoordenadaHist(tiempo,x,y);
 
                     rutas.add(cor);
 
                     data = in.readLine();
                 }
+          VehiculoH vehiculo = new VehiculoH(id, fecha,rutas);
+        autosH.add(vehiculo);
 
             } catch (IOException e) {
                 System.out.println("no se encontro!");
@@ -101,24 +103,23 @@ ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
         } catch (IOException ex) {}
         }
         
-        VehiculoH vehiculo = new VehiculoH(id, fecha,rutas);
-        autosH.add(vehiculo);
+
     }
 
  
  public  void imprimir(){
-     for(int i=0;i<autos.size();i++){
-         System.out.println(autos.get(i).id);
-         for(int j=0;j<autos.get(i).rutas.size();j++){
-             System.out.println(autos.get(i).rutas.get(j).horaSalida);
-            System.out.print(" ");
-             for(int k=0;k<autos.get(i).rutas.get(j).ruta.size();k++){
-              System.out.print(autos.get(i).rutas.get(j).ruta.get(k).x);  
-              System.out.print(",");
-              System.out.print(autos.get(i).rutas.get(j).ruta.get(k).y); 
-              System.out.print("\n");
-             }
+     System.out.println();
+     for(int i=0;i<autosH.size();i++){
+         System.out.println(autosH.get(i).id);
+         System.out.println(autosH.get(i).fecha);
+         for(int j=0; j<autosH.get(i).coord.size();j++){
+             System.out.print(autosH.get(i).coord.get(j).hora);
+             System.out.print(":");
+             System.out.print(autosH.get(i).coord.get(j).x);
+             System.out.print(",");
+             System.out.println(autosH.get(i).coord.get(j).y);
          }
+         System.out.println("---");
          
      }
  }
@@ -140,8 +141,8 @@ ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
                 }
             }
         
-        ter=true;
-
+        this.ter=true;
+       
        //ClienteVehiculos.cargarVehiculos(autos);
       
        // ClienteVehiculos.actualizarVehiculos();
@@ -153,5 +154,7 @@ ArrayList<CoordenadaHist> rutas = new ArrayList<CoordenadaHist>();
 
      
     }
+    
+    
     
 }

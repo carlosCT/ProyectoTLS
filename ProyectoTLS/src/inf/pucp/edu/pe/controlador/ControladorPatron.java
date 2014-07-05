@@ -24,7 +24,7 @@ public class ControladorPatron {
 
     public ArrayList<InfoCuad> listaCuadrantesPat() {
 
-        ArrayList<DiaMes> infoGps = LeeArchHist.datosCargados();
+        ArrayList<DiaMes> infoGps = null;//LeeArchHist.datosCargados();
 
         ArrayList<InfoCuad> listaCuadrantes = new ArrayList<InfoCuad>();
 

@@ -17,7 +17,7 @@ public class CoordenadaHist {
     
     
     public CoordenadaHist(int h, int x, int y){
-        this.hora=hora;
+        this.hora=h;
         this.x=x;
         this.y=y;
     }

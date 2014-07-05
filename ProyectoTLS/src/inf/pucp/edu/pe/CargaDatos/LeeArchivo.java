@@ -150,7 +150,7 @@ public LeeArchivo(String s){
                 }
             }
         
-        ter=true;
+        this.ter=true;
         
        //ClienteVehiculos.cargarVehiculos(autos);
       

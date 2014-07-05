@@ -32,8 +32,11 @@ import javax.swing.border.EmptyBorder;
 public class MenuPrincipalCarga extends javax.swing.JFrame {
     private String file;
     public String car;
+    private char tipo = 'S'; 
+    public boolean flag= false;
 
 LeeArchivo arch = null;
+LeeArchHist archHi=null;
 
     /**
      * Creates new form MenuPrincipalCarga
@@ -68,11 +71,11 @@ LeeArchivo arch = null;
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioSim = new javax.swing.JRadioButton();
+        jRadioHis = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        jPatrones = new javax.swing.JButton();
         nombre = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
 
@@ -136,11 +139,22 @@ LeeArchivo arch = null;
             }
         });
 
-        TipoCarga.add(jRadioButton1);
-        jRadioButton1.setText("Simulación");
+        TipoCarga.add(jRadioSim);
+        jRadioSim.setSelected(true);
+        jRadioSim.setText("Simulación");
+        jRadioSim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioSimActionPerformed(evt);
+            }
+        });
 
-        TipoCarga.add(jRadioButton2);
-        jRadioButton2.setText("Histórica");
+        TipoCarga.add(jRadioHis);
+        jRadioHis.setText("Histórica");
+        jRadioHis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioHisActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Procesamiento de Patrones"));
@@ -148,7 +162,12 @@ LeeArchivo arch = null;
         jLabel4.setText("Luego de finalizar la carga de datos histórica de una ciudad, por favor Genere los patrones");
         jLabel4.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
-        jButton5.setText("Generar Patrones");
+        jPatrones.setText("Generar Patrones");
+        jPatrones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jPatronesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,7 +180,7 @@ LeeArchivo arch = null;
                         .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(210, 210, 210)
-                        .addComponent(jButton5)))
+                        .addComponent(jPatrones)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,7 +189,7 @@ LeeArchivo arch = null;
                 .addContainerGap()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(jButton5)
+                .addComponent(jPatrones)
                 .addGap(14, 14, 14))
         );
 
@@ -204,20 +223,17 @@ LeeArchivo arch = null;
                                         .addGap(120, 120, 120)
                                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(130, 130, 130)
-                                        .addComponent(jButton4)))
-                                .addGap(142, 142, 142))))
+                                        .addComponent(jButton4))
+                                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 608, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(75, 75, 75))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(166, 166, 166)
-                        .addComponent(jRadioButton1)
+                        .addComponent(jRadioSim)
                         .addGap(131, 131, 131)
-                        .addComponent(jRadioButton2))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(53, 53, 53)
-                            .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jRadioHis))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(81, 81, 81)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 518, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -234,8 +250,8 @@ LeeArchivo arch = null;
                     .addComponent(jButton1))
                 .addGap(17, 17, 17)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(jRadioSim)
+                    .addComponent(jRadioHis))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -266,6 +282,7 @@ LeeArchivo arch = null;
          System.out.print("---"+ file + "---");
          arch = new LeeArchivo(file);
           NombreArch.setText(file);
+          archHi = new LeeArchHist(file);
      
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -286,7 +303,12 @@ LeeArchivo arch = null;
         
         jProgressBar1.setIndeterminate(true);
          this.actualizacion.start();
+         
+         if(tipo=='S')
          this.cargahilo.start();
+         
+         if(tipo=='H')
+          this.cargahiloHis.start();
 //         try {           
 //            arch.Cargar();}catch(IOException e){};
     
@@ -296,6 +318,9 @@ LeeArchivo arch = null;
     }//GEN-LAST:event_btnIniciarCarga
 
     private void btnCancelar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelar
+       //this.cargahiloHis.start();
+//        try{
+//        archHi.Cargar();}catch(IOException e){};
         jProgressBar1.setValue(0);
     }//GEN-LAST:event_btnCancelar
 
@@ -306,6 +331,18 @@ LeeArchivo arch = null;
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         setVisible(false);
     }//GEN-LAST:event_formWindowClosing
+
+    private void jRadioHisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioHisActionPerformed
+        tipo='H';
+    }//GEN-LAST:event_jRadioHisActionPerformed
+
+    private void jRadioSimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioSimActionPerformed
+        tipo='S';
+    }//GEN-LAST:event_jRadioSimActionPerformed
+
+    private void jPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPatronesActionPerformed
+       
+    }//GEN-LAST:event_jPatronesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -344,8 +381,16 @@ LeeArchivo arch = null;
     Thread actualizacion = new Thread(){
         
         public void run(){
-            while(!arch.ter)
-            nombre.setText(file + "/veh" + arch.archact + ".rut.txt");
+            
+            if(tipo=='S'){
+               while(!flag)
+            nombre.setText(file + "/veh" + arch.archact + ".rut.txt");  
+            }
+            if(tipo=='H'){
+                   while(!flag)
+            nombre.setText(file + "/veh" + archHi.archact + ".gps.txt");
+            }
+           
             
         }
     };
@@ -361,8 +406,24 @@ LeeArchivo arch = null;
         jProgressBar1.setString("100%"); 
         jProgressBar1.setValue(100);
         nombre.setText("Carga Finalizada con Exito");
+        flag=true;
         }
     };
+    
+     Thread cargahiloHis = new Thread(){
+        public void run (){
+            try {
+            
+            archHi.Cargar();}catch(IOException e){};
+           
+        //
+        jProgressBar1.setIndeterminate(false);
+        jProgressBar1.setString("100%"); 
+        jProgressBar1.setValue(100);
+        nombre.setText("Carga Finalizada con Exito");
+        flag=true;
+        }
+    };   
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField NombreArch;
@@ -371,15 +432,15 @@ LeeArchivo arch = null;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jPatrones;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioHis;
+    private javax.swing.JRadioButton jRadioSim;
     private javax.swing.JLabel nombre;
     // End of variables declaration//GEN-END:variables
 private void inciaCarga()
