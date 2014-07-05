@@ -78,7 +78,6 @@ public class MenuPrincipalSimulacion extends JFrame{
         
         try{
                 ClienteSemaforos.inicializarCruces();
-                ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
         }catch(IOException ex){}
          
      

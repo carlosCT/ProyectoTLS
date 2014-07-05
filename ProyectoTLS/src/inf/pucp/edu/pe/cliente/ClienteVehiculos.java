@@ -98,6 +98,26 @@ public class ClienteVehiculos {
             
     }
     
+    public static void setTiempoSimulacion(int tiempo) throws IOException{
+    
+        String IP_SERVIDOR=ipV;
+        int PUERTO_SERVIDOR=puertoV;
+        String lista[];
+        String resultado = null;
+        
+            try{
+                
+                String valor="setTiempo " + tiempo;                                                               
+                actualizar(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+            
+    }
+    
     public static void cambiarVelocidad(int velocidad) throws IOException{
     
         String IP_SERVIDOR=ipV;

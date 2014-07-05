@@ -6,12 +6,14 @@
 
 package inf.pucp.edu.pe.vista.simulacion;
 
+import inf.pucp.edu.pe.CargaDatos.LeeArchivo;
 import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.vista.principal.MenuPrincipal;
 import inf.pucp.edu.pe.vista.principal.PanelImagenVentana;
 import java.awt.BorderLayout;
 import java.awt.Point;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.border.EmptyBorder;
 
@@ -276,6 +278,16 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
         ClienteSemaforos.puertoSemaforo=Integer.parseInt(puertoSemaforo);
         ClienteVehiculos.ipV=ipVehiculos;
         ClienteVehiculos.puertoV=Integer.parseInt(puertoVehiculo);    
+        
+        try{
+            
+            ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
+            ClienteSemaforos.setTiempoSimulacion(Integer.parseInt(txtTiempoSimulacion.getText()));
+            ClienteVehiculos.setTiempoSimulacion(Integer.parseInt(txtTiempoSimulacion.getText()));
+            
+            
+        }catch(IOException e){}
+        
         
          //if(!"".equals(ClienteSemaforos.ipS) && !"".equals(ClienteVehiculos.ipV)){
 //                indice++;

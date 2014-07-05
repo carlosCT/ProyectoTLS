@@ -125,6 +125,26 @@ public class ClienteSemaforos {
         
     }
     
+    public static void setTiempoSimulacion(int tiempo) throws IOException{
+    
+        String IP_SERVIDOR=ipS;
+        int PUERTO_SERVIDOR=puertoSemaforo;
+        String lista[];
+        String resultado = null;
+                      
+            try{
+                
+                String valor="setTiempo " + tiempo;                                                               
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            System.out.print("Fin Cliente");
+        
+    }
+    
     public static boolean verificarLuz(int x, int y, int dir, double vel) throws IOException{
     
         String IP_SERVIDOR=ipS;

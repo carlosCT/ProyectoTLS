@@ -5,6 +5,7 @@
  */
 package inf.pucp.edu.pe.CargaDatos;
 
+import inf.pucp.edu.pe.cliente.ClienteSemaforos;
 import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.modelo.Coordernada;
 import inf.pucp.edu.pe.modelo.Ruta;
@@ -120,12 +121,12 @@ public LeeArchivo(String s){
          System.out.println(autos.get(i).id);
          for(int j=0;j<autos.get(i).rutas.size();j++){
              System.out.println(autos.get(i).rutas.get(j).horaSalida);
-            System.out.print(" ");
+            //System.out.print(" ");
              for(int k=0;k<autos.get(i).rutas.get(j).ruta.size();k++){
-              System.out.print(autos.get(i).rutas.get(j).ruta.get(k).x);  
-              System.out.print(",");
-              System.out.print(autos.get(i).rutas.get(j).ruta.get(k).y); 
-              System.out.print("\n");
+              //System.out.print(autos.get(i).rutas.get(j).ruta.get(k).x);  
+              //System.out.print(",");
+              //System.out.print(autos.get(i).rutas.get(j).ruta.get(k).y); 
+              //System.out.print("\n");
              }
          }
          
@@ -139,7 +140,7 @@ public LeeArchivo(String s){
   if (listaDirectorio == null) {
             System.out.println("No hay ficheros en el directorio especificado");
         } else {
-            for (int x = 1; x <1000; x++)
+            for (int x = 1; x <10000; x++)
         //    for (int x = 1; x <listaDirectorio.length; x++) //System.out.println(listaDirectorio[x]);                      
             {
                 try {
@@ -150,11 +151,11 @@ public LeeArchivo(String s){
             }
         
         ter=true;
-
+        
        //ClienteVehiculos.cargarVehiculos(autos);
       
        // ClienteVehiculos.actualizarVehiculos();
-  //imprimir();
+       //imprimir();
         
     }
     
