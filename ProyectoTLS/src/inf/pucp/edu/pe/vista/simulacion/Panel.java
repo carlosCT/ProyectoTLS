@@ -110,6 +110,13 @@ public final class Panel extends JPanel{
 
                 Simulacion.lblCantidadSemaforos.setText("#Semaforos: "+vs.getCantidadSemaforos());
                 Simulacion.lblCantidadVehiculos.setText("#Vehiculos: "+vs.getCantidadDeVehiculos());    
+         //AQUI MODIFIQUE///////////////       
+                if(vs.getCantidadDeVehiculos()>=0.01*2000)// 2000 carros en la ciudad
+                 
+                    Simulacion.panelNivelTrafico1.setBackground(Color.red);
+                else{
+                    Simulacion.panelNivelTrafico1.setBackground(Color.green);
+                }
           }
       } 
   };
