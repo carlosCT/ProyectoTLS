@@ -271,65 +271,8 @@ System.out.println("entro al metodo listaCuadrantesPat ");
         return r;
     }
     
-    int GuardarSimulacionInf(int dd, int mm, int aa, int horaIni, int horaFin){
-        int idSim=0;
-        int result=0;
-        
-        ConnectionDB objConn = new ConnectionDB();
-        Connection conn = null;
-
-        try {
-            conn = objConn.open();
-        } catch (SQLException ex) {
-            //  Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null,ex);
-        }
-
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
-        try {
-            String SqlString = null;
-            SqlString = "INSERT INTO simulacion(Dia, Mes, Anho, HoraInicio, HoraFin) "
-                    + "VALUES(?,?,?,?,?)";
-            pstmt = conn.prepareStatement(SqlString);
-            pstmt.setInt(1, dd);
-            pstmt.setInt(2, mm);
-            pstmt.setInt(3, aa);
-            pstmt.setInt(4, horaIni);
-            pstmt.setInt(5, horaFin);
-            result = pstmt.executeUpdate();
-            pstmt.close();
-            if (result == 0) {
-                throw new Exception();
-            }
-            int lastid = 0;
-            
-            
-            SqlString="SELECT MAX(idSimulacion) from simulacion";
-            pstmt=conn.prepareStatement(SqlString);
-            rs = pstmt.executeQuery();
-
-            while (rs.next()) {
-                idSim = rs.getInt("MAX(idSimulacion)");
-            }
-            
-
-        }catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        
-        return idSim;
-    }
     
-    int GuardarVelocProm(int hora, int idSim, float velocidad){
+    void GuardarVelocProm(int dd, int mm, int aa, int horaIni, int horaFin, float velocidad){
         int result = 0;
 
         ConnectionDB objConn = new ConnectionDB();
@@ -346,12 +289,15 @@ System.out.println("entro al metodo listaCuadrantesPat ");
 
         try {
             String SqlString = null;
-            SqlString = "INSERT INTO velocXSim(idSimulacion, Hora, ValocProm) "
-                    + "VALUES(?,?,?)";
+            SqlString = "INSERT INTO Simulacion(Dia, Mes, Anho, HoraInicial, HoraFinal, ValocProm) "
+                    + "VALUES(?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(SqlString);
-            pstmt.setInt(1, idSim);
-            pstmt.setInt(2, hora);
-            pstmt.setFloat(3, velocidad);            
+            pstmt.setInt(1, dd);
+            pstmt.setInt(2, mm);
+            pstmt.setInt(3, aa);
+            pstmt.setInt(4, horaIni);
+            pstmt.setInt(5, horaFin);
+            pstmt.setFloat(6, velocidad);            
             result = pstmt.executeUpdate();
             pstmt.close();
             if (result == 0) {
@@ -370,7 +316,7 @@ System.out.println("entro al metodo listaCuadrantesPat ");
                 e.printStackTrace();
             }
         }
-        return result;
+        
     }
     
 }
