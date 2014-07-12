@@ -128,20 +128,27 @@ System.out.println("entro al metodo listaCuadrantesPat ");
             }
             rs = null;
             SqlString = null;
-            SqlString = "SELECT s.TiempoV, s.TiempoR FROM semXPatron s WHERE s.IdPatron='" + id + "'";
+            SqlString = "SELECT s.TiempoV, s.TiempoR, s.PosX, s.PosY FROM semXPatron s WHERE s.IdPatron='" + id + "'";
 
             pstmt = conn.prepareStatement(SqlString);
             rs = pstmt.executeQuery();
             int verde = 0;
             int rojo = 0;
+            int posX=0;
+            int posY=0;
 
             ArrayList<Integer> tiempos = new ArrayList<Integer>();
+            ArrayList<Integer> sems = new ArrayList<Integer>();
 
             while (rs.next()) {
                 verde = rs.getInt("TiempoV");
                 rojo = rs.getInt("TiempoR");
+                posX= rs.getInt("PosX");
+                posY=rs.getInt("PosY");
                 tiempos.add(verde);
                 tiempos.add(rojo);
+                sems.add(posX);
+                sems.add(posY);
             }
 
             p.setAnho(anho);
@@ -212,13 +219,15 @@ System.out.println("entro al metodo listaCuadrantesPat ");
             for (int i = 0; i < tam; i++) {
                 int j = i * 2;
 
-                SqlString = "INSERT INTO semXPatron(IdPatron, TiempoV,TiempoR) "
-                        + "VALUES(?,?,?)";
+                SqlString = "INSERT INTO semXPatron(IdPatron, TiempoV,TiempoR, posX, posY) "
+                        + "VALUES(?,?,?,?,?)";
                 pstmt = conn.prepareStatement(SqlString);
                 //rs=pstmt.executeQuery();
                 pstmt.setInt(1, lastid);
                 pstmt.setInt(2, p.getConfSemaf().get(j));
                 pstmt.setInt(3, p.getConfSemaf().get(j + 1));
+                pstmt.setInt(4, p.getSem().get(j));
+                pstmt.setInt(5, p.getSem().get(j+1));
                 result = pstmt.executeUpdate();
             }
 
@@ -289,7 +298,7 @@ System.out.println("entro al metodo listaCuadrantesPat ");
 
         try {
             String SqlString = null;
-            SqlString = "INSERT INTO Simulacion(Dia, Mes, Anho, HoraInicial, HoraFinal, ValocProm) "
+            SqlString = "INSERT INTO Simulacion(Dia, Mes, Anho, HoraInicial, HoraFinal, VelocProm) "
                     + "VALUES(?,?,?,?,?,?)";
             pstmt = conn.prepareStatement(SqlString);
             pstmt.setInt(1, dd);

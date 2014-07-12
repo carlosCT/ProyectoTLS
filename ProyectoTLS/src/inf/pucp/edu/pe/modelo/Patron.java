@@ -18,7 +18,16 @@ public class Patron {
     private int anho;
     private int hora;
     private String diaSemana;
-    private ArrayList<Integer> confSemaf;  //todos los semaforos de la ciudad
+    private ArrayList<Integer> confSemaf;  //tiempo verde y rojo de cada uno de los semaforos en el cuadrante del patron
+    private ArrayList<Integer> Sem; //posicion X, posicion Y de cada uno de los semaforos en el cuadrante del patron
+
+    public ArrayList<Integer> getSem() {
+        return Sem;
+    }
+
+    public void setSem(ArrayList<Integer> Sem) {
+        this.Sem = Sem;
+    }
 
     /**
      * @return the dia
