@@ -13,7 +13,6 @@ import inf.pucp.edu.pe.cliente.ClienteVehiculos;
 import inf.pucp.edu.pe.vista.reporte.MenuPrincipalReporte;
 import inf.pucp.edu.pe.vista.seguridad.MenuPrincipalSeguridad;
 import inf.pucp.edu.pe.vista.simulacion.ConfiguracionCliente;
-import inf.pucp.edu.pe.vista.simulacion.MenuPrincipalSimulacion;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
