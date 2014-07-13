@@ -82,8 +82,8 @@
                   <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
                   <Component id="lblEscala" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
-                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="86" max="32767" attributes="0"/>
+                  <Component id="lblVprom" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnReducirZoom" min="-2" max="-2" attributes="0"/>
@@ -109,7 +109,7 @@
                           <Component id="lblSemaforos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblVehiculos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEscala" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblVprom" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="12" max="32767" attributes="0"/>
@@ -197,7 +197,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblSemaforos">
           <Properties>
-            <Property name="text" type="java.lang.String" value="#Semaforos : "/>
+            <Property name="text" type="java.lang.String" value="#Semaforos : 239000 "/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -229,10 +229,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNewWindowsActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="lblVprom">
           <Properties>
             <Property name="text" type="java.lang.String" value="VPromedio:"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

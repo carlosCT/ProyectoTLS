@@ -109,7 +109,16 @@ public final class Panel extends JPanel{
                 lPosicionY.setText("Posicion Y en el Mapa:    "+ vs.getPosicionRelativaY()*Panel.escala);
 
                 Simulacion.lblCantidadSemaforos.setText("#Semaforos: "+vs.getCantidadSemaforos());
-                Simulacion.lblCantidadVehiculos.setText("#Vehiculos: "+vs.getCantidadDeVehiculos());    
+                Simulacion.lblCantidadVehiculos.setText("#Vehiculos: "+vs.getCantidadDeVehiculos());   
+                
+                try{
+                    
+                    MenuPrincipalSimulacion.lblVehiculos.setText("#Vehiculos: " + ClienteVehiculos.solicitarVehiculosCiudad());
+                    MenuPrincipalSimulacion.lblVprom.setText("#Vprom: " + ClienteVehiculos.solicitarVelocidadPromedio());
+                    Simulacion.lblTiempoSimulacion.setText(ClienteVehiculos.solicitarTiempo());
+                                        
+                }catch(IOException e){}
+                
          //AQUI MODIFIQUE///////////////       
                 if(vs.getCantidadDeVehiculos()>=0.01*2000)// 2000 carros en la ciudad
                  
