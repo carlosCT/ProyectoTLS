@@ -113,7 +113,7 @@ System.out.println("entro al metodo listaCuadrantesPat ");
         try {
             String SqlString = null;
 
-            SqlString = "SELECT p.idPatron,p.Dia, p.Anho FROM patron p WHERE p.DiaSemana='" + diaSemana + "' AND p.Mes='" + mes + "' AND p.Hora='" + hora + "'";
+            SqlString = "SELECT p.idPatron,p.Dia, p.Anho FROM patron p WHERE p.DiaSemana='" + diaSemana + "' AND p.Hora='" + hora + "'";
             pstmt = conn.prepareStatement(SqlString);
             rs = pstmt.executeQuery();
 
