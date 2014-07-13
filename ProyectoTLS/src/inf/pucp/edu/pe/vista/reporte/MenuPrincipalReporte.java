@@ -164,9 +164,9 @@ public class MenuPrincipalReporte extends javax.swing.JFrame {
 
     private void mnuVelocidadPromedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuVelocidadPromedioActionPerformed
 //        
-//        ReporteDeVelocidadPromedioDeAutos rvpa = new ReporteDeVelocidadPromedioDeAutos();
-//        this.add(rvpa);
-//        rvpa.setVisible(true);
+        ReporteDeVelocidadPromedioDeAutos rvpa = new ReporteDeVelocidadPromedioDeAutos();
+        this.add(rvpa);
+        rvpa.setVisible(true);
     }//GEN-LAST:event_mnuVelocidadPromedioActionPerformed
 
     
