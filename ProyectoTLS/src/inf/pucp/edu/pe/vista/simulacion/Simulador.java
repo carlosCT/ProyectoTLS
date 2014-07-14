@@ -155,7 +155,7 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
         btnZoomMas = new javax.swing.JButton();
         lblTiempo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 30));
