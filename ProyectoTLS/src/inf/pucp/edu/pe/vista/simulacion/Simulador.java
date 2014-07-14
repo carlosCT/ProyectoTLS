@@ -53,10 +53,6 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
         p= configMapa();
         this.addKeyListener(this);
              
-        
-        try{
-                ClienteSemaforos.inicializarCruces();
-        }catch(IOException ex){}
          
         
        txtVelocidad.setEditable(false);
@@ -434,7 +430,7 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
     }//GEN-LAST:event_btnMenosActionPerformed
 
     private void btnMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasActionPerformed
-       if(velocidadSimulacion != 4){
+       if(velocidadSimulacion != 10){
                     
                     velocidadSimulacion++;
                     try{

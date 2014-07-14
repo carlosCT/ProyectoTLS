@@ -422,7 +422,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
     }//GEN-LAST:event_btnMenosActionPerformed
 
     private void btnMasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMasActionPerformed
-       if(velocidadSimulacion != 4){
+       if(velocidadSimulacion != 10){
                     
                     velocidadSimulacion++;
                     try{

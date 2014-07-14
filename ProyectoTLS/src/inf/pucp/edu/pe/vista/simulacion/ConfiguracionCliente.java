@@ -80,6 +80,10 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        rbtnSinConf = new javax.swing.JRadioButton();
+        rbtnPatrones = new javax.swing.JRadioButton();
+        rbtnConConf = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -241,29 +245,84 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
             }
         });
 
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Configuración de Semáforos"), "Configuracion"));
+
+        rbtnSinConf.setSelected(true);
+        rbtnSinConf.setText("Sin configuración");
+        rbtnSinConf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnSinConfActionPerformed(evt);
+            }
+        });
+
+        rbtnPatrones.setText("Patrones");
+        rbtnPatrones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnPatronesActionPerformed(evt);
+            }
+        });
+
+        rbtnConConf.setText("Conf. durante Sim.");
+        rbtnConConf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnConConfActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtnConConf)
+                    .addComponent(rbtnPatrones)
+                    .addComponent(rbtnSinConf))
+                .addContainerGap(142, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbtnSinConf)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbtnPatrones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbtnConConf)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(btnAceptar)
-                .addGap(66, 66, 66)
-                .addComponent(btnCancelar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 26, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addComponent(btnAceptar)
+                        .addGap(66, 66, 66)
+                        .addComponent(btnCancelar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
 
         pack();
@@ -281,10 +340,17 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
         
         try{
             
+            ClienteSemaforos.inicializarCruces();
             ClienteVehiculos.cargarVehiculos(LeeArchivo.autos);
             ClienteSemaforos.setTiempoSimulacion(Integer.parseInt(txtTiempoSimulacion.getText()));
             ClienteVehiculos.setTiempoSimulacion(Integer.parseInt(txtTiempoSimulacion.getText()));
             LeeArchivo.autos = null;
+            
+            if(rbtnConConf.isSelected()){
+                
+                ClienteSemaforos.confSemaforos();
+                
+            }
             
         }catch(IOException e){}
         
@@ -311,6 +377,29 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
     private void txtPuertoVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPuertoVehiculoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtPuertoVehiculoActionPerformed
+
+    private void rbtnConConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnConConfActionPerformed
+        // TODO add your handling code here:
+        rbtnPatrones.setSelected(false);
+        rbtnConConf.setSelected(true);
+        rbtnSinConf.setSelected(false);
+    }//GEN-LAST:event_rbtnConConfActionPerformed
+
+    private void rbtnPatronesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnPatronesActionPerformed
+        // TODO add your handling code here:
+        rbtnPatrones.setSelected(true);
+        rbtnConConf.setSelected(false);
+        rbtnSinConf.setSelected(false);
+        
+        
+    }//GEN-LAST:event_rbtnPatronesActionPerformed
+
+    private void rbtnSinConfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnSinConfActionPerformed
+        // TODO add your handling code here:
+        rbtnPatrones.setSelected(false);
+        rbtnConConf.setSelected(false);
+        rbtnSinConf.setSelected(true);
+    }//GEN-LAST:event_rbtnSinConfActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,9 +450,13 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField txtIpServidorSemaforo;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JRadioButton rbtnConConf;
+    private javax.swing.JRadioButton rbtnPatrones;
+    private javax.swing.JRadioButton rbtnSinConf;
+    public static javax.swing.JTextField txtIpServidorSemaforo;
     private javax.swing.JTextField txtIpServidorVehiculo;
-    private javax.swing.JTextField txtPuertoSemaforo;
+    public static javax.swing.JTextField txtPuertoSemaforo;
     private javax.swing.JTextField txtPuertoVehiculo;
     private javax.swing.JTextField txtTiempoSimulacion;
     // End of variables declaration//GEN-END:variables

@@ -38,7 +38,8 @@ public class Mapa extends javax.swing.JPanel {
     public static int zoom=100;
     
     public int factor;
-  
+    public boolean primeraIteracion = true;
+    public String horaInicial;
     
     Toolkit t = Toolkit.getDefaultToolkit();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize(); 
@@ -132,6 +133,7 @@ public class Mapa extends javax.swing.JPanel {
           
           Thread updateInformation= new Thread(){
               public void run(){
+                  
                   while(Simulador.run){
                       while(Simulador.seguir){
                           
@@ -144,10 +146,20 @@ public class Mapa extends javax.swing.JPanel {
                             
                             /*INFORMACION DE TIEMPO DE SIMULACION*/
                                 Simulador.lblTiempo.setText("Tiempo: " + ClienteVehiculos.solicitarTiempo() );
+                              /*  
+                              if(primeraIteracion){
+                                  
+                                  primeraIteracion = !primeraIteracion;
+                                  horaInicial = ClienteVehiculos.solicitarTiempo();
+                                  
+                              }  
+                              */  
                             
                           }catch(IOException e){}
                           
-                          nivelDeTrafico();
+                          try{
+                            nivelDeTrafico();
+                          }catch(Exception ex){}
                       }
                   }
                   
@@ -156,9 +168,10 @@ public class Mapa extends javax.swing.JPanel {
           
           
          public void nivelDeTrafico(){
+             
              try{
                  
-                if(listaVehiculos.size()>0.01*Integer.parseInt(ClienteVehiculos.solicitarVehiculosCiudad())){
+                if((listaVehiculos.size()) > 0.01 * Integer.parseInt(ClienteVehiculos.solicitarVehiculosCiudad()) && listaVehiculos.size() > 1){
                     Simulador.panelTrafico1.setBackground(Color.red);
                 }else{
                     Simulador.panelTrafico1.setBackground(Color.green);

@@ -200,6 +200,33 @@ public class ClienteSemaforos {
             
     }
     
+     public static void confSemaforos() throws IOException{
+    
+        String IP_SERVIDOR=ipS;
+        int PUERTO_SERVIDOR=puertoSemaforo;
+        String lista[];
+        String resultado = null;
+        
+            try{
+                
+                String valor="confSem";                                                               
+                resultado = realizar_operacion(IP_SERVIDOR, PUERTO_SERVIDOR, valor);
+                
+                
+//                for(Cruce c : listaCruces){
+//                    
+//                    System.out.println("Pos x: " + c.getPosX() + " Pos y: " + c.getPosY() + " Estado: " + c.getEstadoLuz());
+//                }
+                
+            }catch(Exception e){
+                System.err.println(e);
+            }
+            
+            //System.out.print("Fin Cliente");
+            
+    }
+    
+    
      private static String realizar_operacion(String host, int puerto, String valor) {
         String respuesta=null;
         try{
