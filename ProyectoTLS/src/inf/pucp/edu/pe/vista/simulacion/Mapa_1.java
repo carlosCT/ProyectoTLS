@@ -118,7 +118,17 @@ public class Mapa_1 extends javax.swing.JPanel {
               public void run(){
                   while(Simulador.run){
                       while(Simulador.seguir){
+                            try{
                           /*INFORMACION DE TOTAL DE VEHICULOS*/
+                            Simulador_1.lblTotalVehiculos2.setText("TotalVehiculos: " + ClienteVehiculos.solicitarVehiculosCiudad());
+                            
+                          /*iNFORMACION DE TRAFICO*/
+                            Simulador_1.lblVPromedio.setText("VPromedio: "+ ClienteVehiculos.solicitarVelocidadPromedio());
+                            
+                            /*INFORMACION DE TIEMPO DE SIMULACION*/
+                                Simulador_1.lblTiempo.setText("Tiempo: " + ClienteVehiculos.solicitarTiempo() );
+                            
+                          }catch(IOException e){}
                           /*iNFORMACION DE TRAFICO*/
                           nivelDeTrafico();
                       }

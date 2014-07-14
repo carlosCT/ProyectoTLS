@@ -133,7 +133,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblVPromedio = new javax.swing.JLabel();
         lblCantVehiculos2 = new javax.swing.JLabel();
         lblCantSemaforos2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -151,7 +151,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
         jLabel2 = new javax.swing.JLabel();
         txtVelocidad = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        lblTiempo = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         btnZoomMenos = new javax.swing.JButton();
         btnZoomMas = new javax.swing.JButton();
@@ -161,7 +161,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 30));
 
-        jLabel1.setText("VPromedio: ");
+        lblVPromedio.setText("VPromedio: ");
 
         lblCantVehiculos2.setText("#VehiculosZona: ");
 
@@ -173,7 +173,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
 
         lblTotalVehiculos2.setText("TotalVehiculos: ");
 
-        lblTotalSemaforos2.setText("TotalSemaforos:");
+        lblTotalSemaforos2.setText("TotalSemaforos: 239 000");
 
         PanelTrafico2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -202,12 +202,12 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
                 .addGap(114, 114, 114)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1)
+                .addComponent(lblVPromedio)
                 .addGap(72, 72, 72)
                 .addComponent(lblTotalVehiculos2)
                 .addGap(67, 67, 67)
                 .addComponent(lblTotalSemaforos2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
                 .addComponent(PanelTrafico2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51))
         );
@@ -220,7 +220,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
                         .addComponent(jLabel4)
                         .addComponent(lblCantSemaforos2)
                         .addComponent(jLabel5)
-                        .addComponent(jLabel1)
+                        .addComponent(lblVPromedio)
                         .addComponent(lblTotalVehiculos2)
                         .addComponent(lblTotalSemaforos2))
                     .addComponent(PanelTrafico2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -280,7 +280,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
             }
         });
 
-        jLabel3.setText("Tiempo: 00:00:00");
+        lblTiempo.setText("Tiempo: 00:00:00");
 
         jLabel8.setText("Zoom:");
 
@@ -314,7 +314,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
                 .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(112, 112, 112)
-                .addComponent(jLabel3)
+                .addComponent(lblTiempo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -332,21 +332,20 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(btnPause)
-                .addComponent(btnStop)
-                .addComponent(btnRestart)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnPlay)
-                    .addComponent(btnMenos)
-                    .addComponent(btnMas)
-                    .addComponent(jLabel2)
-                    .addComponent(txtVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel8)
-                    .addComponent(btnZoomMenos)
-                    .addComponent(btnZoomMas)))
+            .addComponent(btnPause)
+            .addComponent(btnStop)
+            .addComponent(btnRestart)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnPlay)
+                .addComponent(btnMenos)
+                .addComponent(btnMas)
+                .addComponent(jLabel2)
+                .addComponent(txtVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblTiempo)
+                .addComponent(jLabel8)
+                .addComponent(btnZoomMenos)
+                .addComponent(btnZoomMas))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -507,9 +506,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
     private javax.swing.JButton btnZoomMas;
     private javax.swing.JButton btnZoomMenos;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
@@ -517,8 +514,10 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JLabel lblCantSemaforos2;
     public static javax.swing.JLabel lblCantVehiculos2;
+    public static javax.swing.JLabel lblTiempo;
     public static javax.swing.JLabel lblTotalSemaforos2;
     public static javax.swing.JLabel lblTotalVehiculos2;
+    public static javax.swing.JLabel lblVPromedio;
     private javax.swing.JTextField txtVelocidad;
     // End of variables declaration//GEN-END:variables
 
