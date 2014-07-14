@@ -21,54 +21,61 @@ import java.util.Calendar;
  * @author fatima
  */
 public class ControladorPatron {
-    
+
     public ArrayList<DiaMes> infoGps;
     public ArrayList<InfoCuad> listaCua;
-    
-    public ControladorPatron(ArrayList<DiaMes> infoGps){
-        this.infoGps=infoGps;
-    }
-    
 
-   // public ArrayList<InfoCuad> listaCuadrantesPat() {
-    public void listaCuadrantesPat(){
-System.out.println("entro al metodo listaCuadrantesPat ");
+    public ControladorPatron(ArrayList<DiaMes> infoGps) {
+        this.infoGps = infoGps;
+    }
+
+    // public ArrayList<InfoCuad> listaCuadrantesPat() {
+    public void listaCuadrantesPat() {
+        System.out.println("entro al metodo listaCuadrantesPat ");
+        System.out.println(infoGps.size());
         //ArrayList<DiaMes> infoGps = null;//LeeArchHist.datosCargados();
 
         ArrayList<InfoCuad> listaCuadrantes = new ArrayList<InfoCuad>();
 
         for (int i = 0; i < infoGps.size(); i++) {
+            System.out.println("Inicio dia I:" + i);
             for (int j = 0; j < infoGps.get(i).getHoras().size(); j++) {
+               // System.out.println("J:" + j);
                 for (int k = 0; k < infoGps.get(i).getHoras().get(j).getMin().size(); k++) {
-
+                   // System.out.println("K:" + k);
                     //seteo el arreglo de posiciones en 0
                     ArrayList<Integer> arrPos = new ArrayList<Integer>();
-                    for (int p = 0; p < 160; p++) {
+                    for (int p = 0; p < 1600; p++) {
                         int x = 0;
                         arrPos.add(x);
                     }
 
                     //se carga el arreglo con los puntos en esa hora
                     for (int l = 0; l < infoGps.get(i).getHoras().get(j).getMin().get(k).getSeg().size(); l++) {
+                        //System.out.println("L:" + l);
                         int r = 0;
-                        while (r < infoGps.get(i).getHoras().get(j).getMin().get(k).getSeg().get(l).getCoordenadas().size()) {
-                            int x = infoGps.get(i).getHoras().get(j).getMin().get(k).getSeg().get(l).getCoordenadas().get(r);
-                            r++;
-                            int y = infoGps.get(i).getHoras().get(j).getMin().get(k).getSeg().get(l).getCoordenadas().get(r);
+                       // if (infoGps.get(i).getHoras().get(j).getMin().get(k).getSeg().get(l).getCoordenadas().size() > 0) {
+                            while (r < infoGps.get(i).getHoras().get(j).getMin().get(k).getSeg().get(l).getCoordenadas().size()) {
+                                int x = infoGps.get(i).getHoras().get(j).getMin().get(k).getSeg().get(l).getCoordenadas().get(r);
+                                r++;
+                                int y = infoGps.get(i).getHoras().get(j).getMin().get(k).getSeg().get(l).getCoordenadas().get(r);
 
-                            int cuadX = x / 6000;
-                            int cuadY = y / 4000;
-                            int posArr = cuadX + (cuadY * 40);
-                            int elm = arrPos.get(posArr);
-                            elm++;
-                            arrPos.set(posArr, elm);
-                            r++;
-                        }
+                                int cuadX = x / 6000;
+                                int cuadY = y / 4000;
+                                int posArr = cuadX + (cuadY * 40);
+                                int elm = arrPos.get(posArr);
+                                elm++;
+                                arrPos.set(posArr, elm);
+                                r++;
+                            }
+                        //}
+
                     }
 
                     //cargara en el arreglo de cuadrantes las zonas mas congestionadas
                     for (int w = 0; w < arrPos.size(); w++) {
                         if (arrPos.get(w) >= 5000) {
+                            System.out.println("W:" + w);
                             int ejeX = w % 40;
                             int ejeY = w / 40;
                             ArrayList<Integer> pos = new ArrayList<Integer>();
@@ -82,18 +89,19 @@ System.out.println("entro al metodo listaCuadrantesPat ");
                             int mes = infoGps.get(i).getMes();
                             int hora = infoGps.get(i).getHoras().get(j).getHora();
 
-                            InfoCuad infoP = new InfoCuad(dia,mes, hora, pos);
+                            InfoCuad infoP = new InfoCuad(dia, mes, hora, pos);
                             listaCuadrantes.add(infoP);
                         }
                     }
                 }
             }
+            System.out.println("Fin dia:" + i);
         }
         System.out.println("-----------YA SALIOOOOO----------");
         System.out.println(listaCuadrantes.size());
-        this.listaCua= listaCuadrantes;
+        this.listaCua = listaCuadrantes;
     }
-    
+
     Patron obtenerPatron(String diaSemana, int mes, int hora) {
 
         Patron p = new Patron();
@@ -113,7 +121,7 @@ System.out.println("entro al metodo listaCuadrantesPat ");
         try {
             String SqlString = null;
 
-            SqlString = "SELECT p.idPatron,p.Dia, p.Anho FROM patron p WHERE p.DiaSemana='" + diaSemana + "' AND p.Hora='" + hora + "'";
+            SqlString = "SELECT p.idPatron,p.Dia, p.Anho FROM Patron p WHERE p.DiaSemana='" + diaSemana + "' AND p.Hora='" + hora + "'";
             pstmt = conn.prepareStatement(SqlString);
             rs = pstmt.executeQuery();
 
@@ -128,14 +136,14 @@ System.out.println("entro al metodo listaCuadrantesPat ");
             }
             rs = null;
             SqlString = null;
-            SqlString = "SELECT s.TiempoV, s.TiempoR, s.PosX, s.PosY FROM semXPatron s WHERE s.IdPatron='" + id + "'";
+            SqlString = "SELECT s.TiempoV, s.TiempoR, s.PosX, s.PosY FROM SemXPatron s WHERE s.idPatron='" + id + "'";
 
             pstmt = conn.prepareStatement(SqlString);
             rs = pstmt.executeQuery();
             int verde = 0;
             int rojo = 0;
-            int posX=0;
-            int posY=0;
+            int posX = 0;
+            int posY = 0;
 
             ArrayList<Integer> tiempos = new ArrayList<Integer>();
             ArrayList<Integer> sems = new ArrayList<Integer>();
@@ -143,8 +151,8 @@ System.out.println("entro al metodo listaCuadrantesPat ");
             while (rs.next()) {
                 verde = rs.getInt("TiempoV");
                 rojo = rs.getInt("TiempoR");
-                posX= rs.getInt("PosX");
-                posY=rs.getInt("PosY");
+                posX = rs.getInt("PosX");
+                posY = rs.getInt("PosY");
                 tiempos.add(verde);
                 tiempos.add(rojo);
                 sems.add(posX);
@@ -192,7 +200,7 @@ System.out.println("entro al metodo listaCuadrantesPat ");
 
         try {
             String SqlString = null;
-            SqlString = "INSERT INTO patron(Dia, Mes, Anho, DiaSemana, Hora) "
+            SqlString = "INSERT INTO Patron(Dia, Mes, Anho, DiaSemana, Hora) "
                     + "VALUES(?,?,?,?,?)";
             pstmt = conn.prepareStatement(SqlString);
             pstmt.setInt(1, p.getDia());
@@ -206,9 +214,9 @@ System.out.println("entro al metodo listaCuadrantesPat ");
                 throw new Exception();
             }
             int lastid = 0;
-            
-            SqlString="SELECT MAX(idPatron) from patron";
-            pstmt=conn.prepareStatement(SqlString);
+
+            SqlString = "SELECT MAX(idPatron) from Patron";
+            pstmt = conn.prepareStatement(SqlString);
             rs = pstmt.executeQuery();
 
             while (rs.next()) {
@@ -219,7 +227,7 @@ System.out.println("entro al metodo listaCuadrantesPat ");
             for (int i = 0; i < tam; i++) {
                 int j = i * 2;
 
-                SqlString = "INSERT INTO semXPatron(IdPatron, TiempoV,TiempoR, posX, posY) "
+                SqlString = "INSERT INTO SemXPatron(IdPatron, TiempoV,TiempoR, posX, posY) "
                         + "VALUES(?,?,?,?,?)";
                 pstmt = conn.prepareStatement(SqlString);
                 //rs=pstmt.executeQuery();
@@ -227,11 +235,11 @@ System.out.println("entro al metodo listaCuadrantesPat ");
                 pstmt.setInt(2, p.getConfSemaf().get(j));
                 pstmt.setInt(3, p.getConfSemaf().get(j + 1));
                 pstmt.setInt(4, p.getSem().get(j));
-                pstmt.setInt(5, p.getSem().get(j+1));
+                pstmt.setInt(5, p.getSem().get(j + 1));
                 result = pstmt.executeUpdate();
             }
 
-            
+
             pstmt.close();
 
             if (result == 0) {
@@ -279,9 +287,8 @@ System.out.println("entro al metodo listaCuadrantesPat ");
 
         return r;
     }
-    
-    
-    void GuardarVelocProm(int dd, int mm, int aa, int horaIni, int horaFin, float velocidad){
+
+    void GuardarVelocProm(int dd, int mm, int aa, int horaIni, int horaFin, float velocidad) {
         int result = 0;
 
         ConnectionDB objConn = new ConnectionDB();
@@ -306,12 +313,12 @@ System.out.println("entro al metodo listaCuadrantesPat ");
             pstmt.setInt(3, aa);
             pstmt.setInt(4, horaIni);
             pstmt.setInt(5, horaFin);
-            pstmt.setFloat(6, velocidad);            
+            pstmt.setFloat(6, velocidad);
             result = pstmt.executeUpdate();
             pstmt.close();
             if (result == 0) {
                 throw new Exception();
-            }           
+            }
 
 
         } catch (Exception ex) {
@@ -325,7 +332,6 @@ System.out.println("entro al metodo listaCuadrantesPat ");
                 e.printStackTrace();
             }
         }
-        
+
     }
-    
 }
