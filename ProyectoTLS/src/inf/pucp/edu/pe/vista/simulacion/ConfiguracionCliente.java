@@ -294,16 +294,13 @@ public class ConfiguracionCliente extends javax.swing.JFrame {
 //                
 //                mps[indice] = new MenuPrincipalSimulacion();
 //                mps[indice].setVisible(true);
-                  MenuPrincipalSimulacion mps= new MenuPrincipalSimulacion();
-                  mps.setVisible(true);
-                 
-                
-                 System.out.println("Ingreso una vez mas: "+MenuPrincipal.vecesPantallaSimulacion);
+                  Simulador simu= new Simulador();
+                  simu.setVisible(true);                                 
+                  //System.out.println("Ingreso una vez mas: "+MenuPrincipal.vecesPantallaSimulacion);
 //            }
 //            else{
 //                
-//            }
-                 
+//            }                 
          this.dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
