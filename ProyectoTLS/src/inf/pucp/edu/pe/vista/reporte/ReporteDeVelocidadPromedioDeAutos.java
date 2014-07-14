@@ -163,7 +163,7 @@ public class ReporteDeVelocidadPromedioDeAutos extends javax.swing.JInternalFram
         // TODO add your handling code here:
         try{
             ConnectionDB conn= new ConnectionDB();
-            JasperReport reporte=JasperCompileManager.compileReport("reporteVelocProm.jrxml");
+            JasperReport reporte=JasperCompileManager.compileReport("report1.jrxml");
             JasperPrint print = JasperFillManager.fillReport(reporte, null, conn.open());
             JasperViewer.viewReport(print);
         }catch(Exception e){
