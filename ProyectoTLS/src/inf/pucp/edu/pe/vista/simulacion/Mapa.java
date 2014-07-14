@@ -134,8 +134,19 @@ public class Mapa extends javax.swing.JPanel {
               public void run(){
                   while(Simulador.run){
                       while(Simulador.seguir){
+                          
+                          try{
                           /*INFORMACION DE TOTAL DE VEHICULOS*/
+                            Simulador.lblTotalVehiculos.setText("TotalVehiculos: " + ClienteVehiculos.solicitarVehiculosCiudad());
+                            
                           /*iNFORMACION DE TRAFICO*/
+                            Simulador.lblVPromedio.setText("VPromedio: "+ ClienteVehiculos.solicitarVelocidadPromedio());
+                            
+                            /*INFORMACION DE TIEMPO DE SIMULACION*/
+                                Simulador.lblTiempo.setText("Tiempo: " + ClienteVehiculos.solicitarTiempo() );
+                            
+                          }catch(IOException e){}
+                          
                           nivelDeTrafico();
                       }
                   }
@@ -145,11 +156,16 @@ public class Mapa extends javax.swing.JPanel {
           
           
          public void nivelDeTrafico(){
-             if(listaVehiculos.size()>0.01*2000){
-                 Simulador.panelTrafico1.setBackground(Color.red);
-             }else{
-                 Simulador.panelTrafico1.setBackground(Color.green);
-             }
+             try{
+                 
+                if(listaVehiculos.size()>0.01*Integer.parseInt(ClienteVehiculos.solicitarVehiculosCiudad())){
+                    Simulador.panelTrafico1.setBackground(Color.red);
+                }else{
+                    Simulador.panelTrafico1.setBackground(Color.green);
+                }
+             
+             }catch(IOException e){}
+             
          } 
           
         Thread actualizarPaint= new Thread(){

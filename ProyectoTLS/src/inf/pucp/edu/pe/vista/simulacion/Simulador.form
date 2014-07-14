@@ -26,7 +26,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" pref="1021" max="32767" attributes="0"/>
+          <Component id="jPanel1" pref="1048" max="32767" attributes="0"/>
           <Component id="jPanel2" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
@@ -62,12 +62,12 @@
                   <EmptySpace min="-2" pref="116" max="-2" attributes="0"/>
                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblVPromedio" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
-                  <Component id="lblTotalVehiculos1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTotalVehiculos" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
                   <Component id="lblTotalSemaforos1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="120" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
                   <Component id="panelTrafico1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
@@ -80,12 +80,12 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="panelTrafico1" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblVPromedio" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblCantVehiculos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblCantSemaforos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblTotalVehiculos1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblTotalVehiculos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblTotalSemaforos1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -95,10 +95,13 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="lblVPromedio">
           <Properties>
             <Property name="text" type="java.lang.String" value="VPromedio: "/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCantVehiculos">
           <Properties>
@@ -126,7 +129,7 @@
             <Property name="text" type="java.lang.String" value="MAPA:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="lblTotalVehiculos1">
+        <Component class="javax.swing.JLabel" name="lblTotalVehiculos">
           <Properties>
             <Property name="text" type="java.lang.String" value="TotalVehiculos: "/>
           </Properties>
@@ -136,7 +139,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblTotalSemaforos1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="TotalSemaforos: "/>
+            <Property name="text" type="java.lang.String" value="TotalSemaforos:  239000"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
@@ -193,7 +196,7 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jButton1" min="-2" pref="23" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                  <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTiempo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="btnNewWindows" min="-2" pref="40" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -216,21 +219,21 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="btnPause" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Component id="btnStop" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Component id="btnRestart" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Component id="btnNewWindows" alignment="0" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnPlay" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPause" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnStop" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnRestart" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="btnMenos" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnMas" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtVelocidad" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnNewWindows" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jButton1" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnZoomMenos" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnZoomMas" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTiempo" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -338,10 +341,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnZoomMasActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel8">
+        <Component class="javax.swing.JLabel" name="lblTiempo">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Tiempo: 00:00:00"/>
+            <Property name="text" type="java.lang.String" value="Tiempo: "/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

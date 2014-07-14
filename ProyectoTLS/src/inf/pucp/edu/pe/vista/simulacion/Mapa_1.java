@@ -129,11 +129,16 @@ public class Mapa_1 extends javax.swing.JPanel {
           
           
          public void nivelDeTrafico(){
-             if(listaVehiculos.size()>0.01*2000){
+             
+             try{
+                 
+             if(listaVehiculos.size()>0.01*Integer.parseInt(ClienteVehiculos.solicitarVehiculosCiudad())){
                  Simulador_1.PanelTrafico2.setBackground(Color.red);
              }else{
                  Simulador_1.PanelTrafico2.setBackground(Color.green);
              }
+             
+             }catch(IOException e){}
          } 
         
         

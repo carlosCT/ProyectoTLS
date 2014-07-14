@@ -131,12 +131,12 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblVPromedio = new javax.swing.JLabel();
         lblCantVehiculos = new javax.swing.JLabel();
         lblCantSemaforos = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        lblTotalVehiculos1 = new javax.swing.JLabel();
+        lblTotalVehiculos = new javax.swing.JLabel();
         lblTotalSemaforos1 = new javax.swing.JLabel();
         panelTrafico1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
@@ -153,14 +153,14 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
         jLabel3 = new javax.swing.JLabel();
         btnZoomMenos = new javax.swing.JButton();
         btnZoomMas = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
+        lblTiempo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1024, 30));
 
-        jLabel1.setText("VPromedio: ");
+        lblVPromedio.setText("VPromedio: ");
 
         lblCantVehiculos.setText("#VehiculosZona: ");
 
@@ -170,9 +170,9 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
 
         jLabel5.setText("MAPA:");
 
-        lblTotalVehiculos1.setText("TotalVehiculos: ");
+        lblTotalVehiculos.setText("TotalVehiculos: ");
 
-        lblTotalSemaforos1.setText("TotalSemaforos: ");
+        lblTotalSemaforos1.setText("TotalSemaforos:  239000");
 
         panelTrafico1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -201,12 +201,12 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
                 .addGap(116, 116, 116)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel1)
+                .addComponent(lblVPromedio)
                 .addGap(75, 75, 75)
-                .addComponent(lblTotalVehiculos1)
+                .addComponent(lblTotalVehiculos)
                 .addGap(89, 89, 89)
                 .addComponent(lblTotalSemaforos1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(panelTrafico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -217,12 +217,12 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelTrafico1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
+                        .addComponent(lblVPromedio)
                         .addComponent(lblCantVehiculos)
                         .addComponent(lblCantSemaforos)
                         .addComponent(jLabel4)
                         .addComponent(jLabel5)
-                        .addComponent(lblTotalVehiculos1)
+                        .addComponent(lblTotalVehiculos)
                         .addComponent(lblTotalSemaforos1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -303,7 +303,7 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
             }
         });
 
-        jLabel8.setText("Tiempo: 00:00:00");
+        lblTiempo.setText("Tiempo: ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -321,7 +321,7 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
-                .addComponent(jLabel8)
+                .addComponent(lblTiempo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnNewWindows, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -342,28 +342,28 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnPause)
+            .addComponent(btnStop)
+            .addComponent(btnRestart)
+            .addComponent(btnNewWindows)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnPlay)
-                .addComponent(btnPause)
-                .addComponent(btnStop)
-                .addComponent(btnRestart)
                 .addComponent(btnMenos)
                 .addComponent(btnMas)
                 .addComponent(jLabel2)
                 .addComponent(txtVelocidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(btnNewWindows)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jLabel3)
                 .addComponent(btnZoomMenos)
                 .addComponent(btnZoomMas)
-                .addComponent(jLabel8))
+                .addComponent(lblTiempo))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1021, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -525,18 +525,18 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
     private javax.swing.JButton btnZoomMas;
     private javax.swing.JButton btnZoomMenos;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JLabel lblCantSemaforos;
     public static javax.swing.JLabel lblCantVehiculos;
+    public static javax.swing.JLabel lblTiempo;
     public static javax.swing.JLabel lblTotalSemaforos1;
-    public static javax.swing.JLabel lblTotalVehiculos1;
+    public static javax.swing.JLabel lblTotalVehiculos;
+    public static javax.swing.JLabel lblVPromedio;
     public static javax.swing.JPanel panelTrafico1;
     private javax.swing.JTextField txtVelocidad;
     // End of variables declaration//GEN-END:variables
