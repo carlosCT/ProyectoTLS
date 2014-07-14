@@ -369,7 +369,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
-       Simulador.seguir=false;
+       Simulador_1.seguir=false;
     }//GEN-LAST:event_btnStopActionPerformed
 
     private void btnPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlayActionPerformed
@@ -387,7 +387,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
     }//GEN-LAST:event_btnPlayActionPerformed
 
     private void btnPauseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPauseActionPerformed
-        Simulador.seguir=false;
+        Simulador_1.seguir=false;
         this.requestFocus();
         this.setFocusable(true);
         try{
@@ -398,7 +398,7 @@ public class Simulador_1 extends javax.swing.JFrame implements KeyListener, Runn
     }//GEN-LAST:event_btnPauseActionPerformed
 
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
-           Simulador.seguir=true;
+           Simulador_1.seguir=true;
            this.requestFocus();
            this.setFocusable(true);
         try{

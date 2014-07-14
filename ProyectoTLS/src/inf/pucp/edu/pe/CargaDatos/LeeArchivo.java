@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 
 public class LeeArchivo {
 
-    public static ArrayList<Vehiculo> autos = new ArrayList<>();
+    public static ArrayList<Vehiculo> autos = new ArrayList<Vehiculo>();
     public  String s;//"/Users/Alejandro/Documents/PUCP/2014-1/dp1/Archivos2";
     public String archact;
     public static boolean ter= false;

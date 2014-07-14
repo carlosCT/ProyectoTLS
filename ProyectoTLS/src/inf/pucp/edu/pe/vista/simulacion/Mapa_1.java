@@ -240,7 +240,7 @@ public class Mapa_1 extends javax.swing.JPanel {
         
        public void paintCar(Graphics g, Vehiculo vehi) {        
           int offset=9;
-          g.setColor(Color.darkGray);
+          g.setColor(Color.blue);
           
            if (Simulador_1.nivelZoom==10){
            g.fillRect(vehi.getPosX()-offset-movHorizontal,vehi.getPosY()-movVertical-offset, 20, 20);
