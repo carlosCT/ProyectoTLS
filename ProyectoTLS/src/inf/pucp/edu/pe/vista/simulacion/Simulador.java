@@ -558,7 +558,7 @@ public class Simulador extends javax.swing.JFrame implements KeyListener, Runnab
               
               p.actualizarPaint.join();
               
-              p.updateInformation.start();
+              p.updateInformation.join();
         }
         catch(Exception e){
               System.out.println("sleeping thread Error"); 
